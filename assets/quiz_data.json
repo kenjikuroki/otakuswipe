@@ -1,0 +1,2342 @@
+{
+    "part1": [
+        {
+            "question": "ジエチルエーテルは、\n麻酔作用を持っている。",
+            "isCorrect": true,
+            "explanation": "正解！昔は麻酔薬として使われていました。蒸気を吸うと眠くなります。",
+            "imagePath": null
+        },
+        {
+            "question": "二硫化炭素は、\n水よりも軽いので水に浮く。",
+            "isCorrect": false,
+            "explanation": "不正解！二硫化炭素は第4類では珍しく「水より重い（比重1.26）」です。水に沈めて保存します。",
+            "imagePath": null
+        },
+        {
+            "question": "二硫化炭素を貯蔵する際は、\n蒸気の漏洩を防ぐために「水中」に保存する。",
+            "isCorrect": true,
+            "explanation": "正解！引火点がマイナス30℃と低く、可燃性蒸気が発生しやすいので、水で封じて蒸気の発散を防ぎます。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリンの引火点は、\n灯油の引火点よりも高い。",
+            "isCorrect": false,
+            "explanation": "不正解！ガソリンは－40℃以下、灯油は40℃以上。ガソリンの方が圧倒的に低くて危険です。",
+            "imagePath": null
+        },
+        {
+            "question": "ベンゼンは、\n冬場に凍結することがある。",
+            "isCorrect": true,
+            "explanation": "正解！ベンゼンの融点は「5.5℃」。意外と高いので、寒い冬の朝などは凍ることがあります。",
+            "imagePath": null
+        },
+        {
+            "question": "トルエンは、\n水によく溶ける。",
+            "isCorrect": false,
+            "explanation": "不正解！トルエンやベンゼンは非水溶性です。水には溶けず、有機溶剤によく溶けます。",
+            "imagePath": null
+        },
+        {
+            "question": "アセトンは、\n水にも油にもよく溶ける。",
+            "isCorrect": true,
+            "explanation": "正解！アセトン（除光液）は両方の性質を持つ親水性の第1石油類です。",
+            "imagePath": null
+        },
+        {
+            "question": "第1石油類の引火点は、\nすべて「21℃未満」である。",
+            "isCorrect": true,
+            "explanation": "正解！1気圧において引火点が21℃未満のものを第1石油類と呼びます。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリンを着色する場合、\n「青色」に着色しなければならない。",
+            "isCorrect": false,
+            "explanation": "不正解！自動車ガソリンは「赤色又は橙色」に着色されています。",
+            "imagePath": null
+        },
+        {
+            "question": "特殊引火物の発火点は、\nすべて「100℃以下」である。",
+            "isCorrect": false,
+            "explanation": "不正解！特殊引火物には「発火点100℃以下のもの」もありますが、「引火点と沸点の条件」で該当するものもあり、すべてが発火点100℃以下とは限りません。",
+            "imagePath": null
+        },
+        {
+            "question": "ジエチルエーテルの蒸気は空気より重いため、\n低所に滞留しやすい。",
+            "isCorrect": true,
+            "explanation": "正解！蒸気比重は約2.6。空気の2倍以上重いので、床を這うように広がります。",
+            "imagePath": null
+        },
+        {
+            "question": "酸化プロピレンを取り扱う容器には、\n銅やマグネシウム合金を使用してはならない。",
+            "isCorrect": true,
+            "explanation": "正解！銅や銀、水銀、マグネシウムと反応して爆発性の化合物を生成する危険があります。",
+            "imagePath": null
+        },
+        {
+            "question": "アセトアルデヒドは、\n水には溶けない。",
+            "isCorrect": false,
+            "explanation": "不正解！アセトアルデヒドは水にも有機溶剤にもよく溶けます。",
+            "imagePath": null
+        },
+        {
+            "question": "ピリジンは、\n特有の悪臭を持つ無色の液体である。",
+            "isCorrect": true,
+            "explanation": "正解！ピリジンは腐ったような独特の臭いがします。水に溶ける第1石油類です。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリン火災には、\n棒状の注水消火が適している。",
+            "isCorrect": false,
+            "explanation": "絶対ダメ！水を入れるとガソリンが浮いて広がり、火の海になります。泡か粉末で窒息消火しましょう。",
+            "imagePath": null
+        },
+        {
+            "question": "ベンゼンの蒸気には毒性があるが、\nトルエンの蒸気には毒性がない。",
+            "isCorrect": false,
+            "explanation": "不正解！トルエンの方が毒性は低いですが、それでも毒性はあります。吸入には注意が必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリンは電気を通しやすいため、\n静電気は発生しにくい。",
+            "isCorrect": false,
+            "explanation": "不正解！ガソリンは「電気の不良導体（絶縁体）」です。そのため静電気が溜まりやすく、スパーク火花が危険です。",
+            "imagePath": null
+        },
+        {
+            "question": "ジエチルエーテルを日光に当てて放置すると、\n爆発性の過酸化物を生成することがある。",
+            "isCorrect": true,
+            "explanation": "正解！空気や光に触れると過酸化物ができ、加熱や衝撃で爆発します。褐色瓶に入れて冷暗所に保管します。",
+            "imagePath": null
+        },
+        {
+            "question": "酢酸エチルは、\n果実のような芳香（甘い香り）がある。",
+            "isCorrect": true,
+            "explanation": "正解！バナナやパイナップルのような匂いがします。水には溶けにくい第1石油類です。",
+            "imagePath": null
+        },
+        {
+            "question": "アルコール類は、\n第1石油類に含まれる。",
+            "isCorrect": false,
+            "explanation": "不正解！アルコール類は独立した区分です。第1石油類とは区別されます。",
+            "imagePath": null
+        },
+        {
+            "question": "ホワイトガソリンは、\nオレンジ色に着色されている。",
+            "isCorrect": false,
+            "explanation": "不正解！洗浄やキャンプ用に使われるホワイトガソリンは「無色透明」です。",
+            "imagePath": null
+        },
+        {
+            "question": "二硫化炭素が燃焼すると、\n有毒な二酸化硫黄（亜硫酸ガス）が発生する。",
+            "isCorrect": true,
+            "explanation": "正解！強烈な毒ガスが出るので、火災時は風上に避難し、空気呼吸器が必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "アセトアルデヒドや酸化プロピレンを貯蔵する場合、\n不活性ガス（窒素など）を封入する。",
+            "isCorrect": true,
+            "explanation": "正解！空気に触れると危険なので、窒素などの不活性ガスでタンク内を満たしてシールします。",
+            "imagePath": null
+        },
+        {
+            "question": "メチルエチルケトン（MEK）は、\n第1石油類である。",
+            "isCorrect": true,
+            "explanation": "正解！塗料の溶剤としてよく使われます。水にある程度溶けます。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリンの燃焼範囲（爆発限界）は、\nおよそ1.4 vol% 〜 7.6 vol% である。",
+            "isCorrect": true,
+            "explanation": "正解！下限値が低いので、わずかな蒸気でも爆発します。",
+            "imagePath": null
+        },
+        {
+            "question": "特殊引火物は、\n液温が－20℃でも引火する危険性がある。",
+            "isCorrect": true,
+            "explanation": "正解！引火点が－20℃以下のものが含まれるため、極寒の地でも引火します。",
+            "imagePath": null
+        },
+        {
+            "question": "ベンゼンとガソリンを混合しても、\n危険性は変わらない。",
+            "isCorrect": false,
+            "explanation": "不正解！混合することで性質が変化したり、危険性が増すことがあります。",
+            "imagePath": null
+        },
+        {
+            "question": "アセトンは、\n水溶性液体用泡消火剤（耐アルコール泡）で消火する。",
+            "isCorrect": true,
+            "explanation": "正解！普通の泡だとアセトンに溶けて消えてしまうので、専用の泡を使います。",
+            "imagePath": null
+        },
+        {
+            "question": "トルエンの蒸気比重は1より小さいので、\n天井付近に溜まる。",
+            "isCorrect": false,
+            "explanation": "不正解！第4類の蒸気は基本的にすべて「空気より重い（比重1以上）」です。下に溜まります。",
+            "imagePath": null
+        },
+        {
+            "question": "ジエチルエーテルの引火点は、\nガソリンよりも低い。",
+            "isCorrect": true,
+            "explanation": "正解！ジエチルエーテルは－45℃、ガソリンは－40℃以下。どちらも極低温で引火しますが、エーテルの方がさらに低いです。",
+            "imagePath": null
+        },
+        {
+            "question": "メタノールとエタノールは、\nどちらも水によく溶ける。",
+            "isCorrect": true,
+            "explanation": "正解！アルコール類は水と非常に親和性が高く、任意の割合で混ざり合います。",
+            "imagePath": null
+        },
+        {
+            "question": "アルコール類の火災は、\n炎の色が青白く、日中は見えにくい。",
+            "isCorrect": true,
+            "explanation": "正解！特にエタノールは明るい場所だと炎が見えにくいため、火災に気づくのが遅れる危険があります。",
+            "imagePath": null
+        },
+        {
+            "question": "メタノール（メチルアルコール）には、\n毒性はない。",
+            "isCorrect": false,
+            "explanation": "不正解！メタノールは毒性が強く、摂取すると失明や死に至る危険があります。（※お酒のエタノールとは別物です！）",
+            "imagePath": null
+        },
+        {
+            "question": "アルコール類の火災に対して、\n一般的な「泡消火剤」は効果的である。",
+            "isCorrect": false,
+            "explanation": "不正解！普通の泡はアルコールに溶けて消えてしまいます。「耐アルコール泡（水溶性液体用）」を使います。",
+            "imagePath": null
+        },
+        {
+            "question": "灯油の引火点は、\n「40℃以上」である。",
+            "isCorrect": true,
+            "explanation": "正解！灯油の引火点は40℃以上です。ガソリン（-40℃以下）に比べると引火しにくいですが、霧状になると常温でも引火します。",
+            "imagePath": null
+        },
+        {
+            "question": "軽油の引火点は、\n「45℃以上」である。",
+            "isCorrect": true,
+            "explanation": "正解！軽油は45℃以上です。ディーゼルエンジンの燃料として使われます。",
+            "imagePath": null
+        },
+        {
+            "question": "灯油は電気を通しやすいため、\n静電気火災の心配はない。",
+            "isCorrect": false,
+            "explanation": "不正解！灯油やガソリンは電気を通さない「絶縁体」なので、静電気が蓄積しやすく危険です。",
+            "imagePath": null
+        },
+        {
+            "question": "第2石油類の定義は、\n引火点が「21℃以上 70℃未満」のものである。",
+            "isCorrect": true,
+            "explanation": "正解！21℃以上70℃未満が第2石油類、70℃以上200℃未満が第3石油類です。70℃ジャストは第3石油類になります。",
+            "imagePath": null
+        },
+        {
+            "question": "氷酢酸（純粋な酢酸）は、\n冬場に凍結することがある。",
+            "isCorrect": true,
+            "explanation": "正解！酢酸の融点は約16.7℃なので、冬場は室内でも凍って固体になることがあります。",
+            "imagePath": null
+        },
+        {
+            "question": "酢酸は、\n水に溶けない。",
+            "isCorrect": false,
+            "explanation": "不正解！酢酸（お酢の成分）は水によく溶けます。そのため、指定数量は2000Lになります。",
+            "imagePath": null
+        },
+        {
+            "question": "第2石油類の非水溶性液体（灯油など）の指定数量は、\n「1000リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！ガソリン（200L）の5倍の量が指定数量です。",
+            "imagePath": null
+        },
+        {
+            "question": "第2石油類の水溶性液体（酢酸など）の指定数量は、\n「2000リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！水溶性の場合は、非水溶性の2倍（1000L × 2 = 2000L）になります。",
+            "imagePath": null
+        },
+        {
+            "question": "アルコール類の指定数量は、\n「400リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！第1石油類の非水溶性（200L）と水溶性（400L）の間、ではなく「400L」と独立して覚えましょう。",
+            "imagePath": null
+        },
+        {
+            "question": "プロパノール（プロピルアルコール）は、\n第1石油類に分類される。",
+            "isCorrect": false,
+            "explanation": "不正解！炭素数1〜3の飽和1価アルコール（メタノール、エタノール、プロパノール）は「アルコール類」に分類されます。",
+            "imagePath": null
+        },
+        {
+            "question": "灯油を保存するポリ容器の色は、\n法律で「赤色」と決まっている。",
+            "isCorrect": false,
+            "explanation": "不正解！JIS規格で推奨されていますが、消防法で「赤じゃなきゃダメ」とは決まっていません。（※青色の灯油缶もあります）",
+            "imagePath": null
+        },
+        {
+            "question": "軽油は、灯油よりも\n発火点が高い。",
+            "isCorrect": true,
+            "explanation": "正解！軽油は灯油より発火点が高く、より高温で自然着火します。",
+            "imagePath": null
+        },
+        {
+            "question": "キシレンは、\n水より重い。",
+            "isCorrect": false,
+            "explanation": "不正解！キシレン（第2石油類）の比重は約0.87で、水に浮きます。クロロベンゼンなどは水より重いです。",
+            "imagePath": null
+        },
+        {
+            "question": "灯油にガソリンを少量混ぜても、\n引火点は変わらないので安全である。",
+            "isCorrect": false,
+            "explanation": "絶対ダメ！わずか数％のガソリンが混ざるだけで引火点が激下がりし、爆発事故の原因になります。",
+            "imagePath": null
+        },
+        {
+            "question": "酢酸の蒸気は、\n鼻を突くような刺激臭がある。",
+            "isCorrect": true,
+            "explanation": "正解！お酢を強烈にしたような刺激臭があります。",
+            "imagePath": null
+        },
+        {
+            "question": "アルコール類の蒸気比重は1より小さいので、\n天井付近に拡散する。",
+            "isCorrect": false,
+            "explanation": "不正解！アルコールの蒸気も空気より重い（1.1〜1.6倍）ので、低い場所に溜まります。",
+            "imagePath": null
+        },
+        {
+            "question": "灯油火災の消火には、\n霧状の強化液消火剤が有効である。",
+            "isCorrect": true,
+            "explanation": "正解！棒状の水はダメですが、霧状（スプレー）の水や強化液は冷却・窒息効果があり有効です。",
+            "imagePath": null
+        },
+        {
+            "question": "クロロベンゼンは、\n第2石油類である。",
+            "isCorrect": true,
+            "explanation": "正解！水には溶けず、水より重い（比重1.1）第2石油類です。",
+            "imagePath": null
+        },
+        {
+            "question": "エタノール濃度が60％未満の水溶液は、\n消防法上の危険物（アルコール類）には該当しない。",
+            "isCorrect": true,
+            "explanation": "正解！アルコール類として扱われるのは「濃度60重量％以上」のものです。お酒（焼酎など）は危険物ではありません。",
+            "imagePath": null
+        },
+        {
+            "question": "灯油とガソリンは、\n臭いで区別がつかない。",
+            "isCorrect": false,
+            "explanation": "不正解！それぞれ特有の臭いがあります。ガソリンの方が揮発性が高く臭いが強いです。",
+            "imagePath": null
+        },
+        {
+            "question": "アクリル酸は、\n貯蔵中に重合して発熱・爆発する危険がある。",
+            "isCorrect": true,
+            "explanation": "正解！アクリル酸（第2石油類）は不安定で重合しやすいので、重合禁止剤を加えて冷所に保存します。",
+            "imagePath": null
+        },
+        {
+            "question": "メタノールの容器には、\n「毒物」の表示が必要である。",
+            "isCorrect": false,
+            "explanation": "ひっかけ！消防法ではなく「毒物及び劇物取締法」などの管轄ですが、危険物容器の表示としては「第四類 アルコール類 危険等級II」などが必須です。",
+            "imagePath": null
+        },
+        {
+            "question": "第2石油類の引火点は常温（20℃）より高いため、\n夏場でも引火する危険はない。",
+            "isCorrect": false,
+            "explanation": "不正解！液温が引火点を超えれば引火します。真夏のアスファルト上などは40℃を超えるので、灯油でも引火します。",
+            "imagePath": null
+        },
+        {
+            "question": "酢酸が皮膚についた場合は、\n水でよく洗い流す。",
+            "isCorrect": true,
+            "explanation": "正解！酢酸は腐食性があり、皮膚を溶かして火傷のようになるので、大量の水で洗います。",
+            "imagePath": null
+        },
+        {
+            "question": "アルコール類を希釈する（水で薄める）ときは、\n水にアルコールを注ぐ。",
+            "isCorrect": true,
+            "explanation": "正解！濃硫酸ほど危険ではありませんが、飛散・急激な蒸発を防ぐため、水の中に少しずつアルコールを入れるのが安全です。",
+            "imagePath": null
+        },
+        {
+            "question": "塗料類（ラッカーなど）は、\n第2石油類に含まれることが多いが、すべてではない。",
+            "isCorrect": true,
+            "explanation": "正解！シンナーや塗料の多くは第2石油類に該当します。",
+            "imagePath": null
+        },
+        {
+            "question": "重油は、動粘度の違いにより\n1種(A重油)、2種(B重油)、3種(C重油)に分類される。",
+            "isCorrect": true,
+            "explanation": "正解！A重油が最もサラサラしていて、C重油が最もドロドロしています。",
+            "imagePath": null
+        },
+        {
+            "question": "重油は、水よりも重いため\n水に沈む。",
+            "isCorrect": false,
+            "explanation": "不正解！重油の比重は0.8〜1.0未満（一部例外あり）なので、基本的には水に浮きます。",
+            "imagePath": null
+        },
+        {
+            "question": "第3石油類の引火点は、\n「70℃以上 200℃未満」である。",
+            "isCorrect": true,
+            "explanation": "正解！この温度帯にある重油やクレオソート油などが該当します。",
+            "imagePath": null
+        },
+        {
+            "question": "グリセリンは、\n水に溶けにくい。",
+            "isCorrect": false,
+            "explanation": "不正解！グリセリンやエチレングリコールは、第3石油類の中でも「水によく溶ける（水溶性）」物質です。",
+            "imagePath": null
+        },
+        {
+            "question": "クレオソート油は、\n特異な臭気（正露丸のような臭い）を持つ液体である。",
+            "isCorrect": true,
+            "explanation": "正解！木材の防腐剤として使われます。独特の焦げ臭いにおいが特徴です。",
+            "imagePath": null
+        },
+        {
+            "question": "第3石油類の非水溶性液体（重油など）の指定数量は、\n「2000リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！灯油（1000L）の2倍、と覚えましょう。",
+            "imagePath": null
+        },
+        {
+            "question": "第4石油類の指定数量は、\n「6000リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！ギヤー油やシリンダー油などが該当します。指定数量はかなり多いです。",
+            "imagePath": null
+        },
+        {
+            "question": "動植物油類の指定数量は、\n「10000リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！第4類の中で最も指定数量が大きいです。",
+            "imagePath": null
+        },
+        {
+            "question": "アマニ油を含んだボロ布を積み上げて放置すると、\n自然発火する危険がある。",
+            "isCorrect": true,
+            "explanation": "正解！これ超重要。アマニ油は「乾性油」であり、酸化熱が溜まって自然発火しやすいです。",
+            "imagePath": null
+        },
+        {
+            "question": "オリーブ油やナタネ油は、\n「不乾性油」に分類される。",
+            "isCorrect": true,
+            "explanation": "正解！これらはヨウ素価が低く、自然発火しにくい油です。",
+            "imagePath": null
+        },
+        {
+            "question": "クレオソート油は、\n水より軽い。",
+            "isCorrect": false,
+            "explanation": "不正解！クレオソート油は「水より重い（比重1.0以上）」です。第4類では珍しいので試験によく出ます。",
+            "imagePath": null
+        },
+        {
+            "question": "ニトロベンゼンは、\n水によく溶ける。",
+            "isCorrect": false,
+            "explanation": "不正解！水には溶けません。また、水より重い（比重1.2）液体です。",
+            "imagePath": null
+        },
+        {
+            "question": "エチレングリコールは、\n自動車の不凍液（ラジエーター液）として使われる。",
+            "isCorrect": true,
+            "explanation": "正解！水に溶けやすく、凍結を防ぐ性質があります。",
+            "imagePath": null
+        },
+        {
+            "question": "C重油を貯蔵する場合、\n流動性を保つために加熱保温装置をつけることがある。",
+            "isCorrect": true,
+            "explanation": "正解！C重油は粘度が高くドロドロなので、温めてサラサラにして送油します。",
+            "imagePath": null
+        },
+        {
+            "question": "ギヤー油（第4石油類）の引火点は、\n200℃以上である。",
+            "isCorrect": true,
+            "explanation": "正解！第4石油類は引火点が200℃以上の危険物です。",
+            "imagePath": null
+        },
+        {
+            "question": "動植物油類は、\n動物の脂肉や植物の種子から抽出したものである。",
+            "isCorrect": true,
+            "explanation": "正解！定義通りです。",
+            "imagePath": null
+        },
+        {
+            "question": "自然発火しやすいのは、\nヨウ素価が「低い」油である。",
+            "isCorrect": false,
+            "explanation": "逆です！ヨウ素価が「高い（130以上）」油ほど、酸化しやすく自然発火の危険が高いです。",
+            "imagePath": null
+        },
+        {
+            "question": "アニリンは、\n無色の液体だが、古くなると酸化して褐色になる。",
+            "isCorrect": true,
+            "explanation": "正解！アニリン（第3石油類）は変色しやすいです。水より重く、毒性があります。",
+            "imagePath": null
+        },
+        {
+            "question": "第3石油類の水溶性液体（グリセリンなど）の指定数量は、\n「4000リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！非水溶性（2000L）の2倍です。",
+            "imagePath": null
+        },
+        {
+            "question": "エンジンオイル（潤滑油）は、\n主に第3石油類に分類される。",
+            "isCorrect": false,
+            "explanation": "不正解！製品によりますが、一般的な潤滑油（ギヤー油、タービン油）は引火点が高いため「第4石油類」に分類されることが多いです。",
+            "imagePath": null
+        },
+        {
+            "question": "ニトロベンゼンには、\n果実のような芳香がある。",
+            "isCorrect": false,
+            "explanation": "不正解！ニトロベンゼンは「アーモンド（杏仁豆腐）」のような独特の香りがします。",
+            "imagePath": null
+        },
+        {
+            "question": "重油を加熱する場合、\n直火（裸火）で加熱してもよい。",
+            "isCorrect": false,
+            "explanation": "絶対ダメ！引火の危険があります。蒸気コイルなどを使って間接的に加熱します。",
+            "imagePath": null
+        },
+        {
+            "question": "ヤシ油やパーム油は、\n常温で固体（固形）の場合があるが、動植物油類に含まれる。",
+            "isCorrect": false,
+            "explanation": "ひっかけ！消防法の動植物油類は「液体」に限られます。常温で固体のものは指定可燃物などになるため、危険物第4類には該当しません。",
+            "imagePath": null
+        },
+        {
+            "question": "グリセリンは、\n化粧品や医薬品の原料として使われる。",
+            "isCorrect": true,
+            "explanation": "正解！保湿剤としてよく使われます。甘みがあり、水に溶ける第3石油類です。",
+            "imagePath": null
+        },
+        {
+            "question": "シリンダー油の引火点は、\nガソリンよりも低い。",
+            "isCorrect": false,
+            "explanation": "不正解！シリンダー油（第4石油類）の引火点は200℃以上。ガソリン（-40℃以下）より遥かに高いです。",
+            "imagePath": null
+        },
+        {
+            "question": "乾性油（アマニ油など）が染み込んだ布を廃棄する場合、\n水に浸してから捨てるのが安全である。",
+            "isCorrect": true,
+            "explanation": "正解！水につけて空気を遮断すれば、酸化反応が起きないので自然発火を防げます。",
+            "imagePath": null
+        },
+        {
+            "question": "第3石油類は、\nすべて水より軽い。",
+            "isCorrect": false,
+            "explanation": "不正解！クレオソート油、ニトロベンゼン、アニリン、グリセリンなどは水より重いです。",
+            "imagePath": null
+        },
+        {
+            "question": "メタクレゾールは、\n第3石油類である。",
+            "isCorrect": true,
+            "explanation": "正解！消毒液に使われるクレゾールも第3石油類です。",
+            "imagePath": null
+        },
+        {
+            "question": "動植物油類は、\n水に溶けるものが多い。",
+            "isCorrect": false,
+            "explanation": "不正解！サラダ油を想像してください。水には溶けず、水に浮きます。",
+            "imagePath": null
+        },
+        {
+            "question": "切削油（マシン油）は、\n布に染み込んだ状態でも、マッチの火を近づけなければ燃えない。",
+            "isCorrect": false,
+            "explanation": "不正解！引火点が高くても、布に染み込むと「灯芯現象」で小さな火種でも簡単に燃え上がります。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物は、\n基本的に水よりも「軽い」ものが多い。",
+            "isCorrect": true,
+            "explanation": "正解！ガソリンや灯油など、大部分は比重が1より小さく、水に浮きます。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物の蒸気は、\n原則として空気よりも重い。",
+            "isCorrect": true,
+            "explanation": "正解！乙4試験では「第4類の蒸気は空気より重く、低所に滞留する」と覚えます。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物は、\nすべて水に溶けにくい。",
+            "isCorrect": false,
+            "explanation": "不正解！アルコール類、アセトン、酢酸など、水によく溶ける「水溶性」の危険物も多数あります。",
+            "imagePath": null
+        },
+        {
+            "question": "二硫化炭素は、\n水よりも重い。",
+            "isCorrect": true,
+            "explanation": "正解！特殊引火物ですが、水より重く（比重1.26）、水に沈みます。",
+            "imagePath": null
+        },
+        {
+            "question": "一般に、電気を通しにくい（絶縁性が高い）液体は、\n静電気が発生しやすい。",
+            "isCorrect": true,
+            "explanation": "正解！ガソリンや灯油などの「非水溶性」液体は、電気が逃げないので静電気が蓄積しやすいです。",
+            "imagePath": null
+        },
+        {
+            "question": "水溶性の危険物（アルコールなど）は、\n静電気が発生・蓄積しやすい。",
+            "isCorrect": false,
+            "explanation": "不正解！水に溶けるものは電気を通しやすい（導電性が高い）ため、静電気はあまり蓄積しません。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリン特有のにおいは、\n芳香（独特の甘いにおい）の一種とされる。",
+            "isCorrect": true,
+            "explanation": "正解！試験的な分類では「芳香」とされます。ベンゼンやトルエンも芳香族です。",
+            "imagePath": null
+        },
+        {
+            "question": "ピリジンや腐った卵のような臭いは、\n「刺激臭」に分類される。",
+            "isCorrect": false,
+            "explanation": "不正解！これらは「悪臭」や「不快臭」と表現されます。刺激臭は「鼻をツンと突く（酢酸など）」においです。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物の火災には、\nすべて泡消火剤が有効である。",
+            "isCorrect": false,
+            "explanation": "ひっかけ！「水溶性」の危険物に普通の泡を使うと、泡が溶けて消えてしまいます。水溶性には「耐アルコール泡」が必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "クレオソート油は、\n水に浮く。",
+            "isCorrect": false,
+            "explanation": "不正解！クレオソート油は「水より重い」です。第3石油類の代表的な例外です。",
+            "imagePath": null
+        },
+        {
+            "question": "アセトンは、\n特有の芳香がある。",
+            "isCorrect": true,
+            "explanation": "正解！アセトンや酢酸エチルは、果実のような、あるいは独特の甘い芳香があります。",
+            "imagePath": null
+        },
+        {
+            "question": "液体の比重が「1」より大きいものは、\n水に入れると沈む。",
+            "isCorrect": true,
+            "explanation": "正解！水の比重を1とした基準です。1より大きければ沈みます。",
+            "imagePath": null
+        },
+        {
+            "question": "第1石油類の中で、\n水溶性のものは存在しない。",
+            "isCorrect": false,
+            "explanation": "不正解！アセトン、アセトアルデヒド、ピリジンなどは「水溶性」の第1石油類です。",
+            "imagePath": null
+        },
+        {
+            "question": "グリセリンは、\n粘りけ（粘度）のある液体である。",
+            "isCorrect": true,
+            "explanation": "正解！ドロッとしています。水に溶け、水より重い液体です。",
+            "imagePath": null
+        },
+        {
+            "question": "酸化プロピレンの蒸気は、\n空気より軽い。",
+            "isCorrect": false,
+            "explanation": "不正解！第4類に「空気より軽い（浮く）蒸気」はありません。すべて重いです。",
+            "imagePath": null
+        },
+        {
+            "question": "アセトアルデヒドは、\n腐った卵のようなにおいがする。",
+            "isCorrect": false,
+            "explanation": "不正解！アセトアルデヒドは「青リンゴのような芳香」または「刺激臭」と表現されます。",
+            "imagePath": null
+        },
+        {
+            "question": "ニトロベンゼンやアニリンは、\n水よりも重い。",
+            "isCorrect": true,
+            "explanation": "正解！第3石油類には水より重いものが多いです。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物は、\n原則として常温（20℃）で液体である。",
+            "isCorrect": true,
+            "explanation": "正解！第4類は「引火性液体」が定義です。例外的に低沸点物質はありますが、乙4では原則この理解でOKです。",
+            "imagePath": null
+        },
+        {
+            "question": "酢酸エチルは、\n水によく溶ける。",
+            "isCorrect": false,
+            "explanation": "不正解！名前に「酢酸」とつきますが、酢酸エチルは水に溶けにくいです。（酢酸は溶けます）",
+            "imagePath": null
+        },
+        {
+            "question": "注水消火（水をかける）が不適切な理由は、\n「油が水に浮いて広がるから」である。",
+            "isCorrect": true,
+            "explanation": "正解！ほとんどの第4類危険物は水より軽いため、水に乗って火災範囲が拡大してしまいます。",
+            "imagePath": null
+        },
+        {
+            "question": "アルコール類やアセトンが燃えている時は、\n二酸化炭素消火剤を使用できる。",
+            "isCorrect": true,
+            "explanation": "正解！窒息効果のあるガス系消火剤（CO2やハロゲン）は、水溶性・非水溶性に関わらず有効です。",
+            "imagePath": null
+        },
+        {
+            "question": "クロロベンゼンは、\n水よりも軽い。",
+            "isCorrect": false,
+            "explanation": "不正解！クロロベンゼン（第2石油類）は水より重い（比重約1.1）です。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物の蒸気比重は、\n分子量が大きいほど小さくなる。",
+            "isCorrect": false,
+            "explanation": "逆です！分子量が大きい物質ほど、蒸気比重は大きくなり、より重くなります。",
+            "imagePath": null
+        },
+        {
+            "question": "シアン化水素は第4類危険物に含まれる。",
+            "isCorrect": false,
+            "explanation": "不正解！シアン化水素は消防法の危険物には該当せず、第4類でも第1類でもありません。毒性が非常に強く、毒劇物などとして規制されます。",
+            "imagePath": null
+        },
+        {
+            "question": "水溶性の液体火災に対して、\n粉末消火剤は効果がない。",
+            "isCorrect": false,
+            "explanation": "不正解！ABC粉末消火剤などは、水溶性液体の火災にも有効です。ダメなのは「普通の泡」です。",
+            "imagePath": null
+        },
+        {
+            "question": "ジエチルエーテルは、\n特有の甘い刺激臭（麻酔臭）がある。",
+            "isCorrect": true,
+            "explanation": "正解！病院のにおい、と表現されることもあります。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリンやベンゼンの蒸気を吸入すると、\n頭痛やめまいを起こすことがある。",
+            "isCorrect": true,
+            "explanation": "正解！多くの第4類危険物の蒸気には麻酔性や毒性があります。",
+            "imagePath": null
+        },
+        {
+            "question": "水に溶けない液体（非水溶性）の指定数量は、\n水に溶ける液体（水溶性）の指定数量の半分である。",
+            "isCorrect": true,
+            "explanation": "正解！例：第1石油類の非水溶性は200L、水溶性は400L。溶けない方が危険なので、指定数量（保管できる量）が厳しい（少ない）です。",
+            "imagePath": null
+        },
+        {
+            "question": "エチレングリコールは、\n無臭である。",
+            "isCorrect": true,
+            "explanation": "正解！第3石油類のエチレングリコールやグリセリンは、においがほとんどありません。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物は、\n酸化されやすい性質を持つものが多い。",
+            "isCorrect": true,
+            "explanation": "正解！燃える＝急激に酸化するということ。つまり還元剤として働きます。",
+            "imagePath": null
+        }
+    ],
+    "part2": [
+        {
+            "question": "引火点とは、点火源（火種）を近づけたときに、\n一瞬だけ引火する最低温度のことである。",
+            "isCorrect": true,
+            "explanation": "正解！引火点は「継続して燃える温度」ではなく、火源を近づけた瞬間にパッと引火する温度です。燃え続ける温度は「燃焼点」と呼ばれます。",
+            "imagePath": null
+        },
+        {
+            "question": "発火点とは、点火源がなくても、\n加熱された熱だけで自然に燃え始める最低温度のことである。",
+            "isCorrect": true,
+            "explanation": "正解！火がなくても、その温度になれば勝手にボッと燃えます。別名「着火点」とも言います。",
+            "imagePath": null
+        },
+        {
+            "question": "一般的に、引火点よりも発火点の方が、\n温度が低い。",
+            "isCorrect": false,
+            "explanation": "逆です！発火点の方が遥かに高いです。（例：ガソリンの引火点は－40℃、発火点は約300℃）",
+            "imagePath": null
+        },
+        {
+            "question": "燃焼の3要素とは、\n「可燃物」「酸素供給源」「点火源」である。",
+            "isCorrect": true,
+            "explanation": "正解！この3つが揃って初めて火がつきます。どれか1つでも欠ければ火は消えます。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物（ガソリンなど）の燃焼形態は、\n「蒸発燃焼」である。",
+            "isCorrect": true,
+            "explanation": "正解！液体そのものが燃えるのではなく、液体から出た「蒸気」が空気と混ざって燃えます。",
+            "imagePath": null
+        },
+        {
+            "question": "木炭やコークスの燃焼形態は、\n「分解燃焼」である。",
+            "isCorrect": false,
+            "explanation": "不正解！木炭は蒸気を出さず、表面が赤熱して燃える「表面燃焼」です。木材やプラスチックが「分解燃焼」です。",
+            "imagePath": null
+        },
+        {
+            "question": "除去消火とは、\n燃えている物体から酸素を遮断することである。",
+            "isCorrect": false,
+            "explanation": "それは「窒息消火」です。除去消火は、ガスの元栓を閉めるように「可燃物を取り除く」ことです。",
+            "imagePath": null
+        },
+        {
+            "question": "ハロゲン化物消火剤や粉末消火剤は、\n「抑制作用（負触媒効果）」により消火する。",
+            "isCorrect": true,
+            "explanation": "正解！燃焼の連鎖反応を化学的に断ち切る作用です。即効性があります。",
+            "imagePath": null
+        },
+        {
+            "question": "油火災（B火災）に対して、\n棒状の水（ストレート放水）は効果的である。",
+            "isCorrect": false,
+            "explanation": "絶対ダメ！油が水に浮いて飛び散り、火災が拡大します。水を使うなら「霧状」です。",
+            "imagePath": null
+        },
+        {
+            "question": "二酸化炭素消火剤の主な消火効果は、\n「冷却作用」である。",
+            "isCorrect": false,
+            "explanation": "不正解！CO2で酸素濃度を下げる「窒息作用」がメインです。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物の火災は、\n「A火災」に分類される。",
+            "isCorrect": false,
+            "explanation": "不正解！油火災は「B火災（黄色）」です。A火災は紙や木などの「普通火災（白）」です。",
+            "imagePath": null
+        },
+        {
+            "question": "電気設備による火災（C火災）の標識色は、\n「青色」である。",
+            "isCorrect": true,
+            "explanation": "正解！C火災（電気）は青色です。",
+            "imagePath": null
+        },
+        {
+            "question": "静電気火花は、\n点火源になる。",
+            "isCorrect": true,
+            "explanation": "正解！冬場にパチッとなるあれは、ガソリン蒸気に引火させるには十分すぎるエネルギーを持っています。",
+            "imagePath": null
+        },
+        {
+            "question": "燃焼範囲（爆発限界）とは、\n蒸気濃度が濃ければ濃いほどよく燃える範囲のことである。",
+            "isCorrect": false,
+            "explanation": "不正解！濃すぎても酸素不足で燃えません。「下限値」と「上限値」の間でのみ燃えます。",
+            "imagePath": null
+        },
+        {
+            "question": "乾燥砂は、\n消火剤として認められない。",
+            "isCorrect": false,
+            "explanation": "不正解！乾燥砂は、窒息作用がある簡易消火用具として認められています。",
+            "imagePath": null
+        },
+        {
+            "question": "泡消火剤は、\n「窒息作用」により消火する。",
+            "isCorrect": true,
+            "explanation": "正解！油の表面を泡で覆って、空気（酸素）を遮断して消します。",
+            "imagePath": null
+        },
+        {
+            "question": "強化液消火剤は、\n霧状にすれば油火災（B火災）にも適応する。",
+            "isCorrect": true,
+            "explanation": "正解！アルカリ金属塩類を含んだ水溶液で、再燃防止効果が高いです。",
+            "imagePath": null
+        },
+        {
+            "question": "圧縮熱や摩擦熱は、\n点火源にはならない。",
+            "isCorrect": false,
+            "explanation": "不正解！ディーゼルエンジンは圧縮熱で着火します。十分に点火源になります。",
+            "imagePath": null
+        },
+        {
+            "question": "水溶性液体（アルコールなど）の火災に、\n普通の泡消火剤を放射すると消火効果が高い。",
+            "isCorrect": false,
+            "explanation": "不正解！アルコールが泡の水分を吸収して泡を消してしまいます。「耐アルコール泡」を使います。",
+            "imagePath": null
+        },
+        {
+            "question": "酸素供給源となるのは、\n空気だけである。",
+            "isCorrect": false,
+            "explanation": "不正解！第1類（酸化性固体）や第6類（酸化性液体）などの「酸化剤」も酸素供給源になります。",
+            "imagePath": null
+        },
+        {
+            "question": "窒素ガスや炭酸ガスは、\n不燃性ガスである。",
+            "isCorrect": true,
+            "explanation": "正解！これらはすでに酸化しているか、反応しにくいガスなので、燃焼しません（＝消火に使えます）。",
+            "imagePath": null
+        },
+        {
+            "question": "引火点は、\n物質によって決まっており、気圧などが変わらない限り一定である。",
+            "isCorrect": true,
+            "explanation": "正解！ガソリンなら-40℃以下、灯油なら40℃以上、という物性値です。",
+            "imagePath": null
+        },
+        {
+            "question": "燃焼の4要素とは、\n3要素に「連鎖反応」を加えたものである。",
+            "isCorrect": true,
+            "explanation": "正解！粉末消火剤などは、この連鎖反応を断ち切ることで火を消します。",
+            "imagePath": null
+        },
+        {
+            "question": "水消火器（棒状）は、\n電気火災（C火災）に適している。",
+            "isCorrect": false,
+            "explanation": "絶対ダメ！水は電気を通すので、感電事故になります。電気火災にはCO2や粉末を使います。",
+            "imagePath": null
+        },
+        {
+            "question": "重曹（炭酸水素ナトリウム）を主成分とする粉末消火剤は、\n熱分解して二酸化炭素と水を放出し、窒息・冷却効果を生む。",
+            "isCorrect": true,
+            "explanation": "正解！BC粉末消火剤の仕組みです。",
+            "imagePath": null
+        },
+        {
+            "question": "アルキルアルミニウムの火災には、\n水を放射するのが最適である。",
+            "isCorrect": false,
+            "explanation": "絶対ダメ！水と爆発的に反応します。「乾燥砂」や「膨張ひる石」で窒息消火します。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリンの燃焼範囲の下限値は、\n約1.4 vol%である。",
+            "isCorrect": true,
+            "explanation": "正解！空気中にたった1.4%のガソリン蒸気があるだけで爆発します。",
+            "imagePath": null
+        },
+        {
+            "question": "消火器の「白・黄・青」の表示は、\n消火器本体の塗色（ボディの色）のことである。",
+            "isCorrect": false,
+            "explanation": "不正解！ボディの色（赤が多い）ではなく、適応火災を示す「円形の標識」の色です。",
+            "imagePath": null
+        },
+        {
+            "question": "冷却消火とは、\n燃焼物を引火点以下に冷やすことである。",
+            "isCorrect": true,
+            "explanation": "正解！水を使うのが代表的です。熱を奪って、ガスが出ない温度まで冷やします。",
+            "imagePath": null
+        },
+        {
+            "question": "ろうそくの燃焼は、\n「蒸発燃焼」である。",
+            "isCorrect": true,
+            "explanation": "正解！固体のロウが熱で溶けて液体になり、さらに気体（蒸気）になって燃えています。",
+            "imagePath": null
+        },
+        {
+            "question": "静電気は、湿度が低いときほど発生しやすい。",
+            "isCorrect": true,
+            "explanation": "正解！空気が乾燥している（湿度が低い）と、電気が逃げにくくなり、静電気が蓄積しやすくなります。",
+            "imagePath": null
+        },
+        {
+            "question": "静電気火災を防ぐための湿度対策として、\n湿度を高く保つことが有効である。",
+            "isCorrect": true,
+            "explanation": "正解！湿度が高いと物体の表面に水分が付着し、電気が逃げやすくなります。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリンなどの絶縁性の液体は、\n配管内を流れるだけでも静電気が発生する。",
+            "isCorrect": true,
+            "explanation": "正解！これを「流動帯電」といいます。パイプとの摩擦で電気が発生します。",
+            "imagePath": null
+        },
+        {
+            "question": "静電気の発生を抑えるためには、\n液体の流速をできるだけ速くする。",
+            "isCorrect": false,
+            "explanation": "逆です！流速が速いほど激しく摩擦して静電気が大量発生します。流速は「遅く」しなければなりません。",
+            "imagePath": null
+        },
+        {
+            "question": "接地（アース）は、\n発生した静電気を大地に逃がす効果がある。",
+            "isCorrect": true,
+            "explanation": "正解！導線を使って地面とつなぐことで、溜まった電気を逃がします。",
+            "imagePath": null
+        },
+        {
+            "question": "タンクローリーから地下タンクへ荷卸しをする際は、\nホースを接続する前に接地（アース）をとる。",
+            "isCorrect": true,
+            "explanation": "正解！ガソリンが流れる前にアースをつなぎ、電位差をなくしておくのが鉄則です。",
+            "imagePath": null
+        },
+        {
+            "question": "電気を通しやすい導体（金属など）であれば、\n静電気は絶対に発生しない。",
+            "isCorrect": false,
+            "explanation": "不正解！導体でも、地面から絶縁された状態（ゴム底の靴を履いた人間など）であれば、静電気は蓄積します。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリンを容器に注入する際、\n液面を波打たせたり、飛散させたりすると静電気が発生しやすい。",
+            "isCorrect": true,
+            "explanation": "正解！噴霧帯電や飛沫帯電といいます。ノズルを液中に差し込んで静かに注入するのが基本です。",
+            "imagePath": null
+        },
+        {
+            "question": "ボンディングとは、\n2つの物体の間を導線で接続し、電位差をなくすことである。",
+            "isCorrect": true,
+            "explanation": "正解！電位差がなくなれば、その物体間でスパーク（放電）は起きません。",
+            "imagePath": null
+        },
+        {
+            "question": "静電気による火花放電は、\nガソリンの蒸気に引火させるほどのエネルギーを持っている。",
+            "isCorrect": true,
+            "explanation": "正解！静電気のパチッという火花（数ミリジュール）は、ガソリンの最小発火エネルギー（0.24ミリジュール）を遥かに超えています。",
+            "imagePath": null
+        },
+        {
+            "question": "化学繊維の衣服（ポリエステルなど）は、\n木綿の衣服に比べて静電気が発生しやすい。",
+            "isCorrect": true,
+            "explanation": "正解！作業着には帯電しにくい綿（コットン）製か、帯電防止加工されたものを着用します。",
+            "imagePath": null
+        },
+        {
+            "question": "配管内にフィルターや金網を設置すると、\n静電気の発生を抑えることができる。",
+            "isCorrect": false,
+            "explanation": "逆です！フィルターを通すと接触面積が増え、通過する際に静電気が「増加」してしまいます。",
+            "imagePath": null
+        },
+        {
+            "question": "液体がタンクに注入された直後は、\n静電気が帯電している可能性があるため、検尺を控える。",
+            "isCorrect": true,
+            "explanation": "正解！注入直後は帯電しています。静置時間（緩和時間）をおいて、電気が逃げてから金属メジャーを入れます。",
+            "imagePath": null
+        },
+        {
+            "question": "絶縁性の高い床の上では、\n人体に静電気が帯留しやすい。",
+            "isCorrect": true,
+            "explanation": "正解！電気が足から地面に逃げないため、人体に溜まってしまいます。",
+            "imagePath": null
+        },
+        {
+            "question": "静電気防止対策として、\n室内の空気を二酸化炭素に置換することが推奨される。",
+            "isCorrect": false,
+            "explanation": "不正解！窒息消火の話と混ざっています。静電気対策としては「加湿（湿度を上げる）」が一般的です。",
+            "imagePath": null
+        },
+        {
+            "question": "導電性（電気を通す性質）の材料で作られた床や靴を使用すると、\n静電気の蓄積を防止できる。",
+            "isCorrect": true,
+            "explanation": "正解！電気を逃がすための「静電靴」や「導電床」が工場などで使われます。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物の中でも、\n水溶性のもの（アルコールなど）は、非水溶性のものより静電気が蓄積しやすい。",
+            "isCorrect": false,
+            "explanation": "逆です！水溶性のものは電気を通しやすいため、静電気は逃げやすいです。危険なのは「電気を通さない（非水溶性）」のガソリン等です。",
+            "imagePath": null
+        },
+        {
+            "question": "静電気の放電火花は、\n点火源にはなり得ない。",
+            "isCorrect": false,
+            "explanation": "不正解！立派な点火源です。乙4類の火災原因の上位です。",
+            "imagePath": null
+        },
+        {
+            "question": "タンクの上部から液体を注ぎ落とす方法は、\n静電気対策として有効である。",
+            "isCorrect": false,
+            "explanation": "絶対ダメ！バシャバシャと激しく飛沫があがり、猛烈な静電気が発生します。注入口は液面下に沈めます。",
+            "imagePath": null
+        },
+        {
+            "question": "人体が帯電していても、\nアースされている金属に触れれば、ゆっくり放電されるので火花は出ない。",
+            "isCorrect": false,
+            "explanation": "急激に放電されると「パチッ」と火花が出ます。静電気除去板などに触れて、徐々に放電させる必要があります。",
+            "imagePath": null
+        },
+        {
+            "question": "静電気は、\n固体と固体が接触・剥離するときだけでなく、液体と固体でも発生する。",
+            "isCorrect": true,
+            "explanation": "正解！ホース（固体）とガソリン（液体）の摩擦でも発生します。",
+            "imagePath": null
+        },
+        {
+            "question": "二硫化炭素は、\n水中保存することで静電気火災を防ぐ効果もある。",
+            "isCorrect": true,
+            "explanation": "正解！蒸気の漏洩防止が主目的ですが、水は導電性があるため電荷を逃がす効果もあります。",
+            "imagePath": null
+        },
+        {
+            "question": "静電気による火災を防ぐには、\n可燃性蒸気の発生を抑制することも重要である。",
+            "isCorrect": true,
+            "explanation": "正解！そもそも燃えるもの（蒸気）がなければ、火花が飛んでも火災にはなりません。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリンスタンドの給油ノズルには、\n静電気を除去するアース線が含まれている。",
+            "isCorrect": true,
+            "explanation": "正解！ノズルと車体の電位差をなくすために、導電性のホースが使われています。",
+            "imagePath": null
+        },
+        {
+            "question": "冬場のセルフスタンドでは、\n給油キャップを開ける前に「静電気除去シート」に触れる。",
+            "isCorrect": true,
+            "explanation": "正解！体に溜まった電気を逃がしてからキャップを開けないと、キャップ付近の蒸気に引火する恐れがあります。",
+            "imagePath": null
+        },
+        {
+            "question": "導体（金属）は、\n接地（アース）しなくても静電気はたまらない。",
+            "isCorrect": false,
+            "explanation": "不正解！浮遊導体（絶縁された金属）は、静電気を大量に蓄えるコンデンサになり、非常に危険な放電を起こします。",
+            "imagePath": null
+        },
+        {
+            "question": "静電気の帯電量は、\n接触する面積が大きいほど、また接触圧力が大きいほど多くなる。",
+            "isCorrect": true,
+            "explanation": "正解！強く擦ったり、広い面で擦れるほど電気は多く発生します。",
+            "imagePath": null
+        },
+        {
+            "question": "粉体（粉末）を空気輸送する場合、\n静電気は発生しない。",
+            "isCorrect": false,
+            "explanation": "不正解！粉体と管壁の摩擦で、液体以上に激しい静電気が発生し、粉塵爆発の原因になります。",
+            "imagePath": null
+        },
+        {
+            "question": "配管の曲がりやバルブなど、\n液体の流れが乱れる場所では、静電気が発生しやすい。",
+            "isCorrect": true,
+            "explanation": "正解！流れがスムーズでない場所では摩擦が大きくなるためです。",
+            "imagePath": null
+        },
+        {
+            "question": "湿度が低いと火災になりやすい理由は、\n「酸素濃度が高くなるから」である。",
+            "isCorrect": false,
+            "explanation": "不正解！酸素濃度は関係ありません。静電気が蓄積しやすく、また木材等が乾燥して燃えやすくなるからです。",
+            "imagePath": null
+        },
+        {
+            "question": "物質が液体から気体になるときに、\n周囲から熱を奪う現象を「気化熱」という。",
+            "isCorrect": true,
+            "explanation": "正解！打ち水をすると涼しくなるのは、水が蒸発するときに地面の熱を奪う（気化熱）からです。",
+            "imagePath": null
+        },
+        {
+            "question": "固体が液体にならず、直接気体になる変化を\n「昇華」という。",
+            "isCorrect": true,
+            "explanation": "正解！ドライアイス（固体二酸化炭素）やナフタレンなどがこれに当たります。",
+            "imagePath": null
+        },
+        {
+            "question": "液体の比重が「1」より小さい物質は、\n水と混ざらない場合、水に浮く。",
+            "isCorrect": true,
+            "explanation": "正解！比重は水（4℃）を「1」とした基準です。0.8なら浮き、1.2なら沈みます。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリンの蒸気比重は「3〜4」であるため、\n空気より軽い。",
+            "isCorrect": false,
+            "explanation": "不正解！蒸気比重は空気（約29g/mol）を「1」とした基準です。1より大きいので「空気より重い」です。",
+            "imagePath": null
+        },
+        {
+            "question": "ボイルの法則では、温度が一定のとき、\n気体の体積は圧力に「比例」する。",
+            "isCorrect": false,
+            "explanation": "逆です！圧力が高くなると、ギュッと圧縮されて体積は小さくなります。つまり「反比例」します。",
+            "imagePath": null
+        },
+        {
+            "question": "シャルルの法則では、圧力が一定のとき、\n気体の体積は絶対温度に「比例」する。",
+            "isCorrect": true,
+            "explanation": "正解！温めると膨張する、という法則です。",
+            "imagePath": null
+        },
+        {
+            "question": "液体が沸騰している間、\n液体の温度は上昇し続ける。",
+            "isCorrect": false,
+            "explanation": "不正解！沸騰中は、加えた熱がすべて状態変化（気化）に使われるため、すべて蒸発しきるまで温度は一定（沸点）に保たれます。",
+            "imagePath": null
+        },
+        {
+            "question": "融解熱とは、\n固体が液体になるときに必要な熱量のことである。",
+            "isCorrect": true,
+            "explanation": "正解！氷（0℃）が水（0℃）になるために必要な熱などがこれです。",
+            "imagePath": null
+        },
+        {
+            "question": "体積膨張率は、\n固体・液体・気体の中で、気体が最も大きい。",
+            "isCorrect": true,
+            "explanation": "正解！気体は温めるとものすごく膨らみます。だからガソリンタンクなどは空間容積を空けておく必要があります。",
+            "imagePath": null
+        },
+        {
+            "question": "1気圧における水の沸点は100℃だが、\n圧力を高くすると沸点は低くなる。",
+            "isCorrect": false,
+            "explanation": "不正解！圧力鍋の原理です。圧力を高くすると、沸点は「高く」なります（100℃以上でも液体のままいられる）。",
+            "imagePath": null
+        },
+        {
+            "question": "比熱が大きい物質ほど、\n温まりやすく冷めやすい。",
+            "isCorrect": false,
+            "explanation": "逆です！比熱とは「温めるのに必要な熱量」のこと。比熱が大きい水などは「温まりにくく冷めにくい」です。",
+            "imagePath": null
+        },
+        {
+            "question": "絶対零度は、\n摂氏「マイナス273℃」のことである。",
+            "isCorrect": true,
+            "explanation": "正解！ケルビン（K）の0度は、摂氏（℃）の-273度です。",
+            "imagePath": null
+        },
+        {
+            "question": "物質の三態とは、\n「個体」「液体」「流体」のことである。",
+            "isCorrect": false,
+            "explanation": "不正解！「固体」「液体」「気体」の3つです。流体は液体と気体の総称です。",
+            "imagePath": null
+        },
+        {
+            "question": "蒸気圧が高い液体ほど、\n蒸発しにくい。",
+            "isCorrect": false,
+            "explanation": "逆です！蒸気圧が高い＝蒸気になろうとする力が強い＝「蒸発しやすい（揮発性が高い）」です。",
+            "imagePath": null
+        },
+        {
+            "question": "熱の移動（伝熱）の3形態は、\n「伝導」「対流」「放射（ふく射）」である。",
+            "isCorrect": true,
+            "explanation": "正解！スプーンが熱くなる（伝導）、お風呂が沸く（対流）、焚き火が暖かい（放射）です。",
+            "imagePath": null
+        },
+        {
+            "question": "水の比熱は、\n一般的な油の比熱よりも小さい。",
+            "isCorrect": false,
+            "explanation": "不正解！水はあらゆる物質の中でもトップクラスに比熱が大きい（4.2J/g・K）です。だから冷却剤として優秀なのです。",
+            "imagePath": null
+        },
+        {
+            "question": "気体が液体に戻る変化を\n「凝縮（液化）」という。",
+            "isCorrect": true,
+            "explanation": "正解！結露などがこれに当たります。このとき熱（凝縮熱）を放出します。",
+            "imagePath": null
+        },
+        {
+            "question": "ボイル・シャルルの法則の式は、\nPV/T = 一定（定数）で表される。",
+            "isCorrect": true,
+            "explanation": "正解！Pは圧力、Vは体積、Tは絶対温度です。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリンなどの第4類危険物は、\n温度が上がると体積が増えるため、容器いっぱいに詰めない。",
+            "isCorrect": true,
+            "explanation": "正解！熱膨張で溢れ出たりタンクが破損するのを防ぐためです。",
+            "imagePath": null
+        },
+        {
+            "question": "液体の表面からだけでなく、\n内部からも気化が起こる現象を「沸騰」という。",
+            "isCorrect": true,
+            "explanation": "正解！ボコボコと泡が出るのが沸騰の特徴です。",
+            "imagePath": null
+        },
+        {
+            "question": "密度とは、\n物質の単位体積あたりの質量のことで、g/cm³などで表す。",
+            "isCorrect": true,
+            "explanation": "正解！密度と比重はほぼ同じ意味で使われますが、比重には単位がありません。",
+            "imagePath": null
+        },
+        {
+            "question": "アセトンなどの水溶性液体を水で薄めると、\n蒸気圧は高くなる（蒸発しやすくなる）。",
+            "isCorrect": false,
+            "explanation": "逆です！水に溶かすと蒸気圧は下がります（ラウールの法則）。つまり蒸発しにくくなり、引火点も高くなります。",
+            "imagePath": null
+        },
+        {
+            "question": "0℃の氷が0℃の水になるとき、\n体積は少し増える。",
+            "isCorrect": false,
+            "explanation": "不正解！水は特異な物質で、氷（固体）の方が水（液体）より体積が大きいです。だから氷は水に浮きます。",
+            "imagePath": null
+        },
+        {
+            "question": "絶対温度（K）を求める式は、\n「摂氏温度（℃）＋ 273」である。",
+            "isCorrect": true,
+            "explanation": "正解！27℃なら、27+273=300ケルビンになります。計算問題で必須です。",
+            "imagePath": null
+        },
+        {
+            "question": "熱伝導率は、一般的に\n気体 ＞ 液体 ＞ 固体 の順に大きい。",
+            "isCorrect": false,
+            "explanation": "逆です！金属などの固体が一番熱を伝えやすく、気体は伝えにくい（断熱材になる）です。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリン火災で水をかけると危険な理由の一つは、\n水が急激に沸騰して体積膨張し、油を吹き飛ばすからである。",
+            "isCorrect": true,
+            "explanation": "水蒸気爆発（スロップオーバーなど）の一因になります。水は気体になると体積が約1700倍になります。",
+            "imagePath": null
+        },
+        {
+            "question": "物質が燃焼するためには、\n必ず気体になる（蒸発する）必要がある。",
+            "isCorrect": false,
+            "explanation": "不正解！木炭などは固体のまま燃えます（表面燃焼）。ただし第4類危険物は蒸発燃焼です。",
+            "imagePath": null
+        },
+        {
+            "question": "気体の圧力を2倍にすると、\n体積は2倍になる。",
+            "isCorrect": false,
+            "explanation": "不正解！ボイルの法則により、圧力と体積は反比例するので、体積は「1/2（半分）」になります。",
+            "imagePath": null
+        },
+        {
+            "question": "二硫化炭素の蒸気比重は2.6である。\nこれは空気に比べて約2.6倍重いことを意味する。",
+            "isCorrect": true,
+            "explanation": "正解！だから床面に滞留します。",
+            "imagePath": null
+        },
+        {
+            "question": "分子運動が停止するとされる理論上の最低温度を\n「絶対零度」という。",
+            "isCorrect": true,
+            "explanation": "正解！これより低い温度は存在しません。",
+            "imagePath": null
+        },
+        {
+            "question": "酸化とは、物質が酸素と化合することである。",
+            "isCorrect": true,
+            "explanation": "正解！鉄がさびるのも、物が燃えるのも「酸化」です。",
+            "imagePath": null
+        },
+        {
+            "question": "還元とは、酸化物が酸素を奪われることである。",
+            "isCorrect": true,
+            "explanation": "正解！酸化の逆です。酸素を失うことを還元といいます。",
+            "imagePath": null
+        },
+        {
+            "question": "物質が水素を「失う」反応は、酸化である。",
+            "isCorrect": true,
+            "explanation": "正解！酸素と化合することだけでなく、水素を失うことも「酸化」の定義に含まれます。",
+            "imagePath": null
+        },
+        {
+            "question": "物質が電子を「受け取る」反応は、酸化である。",
+            "isCorrect": false,
+            "explanation": "不正解！電子を「失う（放出する）」のが酸化、電子を「受け取る」のが還元です。",
+            "imagePath": null
+        },
+        {
+            "question": "酸化剤とは、自分自身は「還元」され、相手を「酸化」させる物質のことである。",
+            "isCorrect": true,
+            "explanation": "正解！相手を酸化させるから酸化剤。その時、自分自身は酸素を相手に渡して還元されます。第1類や第6類危険物がこれです。",
+            "imagePath": null
+        },
+        {
+            "question": "還元剤とは、自分自身は「還元」される物質のことである。",
+            "isCorrect": false,
+            "explanation": "不正解！還元剤は、相手を還元させ、自分自身は「酸化」されます。第2類や第4類（可燃物）は還元剤です。",
+            "imagePath": null
+        },
+        {
+            "question": "pH（水素イオン指数）が「7」の溶液は、中性である。",
+            "isCorrect": true,
+            "explanation": "正解！7が中性、7より小さいと酸性、7より大きいとアルカリ性です。",
+            "imagePath": null
+        },
+        {
+            "question": "pHの値が小さいほど、酸性が強い。",
+            "isCorrect": true,
+            "explanation": "正解！pH 1は強酸性、pH 6は弱酸性です。",
+            "imagePath": null
+        },
+        {
+            "question": "有機化合物は、一般に「炭素」を含む化合物である。",
+            "isCorrect": true,
+            "explanation": "正解！燃やすと二酸化炭素が出るのが特徴です。（※二酸化炭素や炭酸塩など一部の例外を除く）",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物（ガソリンやアルコール）は、\n一般に「有機化合物」である。",
+            "isCorrect": true,
+            "explanation": "正解！石油製品やアルコールは炭素を含んでおり、燃えます。",
+            "imagePath": null
+        },
+        {
+            "question": "無機化合物は、有機化合物に比べて融点や沸点が低いものが多い。",
+            "isCorrect": false,
+            "explanation": "逆です！食塩（無機）と砂糖（有機）で考えると、食塩の方が融点が遥かに高いです。有機物は熱に弱く、低い温度で溶けたり燃えたりします。",
+            "imagePath": null
+        },
+        {
+            "question": "同素体とは、同じ元素からできているが、性質や構造が違う物質のことである。",
+            "isCorrect": true,
+            "explanation": "正解！「ダイヤモンドと黒鉛（炭素）」や「酸素とオゾン（酸素）」の関係です。",
+            "imagePath": null
+        },
+        {
+            "question": "異性体とは、化学式（分子式）は同じだが、構造式が異なる化合物のことである。",
+            "isCorrect": true,
+            "explanation": "正解！有機化学で重要です。「ジメチルエーテル」と「エチルアルコール」は同じC2H6Oですが、性質は全然違います。",
+            "imagePath": null
+        },
+        {
+            "question": "一酸化炭素（CO）は、有機化合物である。",
+            "isCorrect": false,
+            "explanation": "不正解！炭素を含んでいますが、一酸化炭素や二酸化炭素は例外的に「無機化合物」に分類されます。",
+            "imagePath": null
+        },
+        {
+            "question": "金属の腐食（さび）は、一種の「酸化」反応である。",
+            "isCorrect": true,
+            "explanation": "正解！金属が空気中の酸素とゆっくり結合して酸化物になる現象です。",
+            "imagePath": null
+        },
+        {
+            "question": "イオン化傾向が大きい金属ほど、\n酸化されやすい（さびやすい）。",
+            "isCorrect": true,
+            "explanation": "正解！イオン化傾向が大きい（カリウムやナトリウムなど）＝電子を出して陽イオンになりやすい＝酸化されやすい、です。",
+            "imagePath": null
+        },
+        {
+            "question": "酸と塩基（アルカリ）が反応して、塩（えん）と水ができる反応を「中和」という。",
+            "isCorrect": true,
+            "explanation": "正解！塩酸＋水酸化ナトリウム→食塩＋水、などが代表例です。",
+            "imagePath": null
+        },
+        {
+            "question": "リトマス試験紙を「青色から赤色」に変えるのは、アルカリ性である。",
+            "isCorrect": false,
+            "explanation": "不正解！青から赤は「酸性（梅干し色）」です。赤から青が「アルカリ性」です。",
+            "imagePath": null
+        },
+        {
+            "question": "原子核は、陽子と電子から構成されている。",
+            "isCorrect": false,
+            "explanation": "不正解！原子核は「陽子」と「中性子」でできています。電子はその周りを回っています。",
+            "imagePath": null
+        },
+        {
+            "question": "原子番号は、原子核に含まれる「中性子」の数で決まる。",
+            "isCorrect": false,
+            "explanation": "不正解！原子番号は「陽子」の数で決まります。",
+            "imagePath": null
+        },
+        {
+            "question": "メンデレーエフが考案した、元素を原子量の順に並べた表をもとにしたものを「周期表」という。",
+            "isCorrect": true,
+            "explanation": "正解！現在使われている周期表は原子番号順ですが、最初に周期性を見出したのはメンデレーエフです。",
+            "imagePath": null
+        },
+        {
+            "question": "第18族元素（希ガス）は、\n化学的に非常に安定しており、他の物質と反応しにくい。",
+            "isCorrect": true,
+            "explanation": "正解！ヘリウム、ネオン、アルゴンなどです。不活性ガス消火剤として使われます。",
+            "imagePath": null
+        },
+        {
+            "question": "化学変化（化学反応）では、\n物質の状態が変わるだけで、新しい物質はできない。",
+            "isCorrect": false,
+            "explanation": "不正解！それは「物理変化（氷が水になるなど）」です。化学変化は、燃焼や電気分解のように「全く違う物質」ができる反応です。",
+            "imagePath": null
+        },
+        {
+            "question": "質量保存の法則とは、\n化学反応の前後で、物質全体の質量の総和は変わらないという法則である。",
+            "isCorrect": true,
+            "explanation": "正解！木が燃えて灰になっても、発生したガスの重さを足せば、燃える前と同じ重さになります。",
+            "imagePath": null
+        },
+        {
+            "question": "触媒とは、自分自身は変化せず、\n化学反応の速度を変化させる物質のことである。",
+            "isCorrect": true,
+            "explanation": "正解！反応を速める「正触媒」と、遅らせる「負触媒（抑制剤）」があります。",
+            "imagePath": null
+        },
+        {
+            "question": "発熱反応がおこると、周囲の温度は下がる。",
+            "isCorrect": false,
+            "explanation": "不正解！熱を発するので温度は上がります。燃焼は激しい発熱反応です。温度が下がるのは「吸熱反応」です。",
+            "imagePath": null
+        },
+        {
+            "question": "有機化合物は、一般に水に溶けやすく、\n有機溶媒には溶けにくい。",
+            "isCorrect": false,
+            "explanation": "逆です！油（有機物）は水に溶けず、油（有機溶媒）によく溶けます。",
+            "imagePath": null
+        },
+        {
+            "question": "硫黄（S）が燃焼すると、\n亜硫酸ガス（二酸化硫黄）が発生する。",
+            "isCorrect": true,
+            "explanation": "正解！S + O2 → SO2。刺激臭のある有毒ガスです。",
+            "imagePath": null
+        },
+        {
+            "question": "物理変化と化学変化の違いとして、\nガソリンの「蒸発」は物理変化、「燃焼」は化学変化である。",
+            "isCorrect": true,
+            "explanation": "正解！蒸発は状態が変わるだけ。燃焼は酸素と結合して別の物質（CO2など）になる反応です。",
+            "imagePath": null
+        },
+        {
+            "question": "フェノールフタレイン溶液を滴下すると、\n酸性は赤色になる。",
+            "isCorrect": false,
+            "explanation": "不正解！フェノールフタレインは「アルカリ性」で赤色になります。酸性・中性では無色です。",
+            "imagePath": null
+        }
+    ],
+    "part3": [
+        {
+            "question": "危険物取扱者免状の写真は、\n「10年」以内に撮影されたものでなければならない。",
+            "isCorrect": false,
+            "explanation": "不正解！写真は「6ヶ月」以内に撮影されたものです。免状の書き換え期限が「10年」です。ここの混同に注意！",
+            "imagePath": null
+        },
+        {
+            "question": "免状の写真の書き換えは、\n免状の交付を受けてから「10年」が経過する前に行う。",
+            "isCorrect": true,
+            "explanation": "正解！写真は10年ごとに古くなるので、更新（書き換え）が必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "免状の写真書き換え申請は、\n「居住地」の都道府県知事に行わなければならない。",
+            "isCorrect": false,
+            "explanation": "不正解！居住地ではなく、「免状を交付した知事」または「勤務地等の知事」に申請します。",
+            "imagePath": null
+        },
+        {
+            "question": "氏名に変更があった場合、\n免状の「書き換え」を申請しなければならない。",
+            "isCorrect": true,
+            "explanation": "正解！結婚などで氏名が変わった場合は書き換えが必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "現住所に変更があった場合、\n免状の「書き換え」を申請しなければならない。",
+            "isCorrect": false,
+            "explanation": "不正解！単なる「住所変更」だけなら、免状の記載事項（氏名・本籍）は変わらないため、書き換え申請は不要です。",
+            "imagePath": null
+        },
+        {
+            "question": "本籍地が変更になった場合、\n同一都道府県内での転居であっても書き換えが必要である。",
+            "isCorrect": false,
+            "explanation": "不正解！本籍が変わっても、都道府県が変わらない場合は書き換え不要です。（免状には都道府県名までしか載らないため）",
+            "imagePath": null
+        },
+        {
+            "question": "免状を紛失して再交付を受けた後、\n失くした免状が出てきた場合は、30日以内に提出する。",
+            "isCorrect": false,
+            "explanation": "不正解！発見した場合は「10日以内」に、再交付を受けた知事に提出（返納）しなければなりません。",
+            "imagePath": null
+        },
+        {
+            "question": "免状の「再交付」の申請は、\nどこの都道府県知事に行ってもよい。",
+            "isCorrect": false,
+            "explanation": "ここ重要！「再交付（失くした時）」は、必ず「免状を交付した知事（または書き換えをした知事）」に申請します。勤務地ではできません。",
+            "imagePath": null
+        },
+        {
+            "question": "免状の「書き換え」の申請は、\n勤務地の都道府県知事に行うことができる。",
+            "isCorrect": true,
+            "explanation": "正解！「書き換え（写真更新など）」は、交付した知事だけでなく、勤務地の知事にも申請できます。",
+            "imagePath": null
+        },
+        {
+            "question": "免状を破損したり汚した場合は、\n「再交付」を申請することができる。",
+            "isCorrect": true,
+            "explanation": "正解！破れたり汚れたりして見えにくくなった場合も再交付の対象です。",
+            "imagePath": null
+        },
+        {
+            "question": "消防法の規定に違反して免状の返納を命じられた場合、\nその日から「2年間」は免状の再交付を受けられない。",
+            "isCorrect": false,
+            "explanation": "不正解！欠格期間は「1年間」です。1年経てばまた試験を受けられます。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物取扱作業に従事していなくても、\n免状を持っていれば定期的に保安講習を受けなければならない。",
+            "isCorrect": false,
+            "explanation": "不正解！保安講習の受講義務があるのは「現に危険物取扱作業に従事している人」だけです。ペーパードライバーは受講不要。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物取扱作業に従事している者は、\n原則として「3年以内」ごとに保安講習を受けなければならない。",
+            "isCorrect": true,
+            "explanation": "正解！実務に就いている人は3年ごとの講習が義務です。",
+            "imagePath": null
+        },
+        {
+            "question": "新たに危険物取扱作業に従事する者で、\n過去2年以内に免状の交付を受けている場合は、講習は3年以内でよい。",
+            "isCorrect": true,
+            "explanation": "正解！免状取ってすぐ（2年以内）の人は知識が新しいので、働き始めてから最初の講習まで3年の猶予があります。",
+            "imagePath": null
+        },
+        {
+            "question": "新たに危険物取扱作業に従事する者で、\n免状取得から2年以上経っている場合は、従事してから1年以内に講習を受ける。",
+            "isCorrect": true,
+            "explanation": "正解！昔取った免状を使って久しぶりに働く場合は、働き始めてから「1年以内」に講習が必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "保安講習の受講申請は、\n「居住地」の都道府県知事に行う。",
+            "isCorrect": false,
+            "explanation": "不正解！講習は原則として「勤務地」の都道府県で行われるものを受けます。",
+            "imagePath": null
+        },
+        {
+            "question": "免状の写真が古くなったが、\n危険物を取り扱っていないので書き換えをしなかった。",
+            "isCorrect": false,
+            "explanation": "これは違反です（試験的には）。仕事をしていてもいなくても、免状の効力を維持するには10年ごとの写真書き換えが必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "交通ルールに違反して罰金刑を受けた場合、\n危険物取扱者免状の返納を命じられることがある。",
+            "isCorrect": false,
+            "explanation": "不正解！返納命令が出るのは「消防法」に違反した場合です。交通違反は関係ありません。",
+            "imagePath": null
+        },
+        {
+            "question": "免状を携帯していなくても、\n免状のコピーを持っていれば危険物を取り扱える。",
+            "isCorrect": false,
+            "explanation": "不正解！必ず「免状の原本」を携帯しなければなりません。",
+            "imagePath": null
+        },
+        {
+            "question": "免状の再交付を申請中であれば、\n免状が手元になくても危険物を取り扱える。",
+            "isCorrect": false,
+            "explanation": "不正解！申請中であっても、免状原本が手元になければ作業に従事できません。",
+            "imagePath": null
+        },
+        {
+            "question": "本籍を変更した場合、\n変更の事由が生じた日から10日以内に書き換え申請が必要である。",
+            "isCorrect": false,
+            "explanation": "不正解！書き換え申請に「○日以内」という期限の規定はありません。「遅滞なく（速やかに）」行う必要があります。",
+            "imagePath": null
+        },
+        {
+            "question": "免状の写真が撮影から10年経過しても、\n書き換え申請をしなければ免状は自動的に失効する。",
+            "isCorrect": false,
+            "explanation": "不正解！自動的に失効する規定はないが、10年以内の写真に書き換える義務がある。",
+            "imagePath": null
+        },
+        {
+            "question": "勤務先が変わっただけなら、\n免状の書き換え申請は不要である。",
+            "isCorrect": true,
+            "explanation": "正解！勤務先は免状の記載事項ではないので、転職しても免状の手続きは不要です。",
+            "imagePath": null
+        },
+        {
+            "question": "再交付の申請と同時に、\n書き換え（写真更新など）の申請を行うことはできない。",
+            "isCorrect": false,
+            "explanation": "不正解！再交付と書き換えは同時に申請できます（例：失くしたついでに写真も新しくするなど）。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物取扱者免状に有効期限はない。",
+            "isCorrect": true,
+            "explanation": "正解！運転免許と違って免状自体に有効期限はありません。あるのは「写真の書き換え期限（10年）」だけです。",
+            "imagePath": null
+        },
+        {
+            "question": "保安講習を受けなかった場合、\n免状の返納を命じられることがある。",
+            "isCorrect": true,
+            "explanation": "正解！受講義務があるのにサボると、消防法違反として返納命令の対象になります。",
+            "imagePath": null
+        },
+        {
+            "question": "日雇いのアルバイトで危険物を取り扱う場合、\n保安講習を受ける必要はない。",
+            "isCorrect": false,
+            "explanation": "不正解！雇用形態に関わらず、継続して危険物取扱い作業に従事するなら講習義務があります。",
+            "imagePath": null
+        },
+        {
+            "question": "免状の記載事項に変更があったときは、\nその免状を交付した知事、または居住地、勤務地の知事に申請できる。",
+            "isCorrect": true,
+            "explanation": "正解！書き換え申請は窓口が広いです。（再交付は交付知事のみ、と区別して覚えましょう）",
+            "imagePath": null
+        },
+        {
+            "question": "免状の写真は、\nカラー写真でなければならない。",
+            "isCorrect": false,
+            "explanation": "不正解！法令上、カラーでなければならないという規定はありません。",
+            "imagePath": null
+        },
+        {
+            "question": "甲種危険物取扱者は、\nすべての類の危険物の取扱いに立ち会うことができる。",
+            "isCorrect": true,
+            "explanation": "正解！甲種は「最強」の免許です。第1類〜第6類まですべて扱えますし、立ち会いも可能です。",
+            "imagePath": null
+        },
+        {
+            "question": "乙種危険物取扱者は、\n免状を持っている類の危険物についてのみ、立ち会うことができる。",
+            "isCorrect": true,
+            "explanation": "正解！乙4持ちなら、乙4（ガソリン等）の立ち会いはできますが、乙1や乙6の立ち会いはできません。",
+            "imagePath": null
+        },
+        {
+            "question": "丙種危険物取扱者は、\nガソリンや灯油などの取扱いに立ち会うことができる。",
+            "isCorrect": false,
+            "explanation": "不正解！丙種は「自分一人で扱う」ことはできますが、無資格者に「立ち会う」権限はありません。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物取扱者の資格を持っていれば、\n実務経験がなくても「危険物保安監督者」になれる。",
+            "isCorrect": false,
+            "explanation": "不正解！保安監督者になるには、甲種または乙種の免状＋「6ヶ月以上」の実務経験が必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "丙種危険物取扱者は、\n実務経験があれば「危険物保安監督者」になれる。",
+            "isCorrect": false,
+            "explanation": "不正解！丙種はどれだけベテランになっても、保安監督者にはなれません。",
+            "imagePath": null
+        },
+        {
+            "question": "給油取扱所（ガソリンスタンド）には、\n必ず「危険物保安監督者」を選任しなければならない。",
+            "isCorrect": true,
+            "explanation": "正解！指定数量の倍数に関係なく、ガソリンスタンドでは選任が必須です。",
+            "imagePath": null
+        },
+        {
+            "question": "製造所等の所有者は、危険物保安監督者を選任したとき、\n「遅滞なく」市町村長等に届け出なければならない。",
+            "isCorrect": true,
+            "explanation": "正解！選任（または解任）したら、速やかに届け出が必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "「危険物保安統括管理者」を選任する場合、\nその人は危険物取扱者の免状を持っている必要がある。",
+            "isCorrect": false,
+            "explanation": "不正解！統括管理者（工場の所長など）は、事業全体の責任者であればよく、免状は不要です。",
+            "imagePath": null
+        },
+        {
+            "question": "「危険物施設保安員」を選任する場合、\nその人は危険物取扱者の免状を持っている必要がある。",
+            "isCorrect": false,
+            "explanation": "不正解！施設保安員も免状は必須ではありません（が、持っている人がなることが望ましいです）。",
+            "imagePath": null
+        },
+        {
+            "question": "移動タンク貯蔵所（タンクローリー）には、\n危険物保安監督者を選任する必要がある。",
+            "isCorrect": false,
+            "explanation": "不正解！タンクローリーは移動する施設なので、特定の監督者を置く義務があります。",
+            "imagePath": null
+        },
+        {
+            "question": "免状を持っていない人でも、\n有資格者が立ち会えば、危険物の取り扱い作業ができる。",
+            "isCorrect": true,
+            "explanation": "正解！セルフスタンドでお客さんが給油できるのは、モニター越しに有資格者が監視（立ち会い）しているからです。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物保安監督者が旅行で不在の場合は、\n代理人を指名して市町村長に届け出る必要がある。",
+            "isCorrect": false,
+            "explanation": "不正解！代理人の選任は（実務上は重要ですが）消防法上の届出義務はありません。",
+            "imagePath": null
+        },
+        {
+            "question": "市町村長等は、災害発生防止のため必要があると認めるときは、\n所有者に対して危険物保安監督者の「解任」を命ずることができる。",
+            "isCorrect": true,
+            "explanation": "正解！「あいつは危険だからクビにしろ（解任命令）」と命令できます。",
+            "imagePath": null
+        },
+        {
+            "question": "市町村長等は、危険物取扱者が消防法に違反した場合、\nその免状の「返納」を命ずることができる。",
+            "isCorrect": false,
+            "explanation": "不正解！危険物取扱者免状の返納を命ずることができるのは「都道府県知事」です。市町村長等（消防署）にはその権限はありません。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物取扱者免状の返納命令を出せるのは、\n「都道府県知事」である。",
+            "isCorrect": true,
+            "explanation": "正解！免状の発行元である知事だけが、免状を取り上げることができます。市町村長（消防署）ではありません。",
+            "imagePath": null
+        },
+        {
+            "question": "予防規程を定めなければならない製造所等は、\n「認可」を受けなければならない。",
+            "isCorrect": true,
+            "explanation": "正解！予防規程は単なる「届出」ではなく、市町村長等の「認可」が必要です。厳しいです。",
+            "imagePath": null
+        },
+        {
+            "question": "給油取扱所（ガソリンスタンド）は、\n予防規程を作成する必要がある。",
+            "isCorrect": true,
+            "explanation": "正解！ガソリンスタンドは指定数量に関係なく、予防規程を作って認可を受ける必要があります。",
+            "imagePath": null
+        },
+        {
+            "question": "指定数量の倍数が10以上の屋内貯蔵所は、\n危険物保安監督者の選任が必要である。",
+            "isCorrect": false,
+            "explanation": "不正解！屋内貯蔵所の場合、倍数が「100以上」で必要になります。10では不要です。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物保安監督者の業務には、\n「火災が発生したときの応急措置」が含まれる。",
+            "isCorrect": true,
+            "explanation": "正解！他にも、保安教育の実施や、施設の点検・整備の監督などが業務です。",
+            "imagePath": null
+        },
+        {
+            "question": "丙種危険物取扱者は、\nガソリンの移動タンク貯蔵所（タンクローリー）に乗務できる。",
+            "isCorrect": true,
+            "explanation": "正解！丙種はガソリン、灯油、軽油、重油などの特定の危険物であれば、タンクローリーの運転・取り扱いが可能です。",
+            "imagePath": null
+        },
+        {
+            "question": "タンクローリーで移動する場合、\n危険物取扱者免状の「写し（コピー）」を携帯していればよい。",
+            "isCorrect": false,
+            "explanation": "絶対ダメ！必ず「免状の原本」を携帯しなければなりません。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物施設保安員を選任したときは、\n市町村長等に届け出る必要がある。",
+            "isCorrect": false,
+            "explanation": "不正解！「監督者」や「統括管理者」は届出が必要ですが、「施設保安員」は届出義務がありません。",
+            "imagePath": null
+        },
+        {
+            "question": "従業員に対する保安教育の実施は、\n危険物保安統括管理者の業務である。",
+            "isCorrect": false,
+            "explanation": "不正解！現場の教育係は「危険物保安監督者」の役目です。",
+            "imagePath": null
+        },
+        {
+            "question": "指定数量の倍数が30以下の製造所では、\n危険物保安監督者の選任は不要である。",
+            "isCorrect": true,
+            "explanation": "正解！一般の製造所等は、倍数が「30を超える」場合に監督者が必要になります。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物取扱者が立ち会う場合、\n立ち会う人間は必ず甲種危険物取扱者でなければならない。",
+            "isCorrect": false,
+            "explanation": "不正解！乙種危険物取扱者も、自分の免状の範囲内で立ち会いが可能です。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物保安監督者を選任しなければならない施設で、\n選任しなかった場合、許可の取消し等の処分を受けることがある。",
+            "isCorrect": true,
+            "explanation": "正解！非常に重い違反となり、使用停止命令などが出ます。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物保安監督者は、\n作業員に対して保安に関する必要な「指示」を与える権限を持つ。",
+            "isCorrect": true,
+            "explanation": "正解！監督者は現場のリーダーなので、指示に従わない作業員を制止する権限もあります。",
+            "imagePath": null
+        },
+        {
+            "question": "地下タンク貯蔵所は、\n指定数量に関わらず危険物保安監督者の選任は不要である。",
+            "isCorrect": true,
+            "explanation": "正解！地下タンク貯蔵所や簡易タンク貯蔵所は、どんなに量が多くても監督者は不要です。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物保安統括管理者は、\n事業所の事業を統括管理する者（工場長など）をもって充てる。",
+            "isCorrect": true,
+            "explanation": "正解！特別な資格はいりませんが、トップが責任を持つという制度です。",
+            "imagePath": null
+        },
+        {
+            "question": "予防規程の変更を命ずることができるのは、\n「消防署長」である。",
+            "isCorrect": false,
+            "explanation": "不正解！命令権者は「市町村長等」です。消防署長ではありません。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリン（第1石油類・非水溶性）の指定数量は、\n「200リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！基本中の基本です。これを基準（1倍）として他の数量を覚えると楽です。",
+            "imagePath": null
+        },
+        {
+            "question": "灯油および軽油（第2石油類・非水溶性）の指定数量は、\n「1000リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！ガソリン（200L）の5倍の量です。",
+            "imagePath": null
+        },
+        {
+            "question": "重油（第3石油類・非水溶性）の指定数量は、\n「2000リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！灯油（1000L）のさらに2倍です。",
+            "imagePath": null
+        },
+        {
+            "question": "ギヤー油やシリンダー油（第4石油類）の指定数量は、\n「6000リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！かなり大量に保管できます。重油（2000L）の3倍です。",
+            "imagePath": null
+        },
+        {
+            "question": "動植物油類の指定数量は、\n「10000リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！第4類の中で最大の指定数量です。1万リットルまでOKです。",
+            "imagePath": null
+        },
+        {
+            "question": "特殊引火物（ジエチルエーテルなど）の指定数量は、\n「50リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！最も危険なので、わずか50Lで規制対象になります。",
+            "imagePath": null
+        },
+        {
+            "question": "アルコール類の指定数量は、\n「200リットル」である。",
+            "isCorrect": false,
+            "explanation": "不正解！アルコール類は「400リットル」です。第1石油類の水溶性と同じ量です。",
+            "imagePath": null
+        },
+        {
+            "question": "アセトン（第1石油類・水溶性）の指定数量は、\n「400リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！第1石油類は、水に溶けると指定数量が2倍（200L→400L）になります。",
+            "imagePath": null
+        },
+        {
+            "question": "第1石油類、第2石油類、第3石油類において、\n水溶性の指定数量は、非水溶性の指定数量の「2倍」である。",
+            "isCorrect": true,
+            "explanation": "正解！この法則を覚えておけば、水溶性の数値を個別に暗記する必要がなくなります。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリンを400リットル貯蔵した場合、\n指定数量の倍数は「2倍」となる。",
+            "isCorrect": true,
+            "explanation": "正解！400 ÷ 200 = 2倍です。",
+            "imagePath": null
+        },
+        {
+            "question": "灯油を500リットル貯蔵した場合、\n指定数量の倍数は「0.5倍」となる。",
+            "isCorrect": true,
+            "explanation": "正解！500 ÷ 1000 = 0.5倍です。1倍未満なので、消防法の許可施設ではなく「少量危険物」の届出対象になります。",
+            "imagePath": null
+        },
+        {
+            "question": "複数の危険物を同じ場所で貯蔵する場合、\nそれぞれの倍数を計算して「合算」する。",
+            "isCorrect": true,
+            "explanation": "正解！足し算して1.0以上になれば、消防法の規制対象（許可が必要）になります。",
+            "imagePath": null
+        },
+        {
+            "question": "ガソリン100L（0.5倍）と灯油500L（0.5倍）を貯蔵した場合、\n合計で1.0倍となり、許可が必要になる。",
+            "isCorrect": true,
+            "explanation": "正解！0.5 + 0.5 = 1.0倍。この計算問題は試験によく出ます。",
+            "imagePath": null
+        },
+        {
+            "question": "グリセリン（第3石油類・水溶性）の指定数量は、\n「4000リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！重油（2000L）の2倍なので4000Lです。",
+            "imagePath": null
+        },
+        {
+            "question": "酢酸（第2石油類・水溶性）の指定数量は、\n「1000リットル」である。",
+            "isCorrect": false,
+            "explanation": "不正解！灯油（1000L）の2倍なので、「2000リットル」です。",
+            "imagePath": null
+        },
+        {
+            "question": "指定数量の「5分の1」以上を指定数量未満の危険物を貯蔵する場合、\n市町村条例による規制を受ける。",
+            "isCorrect": true,
+            "explanation": "正解！これを「少量危険物」といいます。消防署への届出が必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "指定数量の倍数が「10倍」以上の屋内貯蔵所等は、\n警報設備を設置しなければならない。",
+            "isCorrect": true,
+            "explanation": "正解！警報設備の設置義務は、屋内貯蔵所などの対象施設で、指定数量の倍数が10倍以上の場合に発生します。",
+            "imagePath": null
+        },
+        {
+            "question": "クレオソート油（第3石油類・非水溶性）の指定数量は、\n「2000リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！重油と同じグループです。",
+            "imagePath": null
+        },
+        {
+            "question": "軽油2000リットルは、\nガソリン2000リットルと同じ倍数である。",
+            "isCorrect": false,
+            "explanation": "不正解！軽油は2倍（2000÷1000）、ガソリンは10倍（2000÷200）になります。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物の指定数量は、\n品名に関係なく一律である。",
+            "isCorrect": false,
+            "explanation": "不正解！危険度に応じて50L〜10000Lまで幅広く設定されています。",
+            "imagePath": null
+        },
+        {
+            "question": "指定数量の計算において、\n1未満の端数は切り捨てる。",
+            "isCorrect": false,
+            "explanation": "絶対ダメ！0.99倍でも1.0未満扱いです。四捨五入や切り捨てはしません。",
+            "imagePath": null
+        },
+        {
+            "question": "トルエン（第1石油類・非水溶性）の指定数量は、\n「200リットル」である。",
+            "isCorrect": true,
+            "explanation": "正解！ガソリンと同じグループです。",
+            "imagePath": null
+        },
+        {
+            "question": "潤滑油（第4石油類）を12000リットル貯蔵する場合、\n倍数は「2倍」である。",
+            "isCorrect": true,
+            "explanation": "正解！12000 ÷ 6000 = 2倍。",
+            "imagePath": null
+        },
+        {
+            "question": "二硫化炭素（特殊引火物）の指定数量は、\nガソリンと同じ200リットルである。",
+            "isCorrect": false,
+            "explanation": "不正解！特殊引火物はめちゃくちゃ危険なので「50リットル」です。",
+            "imagePath": null
+        },
+        {
+            "question": "エタノール（アルコール類）を400リットル貯蔵する場合、\n倍数は「1倍」である。",
+            "isCorrect": true,
+            "explanation": "正解！アルコール類の指定数量は400Lです。",
+            "imagePath": null
+        },
+        {
+            "question": "指定数量以上の危険物を、\n車両（タンクローリー等）で運搬する場合、標識を掲げる必要がある。",
+            "isCorrect": false,
+            "explanation": "ひっかけ！運搬（トラックに積んで運ぶ等）の場合は、指定数量の「何分の1であっても（少量でも）」、「危」の標識が必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "指定数量未満の危険物であっても、\n消防法による規制を一部受ける。",
+            "isCorrect": true,
+            "explanation": "正解！運搬の基準（容器の強さなど）や、品名ごとの共通ルールなどは量に関係なく適用されます。",
+            "imagePath": null
+        },
+        {
+            "question": "酸化プロピレン（特殊引火物）を100リットル貯蔵すると、\n倍数は「2倍」になる。",
+            "isCorrect": true,
+            "explanation": "正解！100 ÷ 50 = 2倍。",
+            "imagePath": null
+        },
+        {
+            "question": "ヤシ油（動植物油類）の指定数量は、\n灯油の10倍である。",
+            "isCorrect": true,
+            "explanation": "正解！ヤシ油は10000L、灯油は1000L。ちょうど10倍です。",
+            "imagePath": null
+        },
+        {
+            "question": "指定数量の倍数を計算する際、\n水溶性と非水溶性を区別する必要はない。",
+            "isCorrect": false,
+            "explanation": "不正解！区別しないと分母（指定数量）が変わってしまうため、計算結果が狂います。必ず区別します。",
+            "imagePath": null
+        },
+        {
+            "question": "製造所等の「標識」は、\n白地に黒色の文字で表示する。",
+            "isCorrect": true,
+            "explanation": "正解！施設の名前（「危険物地下タンク貯蔵所」など）を書いた看板は、白地に黒文字です。",
+            "imagePath": null
+        },
+        {
+            "question": "標識のサイズは、\n横0.3m以上、縦0.6m以上である。",
+            "isCorrect": true,
+            "explanation": "正解！縦長の長方形が基本サイズです。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物（引火性液体）の注意事項を掲示する板は、\n「火気注意」と表示する。",
+            "isCorrect": false,
+            "explanation": "不正解！引火性液体は特に危険なので、より強い「火気厳禁」を表示します。（「火気注意」は第2類の一部などです）",
+            "imagePath": null
+        },
+        {
+            "question": "「火気厳禁」の掲示板の色は、\n「赤地に白色」の文字である。",
+            "isCorrect": true,
+            "explanation": "正解！火の色（赤）で危険を知らせます。「火気注意」も同じ赤色です。",
+            "imagePath": null
+        },
+        {
+            "question": "「給油中エンジン停止」の掲示板の色は、\n「黄地に黒色」の文字である。",
+            "isCorrect": true,
+            "explanation": "正解！ガソリンスタンドにあるこの看板は、黄色（注意喚起）です。",
+            "imagePath": null
+        },
+        {
+            "question": "「禁水（水気厳禁）」の掲示板の色は、\n「青地に白色」の文字である。",
+            "isCorrect": true,
+            "explanation": "正解！水の色（青）です。第1類や第3類の禁水性物質に使われます。",
+            "imagePath": null
+        },
+        {
+            "question": "掲示板には、\n危険物保安監督者の「氏名および職名」を記載する。",
+            "isCorrect": true,
+            "explanation": "正解！誰が責任者かを明記する必要があります。",
+            "imagePath": null
+        },
+        {
+            "question": "製造所等には、火災の延焼を防ぐため、\n周囲に一定の幅の「保有空地」を確保しなければならない。",
+            "isCorrect": true,
+            "explanation": "正解！建物の周りに空き地を作って、火災が隣に燃え移るのを防ぎます。",
+            "imagePath": null
+        },
+        {
+            "question": "地下タンク貯蔵所には、\n保有空地を確保する必要がある。",
+            "isCorrect": false,
+            "explanation": "不正解！タンクが地下に埋まっているので、延焼の危険が少なく、保有空地は不要です。",
+            "imagePath": null
+        },
+        {
+            "question": "簡易タンク貯蔵所には、\n保有空地を確保する必要がある。",
+            "isCorrect": true,
+            "explanation": "正解！簡易タンクは地上に置くため、周囲に1m以上の保有空地が必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "保有空地には、\n物品や資材を置いてはならない。",
+            "isCorrect": true,
+            "explanation": "正解！「空地」の意味がなくなります。いざという時の避難や消火活動のスペースだからです。",
+            "imagePath": null
+        },
+        {
+            "question": "製造所の指定数量の倍数が10を超える場合、\n保有空地の幅は「3メートル以上」必要である。",
+            "isCorrect": false,
+            "explanation": "不正解！倍数が10以下の場合は3mですが、10を超える場合は「5m以上」必要になります。",
+            "imagePath": null
+        },
+        {
+            "question": "製造所の屋根は、\n爆発時に圧力を上に逃がすため、「不燃材料で作った軽いもの」にする。",
+            "isCorrect": true,
+            "explanation": "正解！頑丈な屋根にすると、爆発した時に横の壁が吹き飛んで被害が拡大してしまうからです。",
+            "imagePath": null
+        },
+        {
+            "question": "製造所の窓や出入口には、\n「網入りガラス」を使用する。",
+            "isCorrect": true,
+            "explanation": "正解！火災時にガラスが割れて脱落し、火が入ってくるのを防ぐためです。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物を取り扱う建物の床は、\n危険物が浸透しない構造にし、かつ「適当な傾斜」をつける。",
+            "isCorrect": true,
+            "explanation": "正解！こぼれた危険物が床に染み込まず、一箇所（ためます）に集まるようにします。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物の蒸気を排出する設備は、\n排出ロを「高い場所」に設ける。",
+            "isCorrect": true,
+            "explanation": "正解！吸い込み口は「低い場所（蒸気が溜まるから）」ですが、排出する出口は安全な「高い場所（屋上など）」にします。",
+            "imagePath": null
+        },
+        {
+            "question": "可燃性蒸気を排出する設備の吸入口は、\n「床面近く」に設ける。",
+            "isCorrect": true,
+            "explanation": "正解！第4類の蒸気は空気より重く、下に溜まるからです。",
+            "imagePath": null
+        },
+        {
+            "question": "屋外タンク貯蔵所には、\n危険物が漏れた時のために「防油堤」を設けなければならない。",
+            "isCorrect": true,
+            "explanation": "正解！タンクから漏れた油が外に流出しないように、周りを囲います。",
+            "imagePath": null
+        },
+        {
+            "question": "防油堤の容量は、\nタンク容量の「100％」あればよい。",
+            "isCorrect": false,
+            "explanation": "不正解！万が一のために、タンク容量の「110％以上」の容量が必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "防油堤の水抜き口（排水口）のバルブは、\n普段は「開けて」おく。",
+            "isCorrect": false,
+            "explanation": "絶対ダメ！開けっ放しだと、漏れた油がそのまま外へ流れてしまいます。普段は閉めておき、雨水を抜く時だけ開けます。",
+            "imagePath": null
+        },
+        {
+            "question": "移動タンク貯蔵所（タンクローリー）には、\n0.3m四方以上の黒地に黄色の文字で「危」という標識を掲げる。",
+            "isCorrect": true,
+            "explanation": "正解！車両の前後に掲げる「危」マークです。これだけは黒地に黄色です。",
+            "imagePath": null
+        },
+        {
+            "question": "屋外タンク貯蔵所等で、\n周囲の状況により必要と認められる場合は、避雷設備を設けなければならない。",
+            "isCorrect": true,
+            "explanation": "正解！落雷による火災を防ぐためです。（※周囲の状況で安全なら免除あり）",
+            "imagePath": null
+        },
+        {
+            "question": "製造所には、\n地階（地下室）を設けてはならない。",
+            "isCorrect": true,
+            "explanation": "正解！地下室に蒸気が溜まると爆発の危険性が極めて高いため、禁止されています。",
+            "imagePath": null
+        },
+        {
+            "question": "給油取扱所（ガソリンスタンド）の周囲には、\n自動車の出入りする側を除き、高さ2m以上の耐火壁等を設ける。",
+            "isCorrect": true,
+            "explanation": "正解！近隣への延焼防止と、目隠しの役割があります。",
+            "imagePath": null
+        },
+        {
+            "question": "給油取扱所の路面は、\n漏れた油が下水道に流出しないよう「油分離装置」に導く構造にする。",
+            "isCorrect": true,
+            "explanation": "正解！ガソリン交じりの水がそのまま下水に流れないよう、油水分離槽（ためます）を通します。",
+            "imagePath": null
+        },
+        {
+            "question": "屋内貯蔵所の床面積は、\n「1000平方メートル」を超えてはならない。",
+            "isCorrect": true,
+            "explanation": "正解！危険物を屋内に貯蔵する場合、広すぎると火災時に手がつけられなくなるため制限があります。",
+            "imagePath": null
+        },
+        {
+            "question": "屋外タンク貯蔵所のタンクは、\n容量に応じて3.2mm以上または4.5mm以上の鋼板で作らなければならない。",
+            "isCorrect": true,
+            "explanation": "正解！腐食してもすぐには穴が開かないよう、ある程度の厚みが必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "防油堤の中に、\n2つ以上のタンクを設置することはできない。",
+            "isCorrect": false,
+            "explanation": "不正解！複数のタンクを1つの防油堤で囲うことは可能です（その場合、最大タンク容量の110%等の計算ルールがあります）。",
+            "imagePath": null
+        },
+        {
+            "question": "製造所の壁、柱、床、はり等は、\n「不燃材料」で作らなければならない。",
+            "isCorrect": true,
+            "explanation": "正解！基本構造は燃えない材料で作る必要があります。延焼のおそれがある外壁は「耐火構造」にします。",
+            "imagePath": null
+        },
+        {
+            "question": "照明設備は、\n可燃性ガスに引火しないよう「防爆構造」とする。",
+            "isCorrect": true,
+            "explanation": "正解！スイッチの火花などで爆発しないよう、密閉された特殊な照明を使います。",
+            "imagePath": null
+        },
+        {
+            "question": "指定数量以上の危険物を車両で「運搬」する場合、\n車両の前後に「危」の標識を掲げる必要がある。",
+            "isCorrect": true,
+            "explanation": "正解！運搬の場合、「危」の標識が必要になるのは指定数量以上の危険物を積載する場合です。",
+            "imagePath": null
+        },
+        {
+            "question": "「運搬」とは、移動タンク貯蔵所（タンクローリー）で危険物を運ぶことである。",
+            "isCorrect": false,
+            "explanation": "不正解！それは「移送」です。「運搬」は、ドラム缶やプラスチック容器などに詰めてトラック等で運ぶことを指します。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物と第1類危険物（酸化性固体）は、\n同一車両に積載して運搬することができる。",
+            "isCorrect": false,
+            "explanation": "絶対ダメ！可燃物（4類）と酸化剤（1類）を混ぜたら爆発します。混載禁止の組み合わせは試験によく出ます。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物と第2類危険物（可燃性固体）は、\n混載することができる。",
+            "isCorrect": true,
+            "explanation": "正解！「類を異にする危険物の混載」において、2類と4類はOKな組み合わせです。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物を収納した運搬容器は、\n収納口を「横」に向けて積載する。",
+            "isCorrect": false,
+            "explanation": "不正解！収納口は「上方」に向けて積載します。横倒し厳禁です。",
+            "imagePath": null
+        },
+        {
+            "question": "液体の危険物を運搬容器に収納する場合、\n収納率は「98％以下」とし、55℃でも漏れない空間を残す。",
+            "isCorrect": true,
+            "explanation": "正解！満タン（100%）にすると、温度上昇で膨張して容器が破裂する恐れがあるためです。",
+            "imagePath": null
+        },
+        {
+            "question": "指定数量未満の危険物を運搬する場合、\n消火設備の備え付けは不要である。",
+            "isCorrect": false,
+            "explanation": "不正解！運搬の場合は、量に関係なく、その危険物に適応する消火設備が必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "運搬容器を積み重ねる高さは、\n原則として「3メートル以下」とする。",
+            "isCorrect": true,
+            "explanation": "正解！あまり高く積むと崩れる危険があるためです。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物（特殊引火物を除く）を運搬する場合、\n遮光性の被覆（シート）で覆う必要がある。",
+            "isCorrect": true,
+            "explanation": "正解！直射日光による温度上昇を防ぐためです。第1類や特殊引火物なども同様です。",
+            "imagePath": null
+        },
+        {
+            "question": "給油取扱所で自動車に給油するときは、\n自動車のエンジンを停止させなければならない。",
+            "isCorrect": true,
+            "explanation": "正解！基本中の基本です。引火防止のためです。",
+            "imagePath": null
+        },
+        {
+            "question": "セルフスタンドの顧客は、\nガソリンを自ら容器（携行缶）に詰め替えることができる。",
+            "isCorrect": false,
+            "explanation": "絶対ダメ！セルフスタンドで客ができるのは「車両への給油」と「灯油容器への詰め替え（灯油コーナーがある場合）」だけです。ガソリンの容器詰め替えは店員しかできません。",
+            "imagePath": null
+        },
+        {
+            "question": "移動タンク貯蔵所（タンクローリー）には、\n完成検査済証などの書類を備え付けておく必要がある。",
+            "isCorrect": true,
+            "explanation": "正解！移動する施設なので、許可証類を常に車載しておく義務があります。",
+            "imagePath": null
+        },
+        {
+            "question": "移動タンク貯蔵所の底弁（バルブ）は、\n使用時以外は閉鎖しておく。",
+            "isCorrect": true,
+            "explanation": "正解！漏洩防止のため、給油時以外は閉めておきます。",
+            "imagePath": null
+        },
+        {
+            "question": "移動タンク貯蔵所を駐車する場合、\n原則として「屋外」の安全な場所を選ぶ。",
+            "isCorrect": false,
+            "explanation": "不正解！原則は「常置場所（許可を受けた車庫）」です。配送途中の一時停止などは安全な場所を選びます。",
+            "imagePath": null
+        },
+        {
+            "question": "指定数量以上の危険物を運搬する場合、\n配送の中断や休憩の際は、安全な場所に車両を停止し監視する。",
+            "isCorrect": true,
+            "explanation": "正解！人目につく場所ではなく、「安全な場所」を選び、かつ危険物の監視を継続します。",
+            "imagePath": null
+        },
+        {
+            "question": "タンクローリーから地下タンクへガソリンを注入する際、\n静電気除去のための接地（アース）を行う。",
+            "isCorrect": true,
+            "explanation": "正解！流動帯電による火災を防ぐための必須作業です。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物と第5類危険物（自己反応性物質）は、\n混載することができる。",
+            "isCorrect": true,
+            "explanation": "正解！4類と混載OKなのは「2類、3類、5類」です。（235の法則）",
+            "imagePath": null
+        },
+        {
+            "question": "運搬容器の外部には、\n危険物の品名、数量、注意事項などを表示する必要がある。",
+            "isCorrect": true,
+            "explanation": "正解！中身が何か分かるように表示します。",
+            "imagePath": null
+        },
+        {
+            "question": "顧客が自ら給油する場合、\n給油ノズルのレバーを固定する器具を使用してもよい。",
+            "isCorrect": false,
+            "explanation": "不正解！オートストップが効かなかった時に溢れる危険があるため、固定金具の使用は禁止されています。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物を取扱う場合、\n必ず保護眼鏡と保護手袋を着用しなければならない。",
+            "isCorrect": false,
+            "explanation": "ひっかけ！安全上は推奨されますが、法令ですべての取扱いに「必ず着用」と規定されているわけではありません。",
+            "imagePath": null
+        },
+        {
+            "question": "移動タンク貯蔵所を連続して運行する場合、\n2名以上の運転要員が必要になる場合がある。",
+            "isCorrect": true,
+            "explanation": "正解！長距離・長時間の運転には交代要員の同乗が義務付けられるケースがあります。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物が皮膚に付着したときは、\n直ちに水で洗い流す。",
+            "isCorrect": true,
+            "explanation": "正解！薬品火傷を防ぐための基本処置です。",
+            "imagePath": null
+        },
+        {
+            "question": "「注油中」の掲示板は、\n給油取扱所の給油空地に掲げる必要がある。",
+            "isCorrect": false,
+            "explanation": "不正解！「注油中」の表示が必要なのは、移動タンク貯蔵所（タンクローリー）が給油作業をしている時です。",
+            "imagePath": null
+        },
+        {
+            "question": "第4類危険物と第6類危険物（酸化性液体）は、\n混載することができる。",
+            "isCorrect": false,
+            "explanation": "不正解！第6類（強酸など）と混ぜると危険です。混載禁止です。",
+            "imagePath": null
+        },
+        {
+            "question": "移動タンク貯蔵所には、\nマニュアル（緊急時の連絡先等）を備え付けておく必要がある。",
+            "isCorrect": true,
+            "explanation": "正解！事故時の対応マニュアルやイエローカードの携帯が必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "給油取扱所において、\n灯油を容器に詰め替える作業は、顧客が自ら行うことができる。",
+            "isCorrect": true,
+            "explanation": "正解！セルフスタンドには、客が自分で灯油をポリタンクに入れられるコーナーを設置できます。",
+            "imagePath": null
+        },
+        {
+            "question": "アルキルアルミニウム等の運搬容器には、\n「禁水」および「火気厳禁」の表示をする。",
+            "isCorrect": true,
+            "explanation": "正解！水と反応する第3類危険物などには禁水表示が必要です。",
+            "imagePath": null
+        },
+        {
+            "question": "固体の危険物の運搬容器収納率は、\n「95％以下」とする。",
+            "isCorrect": true,
+            "explanation": "正解！液体は98％、固体は95％です。",
+            "imagePath": null
+        },
+        {
+            "question": "危険物を廃棄する場合、\n下水道や河川に投棄してはならない。",
+            "isCorrect": true,
+            "explanation": "正解！法令で禁止されています。安全な場所で焼却するか、専門業者に委託します。",
+            "imagePath": null
+        },
+        {
+            "question": "移動タンク貯蔵所のタンクには、\n静電気除去装置（アース線）が設けられている。",
+            "isCorrect": true,
+            "explanation": "正解！走行中や荷卸し時の静電気対策として必須です。",
+            "imagePath": null
+        }
+    ]
+}
