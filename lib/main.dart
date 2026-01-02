@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:shimmer/shimmer.dart';
+
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
 import 'widgets/ad_banner.dart';
 import 'utils/ad_manager.dart';
+import 'models/slang_item.dart';
+import 'widgets/quiz_card.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // 1. 同意フローの初期化 (完了を待つ)
+  await AdManager.instance.initializeConsent();
+  
+  // 2. Mobile Ads SDKの初期化
   MobileAds.instance.initialize();
   
   // アプリ起動時にHome用の広告を先行読み込み
@@ -31,137 +38,116 @@ Future<void> main() async {
 // -----------------------------------------------------------------------------
 // 1. Data Models & Helpers
 // -----------------------------------------------------------------------------
-class Quiz {
-  final String question;
-  final bool isCorrect;
-  final String explanation;
-  final String? imagePath;
 
-  Quiz({
-    required this.question,
-    required this.isCorrect,
-    required this.explanation,
-    this.imagePath,
-  });
+class QuizData {
+  static SlangData? _data;
 
-  factory Quiz.fromJson(Map<String, dynamic> json) {
-    return Quiz(
-      question: (json['question'] as String).replaceAll('\n', ''),
-      isCorrect: json['isCorrect'] as bool,
-      explanation: json['explanation'] as String,
-      imagePath: json['imagePath'] as String?,
-    );
+  static Future<void> load() async {
+    try {
+      final String jsonString = await rootBundle.loadString('assets/json/slang_data.json');
+      final Map<String, dynamic> jsonData = json.decode(jsonString);
+      _data = SlangData.fromJson(jsonData);
+    } catch (e) {
+      debugPrint("Error loading slang data: $e");
+      // Fallback empty data to prevent crash
+      _data = SlangData(
+        level1: [],
+        level2: [],
+        level3: [],
+        level4: [],
+        bonus: [],
+      );
+    }
+  }
+
+  static List<SlangItem> get level1 => _data?.level1 ?? [];
+  static List<SlangItem> get level2 => _data?.level2 ?? [];
+  static List<SlangItem> get level3 => _data?.level3 ?? [];
+  static List<SlangItem> get level4 => _data?.level4 ?? [];
+  static List<SlangItem> get bonus => _data?.bonus ?? [];
+
+  static List<SlangItem> getItemsFromWords(List<String> words) {
+    if (_data == null) return [];
+    
+    final allItems = [
+      ...level1,
+      ...level2,
+      ...level3,
+      ...level4,
+      ...bonus,
+    ];
+    return allItems.where((item) => words.contains(item.word)).toList();
   }
 }
 
 class PrefsHelper {
-  static const String _keyWeakQuestions = 'weak_questions';
+  static const String _keyWeakWords = 'weak_words';
   static const String _keyAdCounter = 'ad_counter';
 
-  // インタースティシャル広告の表示判定 (3回に1回表示)
-  static Future<bool> shouldShowInterstitial() async {
+  // --- Weak Words Management ---
+  static Future<void> addWeakWords(List<String> words) async {
+    if (words.isEmpty) return;
     final prefs = await SharedPreferences.getInstance();
-    int current = prefs.getInt(_keyAdCounter) ?? 0;
-    current++;
-    await prefs.setInt(_keyAdCounter, current);
-    
-    // 3回に1回表示 (1, 2, [3], 4, 5, [6]...)
-    return (current % 3 == 0);
-  }
-  
-  // ハイスコア保存 (Key: 'highscore_part1', etc.)
-  static Future<void> saveHighScore(String categoryKey, int score) async {
-    final prefs = await SharedPreferences.getInstance();
-    final currentHigh = prefs.getInt(categoryKey) ?? 0;
-    if (score > currentHigh) {
-      await prefs.setInt(categoryKey, score);
-    }
-  }
-
-  static Future<int> getHighScore(String categoryKey) async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt(categoryKey) ?? 0;
-  }
-
-  // 苦手リスト追加 (既に存在すれば追加しない)
-  static Future<void> addWeakQuestions(List<String> questions) async {
-    if (questions.isEmpty) return;
-    final prefs = await SharedPreferences.getInstance();
-    final List<String> current = prefs.getStringList(_keyWeakQuestions) ?? [];
+    final List<String> current = prefs.getStringList(_keyWeakWords) ?? [];
     
     bool changed = false;
-    for (final q in questions) {
-      if (!current.contains(q)) {
-        current.add(q);
+    for (final w in words) {
+      if (!current.contains(w)) {
+        current.add(w);
         changed = true;
       }
     }
     
     if (changed) {
-      await prefs.setStringList(_keyWeakQuestions, current);
+      await prefs.setStringList(_keyWeakWords, current);
     }
   }
 
-  // 苦手リストから削除 (正解した場合など)
-  static Future<void> removeWeakQuestions(List<String> questions) async {
-    if (questions.isEmpty) return;
+  static Future<void> removeWeakWords(List<String> words) async {
+    if (words.isEmpty) return;
     final prefs = await SharedPreferences.getInstance();
-    final List<String> current = prefs.getStringList(_keyWeakQuestions) ?? [];
+    final List<String> current = prefs.getStringList(_keyWeakWords) ?? [];
     
     bool changed = false;
-    for (final q in questions) {
-       if (current.remove(q)) {
+    for (final w in words) {
+       if (current.remove(w)) {
          changed = true;
        }
     }
     
     if (changed) {
-      await prefs.setStringList(_keyWeakQuestions, current);
+      await prefs.setStringList(_keyWeakWords, current);
     }
   }
 
-  // 苦手リスト取得
-  static Future<List<String>> getWeakQuestions() async {
+  static Future<List<String>> getWeakWords() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getStringList(_keyWeakQuestions) ?? [];
+    return prefs.getStringList(_keyWeakWords) ?? [];
   }
-}
 
-class QuizData {
-  static Map<String, List<Quiz>> _data = {};
-
-  // アプリ起動時などに呼び出してデータをロードする
-  static Future<void> load() async {
-    try {
-      final String jsonString = await rootBundle.loadString('assets/quiz_data.json');
-      final Map<String, dynamic> jsonData = json.decode(jsonString);
-
-      _data = {};
-      jsonData.forEach((key, value) {
-        if (value is List) {
-          _data[key] = value.map((q) => Quiz.fromJson(q)).toList();
-        }
-      });
-    } catch (e) {
-      debugPrint("Error loading quiz data: $e");
-      // エラー時は空っぽなどで落ちないようにする
-      _data = {};
+  // --- High Score Management ---
+  static Future<void> saveHighScore(String key, int score) async {
+    final prefs = await SharedPreferences.getInstance();
+    final currentHigh = prefs.getInt(key) ?? 0;
+    if (score > currentHigh) {
+      await prefs.setInt(key, score);
     }
   }
 
-  static List<Quiz> get part1 => _data['part1'] ?? [];
-  static List<Quiz> get part2 => _data['part2'] ?? [];
-  static List<Quiz> get part3 => _data['part3'] ?? [];
-
-  // 全問題からテキストで検索してQuizオブジェクトを返すユーティリティ
-  static List<Quiz> getQuizzesFromTexts(List<String> texts) {
-    // 全ロード済みリストを結合
-    final allQuizzes = [
-      ...part1,
-      ...part2,
-      ...part3,
-    ];
-    return allQuizzes.where((q) => texts.contains(q.question)).toList();
+  static Future<int> getHighScore(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(key) ?? 0;
+  }
+  
+  // --- Ad Management ---
+  static Future<bool> shouldShowInterstitial() async {
+    final prefs = await SharedPreferences.getInstance();
+    int counter = prefs.getInt(_keyAdCounter) ?? 0;
+    counter++; 
+    await prefs.setInt(_keyAdCounter, counter);
+    
+    // 3回に1回表示
+    return (counter % 3 == 0);
   }
 }
 
@@ -206,6 +192,7 @@ class _HomePageState extends State<HomePage> {
   int _highScore1 = 0;
   int _highScore2 = 0;
   int _highScore3 = 0;
+  int _highScore4 = 0;
   int _weaknessCount = 0;
   bool _isLoading = true; // ローディング状態
 
@@ -228,32 +215,33 @@ class _HomePageState extends State<HomePage> {
   }
   
   Future<void> _loadUserData() async {
-    final s1 = await PrefsHelper.getHighScore('highscore_part1');
-    final s2 = await PrefsHelper.getHighScore('highscore_part2');
-    final s3 = await PrefsHelper.getHighScore('highscore_part3');
-    final weakList = await PrefsHelper.getWeakQuestions();
+    final s1 = await PrefsHelper.getHighScore('highscore_level1');
+    final s2 = await PrefsHelper.getHighScore('highscore_level2');
+    final s3 = await PrefsHelper.getHighScore('highscore_level3');
+    final s4 = await PrefsHelper.getHighScore('highscore_level4');
+    final weakList = await PrefsHelper.getWeakWords();
 
     if (mounted) {
       setState(() {
         _highScore1 = s1;
         _highScore2 = s2;
         _highScore3 = s3;
+        _highScore4 = s4;
         _weaknessCount = weakList.length;
       });
     }
   }
 
-  void _startQuiz(BuildContext context, List<Quiz> quizList, String categoryKey, {bool isRandom10 = true}) async {
-    List<Quiz> questionsToUse = List<Quiz>.from(quizList);
+  void _startQuiz(BuildContext context, List<SlangItem> itemList, String categoryKey, {bool isRandom10 = true}) async {
+    List<SlangItem> itemsToUse = List<SlangItem>.from(itemList);
     
     if (isRandom10) {
-      questionsToUse.shuffle();
-      if (questionsToUse.length > 10) {
-        questionsToUse = questionsToUse.take(10).toList();
+      itemsToUse.shuffle();
+      if (itemsToUse.length > 10) {
+        itemsToUse = itemsToUse.take(10).toList();
       }
     } else {
-      // isRandom10 = false の場合はそのまま（現状の仕様では基本trueで呼ぶ）
-      questionsToUse.shuffle();
+      itemsToUse.shuffle();
     }
     
     // クイズ開始時に結果画面用の広告とインタースティシャル広告を先行読み込み
@@ -263,9 +251,9 @@ class _HomePageState extends State<HomePage> {
     await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => QuizPage(
-          quizzes: questionsToUse,
+          items: itemsToUse,
           categoryKey: categoryKey,
-          totalQuestions: isRandom10 ? 10 : questionsToUse.length, // totalQuestionsを渡す
+          totalQuestions: isRandom10 ? 10 : itemsToUse.length, // totalQuestionsを渡す
         ),
       ),
     );
@@ -277,11 +265,11 @@ class _HomePageState extends State<HomePage> {
     // Navigatorを先に取得してGap回避
     final navigator = Navigator.of(context);
     
-    final weakTexts = await PrefsHelper.getWeakQuestions();
+    final weakWords = await PrefsHelper.getWeakWords();
     if (!mounted) return;
-    if (weakTexts.isEmpty) return;
+    if (weakWords.isEmpty) return;
 
-    final weakQuizzes = QuizData.getQuizzesFromTexts(weakTexts);
+    final weakItems = QuizData.getItemsFromWords(weakWords);
     
     // 復習モード開始
     AdManager.instance.preloadAd('result');
@@ -290,9 +278,9 @@ class _HomePageState extends State<HomePage> {
     await navigator.push(
       MaterialPageRoute(
         builder: (context) => QuizPage(
-          quizzes: weakQuizzes,
+          items: weakItems,
           isWeaknessReview: true, // 復習モードフラグ
-          totalQuestions: weakQuizzes.length,
+          totalQuestions: weakItems.length,
         ),
       ),
     );
@@ -326,16 +314,16 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         children: [
                           Text(
-                            "乙４",
+                            "OTAKU",
                             style: TextStyle(
-                              fontSize: 80,
+                              fontSize: 60,
                               fontWeight: FontWeight.w900,
-                              color: Colors.orange,
+                              color: Colors.pinkAccent,
                               height: 1.0,
                             ),
                           ),
                           Text(
-                            "爆速クイズ",
+                            "Swipe Slang",
                             style: TextStyle(
                               fontSize: 32,
                               fontWeight: FontWeight.bold,
@@ -348,33 +336,41 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(height: 30),
                     
                     const Text(
-                      "カテゴリを選択",
+                      "Choose Level",
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 20),
                     
                     _CategoryButton(
-                      title: "第1章：危険物の性質",
+                      title: "Level 1: Survival",
                       color: Colors.orange,
                       highScore: _highScore1,
-                      onTap: () => _startQuiz(context, QuizData.part1, 'highscore_part1'),
+                      onTap: () => _startQuiz(context, QuizData.level1, 'highscore_level1'),
                     ),
                     const SizedBox(height: 16),
                     
                     _CategoryButton(
-                      title: "第2章：物理・化学",
+                      title: "Level 2: Otaku",
                       color: Colors.blue,
                       highScore: _highScore2,
-                      onTap: () => _startQuiz(context, QuizData.part2, 'highscore_part2'),
+                      onTap: () => _startQuiz(context, QuizData.level2, 'highscore_level2'),
                     ),
                     const SizedBox(height: 16),
                     
                     _CategoryButton(
-                      title: "第3章：法令",
+                      title: "Level 3: Internet",
                       color: Colors.green,
                       highScore: _highScore3,
-                      onTap: () => _startQuiz(context, QuizData.part3, 'highscore_part3'),
+                      onTap: () => _startQuiz(context, QuizData.level3, 'highscore_level3'),
+                    ),
+                     const SizedBox(height: 16),
+                    
+                    _CategoryButton(
+                      title: "Level 4: Youth",
+                      color: Colors.purple,
+                      highScore: _highScore4,
+                      onTap: () => _startQuiz(context, QuizData.level4, 'highscore_level4'),
                     ),
                   ],
                 ),
@@ -400,7 +396,7 @@ class _HomePageState extends State<HomePage> {
                 child: ElevatedButton.icon(
                   onPressed: _weaknessCount > 0 ? () => _startWeaknessReview(context) : null,
                   icon: const Icon(Icons.warning_amber_rounded),
-                  label: Text("苦手を復習する ($_weaknessCount問)"),
+                  label: Text("Review Weak Words ($_weaknessCount)"),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
                     foregroundColor: Colors.white,
@@ -500,14 +496,14 @@ class _CategoryButton extends StatelessWidget {
 // -----------------------------------------------------------------------------
 
 class QuizPage extends StatefulWidget {
-  final List<Quiz> quizzes;
+  final List<SlangItem> items;
   final String? categoryKey; // ハイスコア保存用Key (復習モードの時はnull)
   final bool isWeaknessReview; // 復習モードかどうか
   final int totalQuestions; // 全問題数（分母）
 
   const QuizPage({
     super.key,
-    required this.quizzes,
+    required this.items,
     this.categoryKey,
     this.isWeaknessReview = false,
     required this.totalQuestions,
@@ -521,11 +517,10 @@ class _QuizPageState extends State<QuizPage> {
   final AppinioSwiperController controller = AppinioSwiperController();
   
   // スコア・履歴管理
-  // スコア・履歴管理
   int _score = 0;
   int _currentIndex = 1; // 現在の問題番号
-  final List<Quiz> _incorrectQuizzes = [];
-  final List<Quiz> _correctQuizzesInReview = []; // 復習モードで正解した問題
+  final List<SlangItem> _incorrectItems = [];
+  final List<SlangItem> _correctItemsInReview = []; // 復習モードで正解した問題
   final List<Map<String, dynamic>> _answerHistory = [];
 
   // 背景色のアニメーション用
@@ -533,28 +528,32 @@ class _QuizPageState extends State<QuizPage> {
 
   void _handleSwipeEnd(int previousIndex, int targetIndex, SwiperActivity activity) {
     if (activity is Swipe) {
-      final quiz = widget.quizzes[previousIndex];
-      bool userVal = (activity.direction == AxisDirection.right);
-      bool isCorrect = (userVal == quiz.isCorrect);
+      final item = widget.items[previousIndex];
+      // 右スワイプ = "知ってる/覚えた" (Positive/Correct)
+      // 左スワイプ = "知らない/忘れた" (Negative/Incorrect)
+      bool isKnown = (activity.direction == AxisDirection.right);
+      
+      // スラングアプリでは「正解/不正解」ではなく「知ってる/知らない」の自己申告に近いが、
+      // クイズ形式にするなら「意味を知ってたか？」を問う。
+      // 右(知ってる)なら正解扱い、左(知らない)なら不正解（復習リスト入り）扱いにする。
 
-      // 履歴保存
       _answerHistory.add({
-        'quiz': quiz,
-        'result': isCorrect,
+        'item': item,
+        'result': isKnown,
       });
 
       setState(() {
-        if (isCorrect) {
+        if (isKnown) {
           _score++;
           _backgroundColor = Colors.green.withValues(alpha: 0.2);
           HapticFeedback.lightImpact();
           
           if (widget.isWeaknessReview) {
-            _correctQuizzesInReview.add(quiz);
+            _correctItemsInReview.add(item);
           }
         } else {
           _backgroundColor = Colors.red.withValues(alpha: 0.2);
-          _incorrectQuizzes.add(quiz);
+          _incorrectItems.add(item);
           HapticFeedback.heavyImpact();
         }
       });
@@ -575,11 +574,11 @@ class _QuizPageState extends State<QuizPage> {
         SnackBar(
           duration: const Duration(milliseconds: 600),
           content: Text(
-            isCorrect ? "正解！ ⭕" : "不正解... ❌",
+            isKnown ? "NICE! 👍" : "Learning! 📝",
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          backgroundColor: isCorrect ? Colors.green : Colors.redAccent,
+          backgroundColor: isKnown ? Colors.green : Colors.orange,
           behavior: SnackBarBehavior.floating,
           margin: EdgeInsets.only(
             bottom: MediaQuery.of(context).size.height * 0.5,
@@ -597,7 +596,7 @@ class _QuizPageState extends State<QuizPage> {
       });
 
       // 全問終了チェック
-      if (previousIndex == widget.quizzes.length - 1) {
+      if (previousIndex == widget.items.length - 1) {
         _finishQuiz();
       }
     }
@@ -612,19 +611,18 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     // 2. 苦手リストへの追加
-    if (_incorrectQuizzes.isNotEmpty) {
-      final incorrectTexts = _incorrectQuizzes.map((q) => q.question).toList();
-      await PrefsHelper.addWeakQuestions(incorrectTexts);
+    if (_incorrectItems.isNotEmpty) {
+      final incorrectWords = _incorrectItems.map((q) => q.word).toList();
+      await PrefsHelper.addWeakWords(incorrectWords);
     }
 
     // 3. 復習モードの場合、正解した問題を苦手リストから削除
-    if (widget.isWeaknessReview && _correctQuizzesInReview.isNotEmpty) {
-      final correctTexts = _correctQuizzesInReview.map((q) => q.question).toList();
-      await PrefsHelper.removeWeakQuestions(correctTexts);
+    if (widget.isWeaknessReview && _correctItemsInReview.isNotEmpty) {
+      final correctWords = _correctItemsInReview.map((q) => q.word).toList();
+      await PrefsHelper.removeWeakWords(correctWords);
     }
     
     // 画面遷移
-    // 画面遷移（3回に1回インタースティシャル広告を表示してから）
     if (mounted) {
       final shouldShow = await PrefsHelper.shouldShowInterstitial();
       
@@ -644,28 +642,28 @@ class _QuizPageState extends State<QuizPage> {
 
   void _navigateToResult() {
     Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => ResultPage(
-                  score: _score,
-                  total: widget.quizzes.length,
-                  history: _answerHistory,
-                  incorrectQuizzes: _incorrectQuizzes,
-                  originalQuizzes: widget.quizzes,
-                  categoryKey: widget.categoryKey,
-                  isWeaknessReview: widget.isWeaknessReview,
-                ),
-              ),
-            );
+      MaterialPageRoute(
+        builder: (context) => ResultPage(
+          score: _score,
+          total: widget.items.length,
+          history: _answerHistory,
+          incorrectItems: _incorrectItems,
+          // originalItems: widget.items, // 必要あれば
+          categoryKey: widget.categoryKey,
+          isWeaknessReview: widget.isWeaknessReview,
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // プログレスバーをAppBarのタイトルとして配置する案もアリだが、
-        // ユーザー指定「UIの上部（カードの上）」に従い、Bodyに配置する形にするためAppBarはシンプルに
+        title: const Text('Swipe to Learn', style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.close, color: Colors.black54),
           onPressed: () => Navigator.of(context).pop(),
@@ -687,7 +685,7 @@ class _QuizPageState extends State<QuizPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "第$_currentIndex問",
+                          "Q.$_currentIndex",
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -720,22 +718,30 @@ class _QuizPageState extends State<QuizPage> {
               Expanded(
                 child: AppinioSwiper(
                   controller: controller,
-                  cardCount: widget.quizzes.length,
+                  cardCount: widget.items.length,
                   loop: false,
                   backgroundCardCount: 2,
                   swipeOptions: const SwipeOptions.symmetric(horizontal: true, vertical: false),
                   onSwipeEnd: _handleSwipeEnd,
                   cardBuilder: (context, index) {
-                    return _buildCard(widget.quizzes[index]);
+                    return QuizCard(slangItem: widget.items[index]);
                   },
                 ),
               ),
+              // 説明テキスト
               Container(
-                padding: const EdgeInsets.only(bottom: 40, top: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton.icon(
+                    Text("← Missed", style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                    Text("Got it! →", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20.0),
+                child: ElevatedButton.icon(
                       onPressed: () {
                         controller.unswipe();
                         setState(() {
@@ -746,21 +752,21 @@ class _QuizPageState extends State<QuizPage> {
                           if (_answerHistory.isNotEmpty) {
                             final last = _answerHistory.removeLast();
                             final bool wasCorrect = last['result'];
-                            final Quiz quiz = last['quiz'];
+                            final SlangItem item = last['item'];
                             
                             if (wasCorrect) {
                               _score--;
                               if (widget.isWeaknessReview) {
-                                _correctQuizzesInReview.remove(quiz);
+                                _correctItemsInReview.remove(item);
                               }
                             } else {
-                              _incorrectQuizzes.remove(quiz);
+                              _incorrectItems.remove(item);
                             }
                           }
                         });
                       },
                       icon: const Icon(Icons.undo),
-                      label: const Text("元に戻す"),
+                      label: const Text("Undo"),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                         backgroundColor: Colors.white,
@@ -768,8 +774,6 @@ class _QuizPageState extends State<QuizPage> {
                         elevation: 2,
                       ),
                     ),
-                  ],
-                ),
               ),
             ],
           ),
@@ -777,123 +781,9 @@ class _QuizPageState extends State<QuizPage> {
       ),
     );
   }
-
-  Widget _buildCard(Quiz quiz) {
-    bool hasImage = quiz.imagePath != null;
-
-    return Container(
-      margin: const EdgeInsets.all(20),
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.08),
-            blurRadius: 24,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      alignment: Alignment.center,
-      child: Column(
-        children: [
-          if (hasImage) 
-            Expanded(
-              flex: 4,
-              child: Container(
-                width: double.infinity,
-                color: Colors.grey[200],
-                child: Image.asset(
-                  quiz.imagePath!,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.image_not_supported, size: 50, color: Colors.grey),
-                        const SizedBox(height: 8),
-                        Text("Image not found", style: TextStyle(color: Colors.grey[600])),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            )
-          else 
-            const Spacer(flex: 2),
-
-          Expanded(
-            flex: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: SizedBox(
-                      width: constraints.maxWidth,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                           if (!hasImage)
-                            const Text(
-                              "Q.",
-                              style: TextStyle(
-                                fontSize: 40,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blueGrey,
-                              ),
-                            ),
-                          if (!hasImage) const SizedBox(height: 20),
-
-                          Text(
-                            quiz.question,
-                            style: TextStyle(
-                              fontSize: hasImage ? 20 : 24,
-                              fontWeight: FontWeight.bold,
-                              height: 1.3,
-                              color: Colors.black87,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-          
-           const Padding(
-            padding: EdgeInsets.only(left: 40.0, right: 40.0, bottom: 40.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Icon(Icons.close, color: Colors.redAccent, size: 48),
-                    Text("誤り", style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(Icons.circle_outlined, color: Colors.green, size: 48),
-                    Text("正しい", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          
-          if (hasImage) const SizedBox(height: 10),
-        ],
-      ),
-    );
-  }
 }
+
+
 
 // -----------------------------------------------------------------------------
 // 4. Result Page
@@ -903,8 +793,8 @@ class ResultPage extends StatelessWidget {
   final int score;
   final int total;
   final List<Map<String, dynamic>> history;
-  final List<Quiz> incorrectQuizzes;
-  final List<Quiz> originalQuizzes;
+  final List<SlangItem> incorrectItems;
+  // final List<SlangItem> originalItems; // 必要なければ削除
   final String? categoryKey;
   final bool isWeaknessReview;
 
@@ -913,8 +803,8 @@ class ResultPage extends StatelessWidget {
     required this.score,
     required this.total,
     required this.history,
-    required this.incorrectQuizzes,
-    required this.originalQuizzes,
+    required this.incorrectItems,
+    // required this.originalItems,
     this.categoryKey,
     required this.isWeaknessReview,
   });
@@ -923,7 +813,7 @@ class ResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("結果発表"),
+        title: const Text("Results"),
         centerTitle: true,
         automaticallyImplyLeading: false, 
         elevation: 0,
@@ -945,7 +835,7 @@ class ResultPage extends StatelessWidget {
             child: Column(
               children: [
                 const Text(
-                  "正解数",
+                  "Learned",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey),
                 ),
                 Text(
@@ -961,7 +851,7 @@ class ResultPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Text(
-                      score >= 8 ? "合格圏内！素晴らしい！" : "あと少し！復習しよう",
+                      score >= 8 ? "You're a Slang Master!" : "Wait, maji?",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -979,7 +869,7 @@ class ResultPage extends StatelessWidget {
                    Padding(
                      padding: const EdgeInsets.only(top: 8.0),
                      child: Text(
-                      "$score個の苦手を克服しました！",
+                      "Mastered $score weak words!",
                       style: const TextStyle(fontSize: 16, color: Colors.blueAccent, fontWeight: FontWeight.bold),
                                        ),
                    ),
@@ -995,8 +885,8 @@ class ResultPage extends StatelessWidget {
               itemCount: history.length,
               itemBuilder: (context, index) {
                 final item = history[index];
-                final Quiz quiz = item['quiz'];
-                final bool isCorrect = item['result'];
+                final SlangItem slang = item['item'];
+                final bool isKnown = item['result'];
 
                 return Card(
                   margin: const EdgeInsets.only(bottom: 12),
@@ -1015,8 +905,8 @@ class ResultPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Icon(
-                              isCorrect ? Icons.check_circle : Icons.cancel,
-                              color: isCorrect ? Colors.green : Colors.red,
+                              isKnown ? Icons.check_circle : Icons.cancel,
+                              color: isKnown ? Colors.green : Colors.red,
                               size: 28,
                             ),
                             const SizedBox(width: 12),
@@ -1025,20 +915,13 @@ class ResultPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    quiz.question,
-                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                    slang.word,
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                                   ),
-                                  if (quiz.imagePath != null)
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 4.0),
-                                      child: Row(
-                                        children: [
-                                          Icon(Icons.image, size: 16, color: Colors.grey[500]),
-                                          const SizedBox(width: 4),
-                                          Text("画像問題", style: TextStyle(color: Colors.grey[500], fontSize: 12)),
-                                        ],
-                                      ),
-                                    ),
+                                  Text(
+                                    slang.meaning,
+                                    style: TextStyle(color: Colors.grey[700], fontSize: 14),
+                                  ),
                                 ],
                               ),
                             ),
@@ -1053,7 +936,7 @@ class ResultPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
-                            "💡 ${quiz.explanation}",
+                            "💡 ${slang.explanation}",
                             style: TextStyle(color: Colors.blueGrey[700], fontSize: 13),
                           ),
                         ),
@@ -1072,7 +955,7 @@ class ResultPage extends StatelessWidget {
             padding: const EdgeInsets.all(24),
             child: Column(
               children: [
-                if (incorrectQuizzes.isNotEmpty)
+                if (incorrectItems.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12.0),
                     child: SizedBox(
@@ -1083,17 +966,15 @@ class ResultPage extends StatelessWidget {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                                 builder: (context) => QuizPage(
-                                  quizzes: incorrectQuizzes,
-                                  // 復習後の続けて復習は、ハイスコアモードではなく、かつ既に苦手克服ロジックが走った後なので
-                                  // 実質「ただの復習」だが、ここでは simple に扱う。
+                                  items: incorrectItems,
                                   isWeaknessReview: true, 
-                                  totalQuestions: incorrectQuizzes.length, // 残り全問
+                                  totalQuestions: incorrectItems.length, // 残り全問
                                 ),
                             ),
                           );
                         },
                         icon: const Icon(Icons.refresh),
-                        label: const Text("苦手な問題だけ復習"),
+                        label: const Text("Review Missed Words"),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange,
                           foregroundColor: Colors.white,
@@ -1114,39 +995,33 @@ class ResultPage extends StatelessWidget {
                         Navigator.of(context).popUntil((route) => route.isFirst);
                         return;
                       }
-
-                      final shuffledAgain = List<Quiz>.from(originalQuizzes)..shuffle();
-                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => QuizPage(
-                            quizzes: shuffledAgain,
-                            categoryKey: categoryKey,
-                            totalQuestions: shuffledAgain.length, // シャッフルして同じ問題数
-                          ),
-                        ),
-                      );
+                      // 通常モードならホームへ
+                      Navigator.of(context).pop();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      foregroundColor: Colors.blueAccent,
+                      foregroundColor: Colors.black87,
                       elevation: 0,
-                      side: const BorderSide(color: Colors.blueAccent, width: 2),
+                      side: BorderSide(color: Colors.grey.withValues(alpha: 0.3)),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                       textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
-                    child: Text(isWeaknessReview ? "ホームに戻る" : "もう一度やる（シャッフル）"),
+                    child: const Text("Back to Home"),
                   ),
                 ),
                 
+                /* 
+                   // もし「もう一度やる」ボタンが必要ならここに追加するが、
+                   // シンプルにするため一旦削除またはコメントアウト
                 if (!isWeaknessReview) ...[
                   const SizedBox(height: 12),
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context).popUntil((route) => route.isFirst);
+                      // リトライ機能の実装が必要
                     },
-                    child: const Text("ホームに戻る", style: TextStyle(color: Colors.grey)),
+                    child: const Text("Retry", style: TextStyle(color: Colors.grey)),
                   ),
-                ],
+                ], 
+                */
               ],
             ),
           ),

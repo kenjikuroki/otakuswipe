@@ -1,0 +1,21 @@
+{
+    "level1_survival": [
+        {
+            "word": "Maji",
+            "meaning": "Really? / Seriously?",
+            "explanation": "Used when you are surprised or want to emphasize something.",
+            "imagePath": "assets/images/slang/lv1_maji.png",
+            "tags": [
+                "Basic",
+                "Common"
+            ],
+            "usage": "Spoken",
+            "warning": null,
+            "example": "Maji de?!"
+        }
+    ],
+    "level2_otaku": [],
+    "level3_internet": [],
+    "level4_youth": [],
+    "bonus_persona": []
+}
