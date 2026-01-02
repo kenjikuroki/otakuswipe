@@ -1,0 +1,578 @@
+// lib/pages/quiz_page.dart
+
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import '../providers/quiz_provider.dart';
+import '../widgets/quiz_card.dart';
+import '../ad_helper.dart';
+import '../widgets/ad_placeholder.dart';
+import '../models/slang_item.dart';
+
+class QuizPage extends StatefulWidget {
+  const QuizPage({super.key});
+
+  @override
+  State<QuizPage> createState() => _QuizPageState();
+}
+
+class _QuizPageState extends State<QuizPage> {
+  // スワイプ操作をボタンから操るためのコントローラー
+  final CardSwiperController _swiperController = CardSwiperController();
+  
+  int _currentIndex = 0;
+  bool _isFlipped = false; // 今のカードが裏返っているか
+
+  // 広告用の変数を追加
+  BannerAd? _bannerAd;
+  bool _isBannerAdReady = false;
+
+  // ▼▼▼ 追加: 各問題の結果を保存するリスト (true: 知ってる, false: 知らない) ▼▼▼
+  List<bool> _quizResults = [];
+
+  // 背景色 (フラッシュ効果用)
+  Color _backgroundColor = Colors.grey[100]!;
+
+  @override
+  void initState() {
+    super.initState();
+    // 画面が開いたらデータを読み込む (LevelSelectPageで読み込み済みのため削除)
+    // Future.microtask(() =>
+    //     Provider.of<QuizProvider>(context, listen: false).loadSlangData());
+
+    // バナー広告を読み込む
+    _loadBannerAd();
+
+    // ▼▼▼ 追加: 画面描画後にプロバイダーからリスト長を取得し、結果リストを初期化 ▼▼▼
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<QuizProvider>(context, listen: false);
+      setState(() {
+        // 初期値はすべて false (未回答/知らない) で埋める
+        _quizResults = List.filled(provider.slangList.length, false);
+      });
+    });
+  }
+
+  void _loadBannerAd() {
+    // プレロードされたバナーがあればそれを使う、なければ新規作成
+    _bannerAd = AdHelper.getQuizBanner(
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBannerAdReady = true;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          debugPrint('Failed to load a banner ad: ${err.message}');
+          _isBannerAdReady = false;
+          ad.dispose();
+        },
+      ),
+    );
+
+    // 取得した時点で既にロード済み（プレロード成功）なら即座に表示フラグを立てる
+    if (_bannerAd!.responseInfo != null) {
+      _isBannerAdReady = true;
+    }
+  }
+
+  @override
+  void dispose() {
+    _swiperController.dispose();
+    _bannerAd?.dispose(); // 広告破棄
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<QuizProvider>(context);
+    final slangList = provider.slangList;
+
+    return Scaffold(
+      backgroundColor: Colors.grey[100], // 背景を少しグレーにしてカードを目立たせる
+      appBar: AppBar(
+        title: Text(provider.currentLevelTitle, style: const TextStyle(fontWeight: FontWeight.bold)),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: Stack(
+        children: [
+          // 背景フラッシュ用のアニメーションコンテナ
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            color: _backgroundColor,
+            child: const SizedBox.expand(),
+          ),
+          
+          slangList.isEmpty
+            ? const Center(child: CircularProgressIndicator())
+            : Column(
+                children: [
+                  // 1. プログレスバー (残り枚数)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: LinearProgressIndicator(
+                        value: (_currentIndex + 1) / slangList.length,
+                        minHeight: 8,
+                        backgroundColor: Colors.grey[300],
+                        valueColor: const AlwaysStoppedAnimation<Color>(Colors.amber),
+                      ),
+                    ),
+                  ),
+
+                  // 2. スワイプカードエリア
+                  Expanded(
+                    child: CardSwiper(
+                      key: ValueKey(slangList), // リストが変わったら再構築
+                      controller: _swiperController,
+                      cardsCount: slangList.length,
+                      numberOfCardsDisplayed: slangList.length < 3 ? slangList.length : 3, // 後ろに重なって見える枚数
+                      backCardOffset: const Offset(0, 40), // 重なりのズレ幅
+                      padding: const EdgeInsets.all(24),
+                      
+                      // スワイプした時の処理
+                      onSwipe: (previousIndex, currentIndex, direction) {
+                        _handleSwipe(previousIndex, direction);
+                        return true; // trueならスワイプ許可
+                      },
+                      
+                      // カードの中身を作る
+                      // カードの中身を作る
+                      cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
+                        final item = slangList[index];
+                        // 今見ているカード(index)かつ、フラグがtrueなら裏面を表示
+                        final isCurrentCardFlipped = (index == _currentIndex && _isFlipped);
+
+                        // Stackを使ってカードの上にオーバーレイを重ねる構造にする
+                        return Stack(
+                          children: [
+                            // 1. メインのカード (GestureDetectorでラップ)
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _isFlipped = !_isFlipped;
+                                });
+                              },
+                              child: QuizCard(
+                                slangItem: item,
+                                isFlipped: isCurrentCardFlipped,
+                              ),
+                            ),
+
+                            // 2. 左スワイプ時のオーバーレイ (Don't Know / 赤)
+                            if (percentThresholdX < 0)
+                              _buildSwipeOverlay(
+                                text: "DON'T KNOW",
+                                color: Colors.red,
+                                alignment: Alignment.topRight,
+                                angle: 0.2, 
+                                opacity: (percentThresholdX.abs() * 2.0).clamp(0.0, 1.0), // 3.0 -> 2.0 にして変化を緩やかに
+                              ),
+
+                            // 3. 右スワイプ時のオーバーレイ (I KNOW IT! / 緑)
+                            if (percentThresholdX > 0)
+                              _buildSwipeOverlay(
+                                text: "I KNOW IT!",
+                                color: Colors.green,
+                                alignment: Alignment.topLeft,
+                                angle: -0.2,
+                                opacity: (percentThresholdX.abs() * 2.0).clamp(0.0, 1.0), // 3.0 -> 2.0 にして変化を緩やかに
+                              ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+
+                  // 3. 操作ボタンエリア
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20, left: 40, right: 40), // bottomを減らす
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // 左スワイプボタン (Don't know)
+                        _circleButton(
+                          icon: Icons.close,
+                          color: Colors.red,
+                          onTap: () => _swiperController.swipe(CardSwiperDirection.left),
+                        ),
+                        
+                        // 戻るボタン (Undo) - おまけ機能
+                        _miniButton(
+                          icon: Icons.replay,
+                          onTap: () {
+                             // カードスワイパーを再構築せずに戻すのは難しいので、簡易的にインデックス操作
+                             // が、ValueKeyがついているので戻るボタンの挙動は少し怪しくなるかも？
+                             // いったんそのまま
+                             _swiperController.undo();
+                             setState(() {
+                               if (_currentIndex > 0) _currentIndex--;
+                               _isFlipped = false;
+                             });
+                          },
+                        ),
+
+                        // 右スワイプボタン (I know)
+                        _circleButton(
+                          icon: Icons.favorite, // ハートに変更（Tinder感）
+                          color: Colors.green,
+                          onTap: () => _swiperController.swipe(CardSwiperDirection.right),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // ▼▼ ここに広告エリアを追加 ▼▼
+                  if (_isBannerAdReady && _bannerAd != null)
+                    SizedBox(
+                      width: _bannerAd!.size.width.toDouble(),
+                      height: _bannerAd!.size.height.toDouble(),
+                      child: AdWidget(ad: _bannerAd!),
+                    )
+                  else
+                    const AdPlaceholder(adSize: AdSize.banner), // 読み込み中はキラキラ,
+                  const SizedBox(height: 10), // 下に少し余白
+                ],
+              ),
+        ],
+      ),
+    );
+  }
+
+  // スワイプされた後のロジック
+  void _handleSwipe(int previousIndex, CardSwiperDirection direction) {
+    // 結果リストの範囲内かチェック
+    if (previousIndex < _quizResults.length) {
+        // 右スワイプなら true (知ってる)、左なら false (知らない) を記録
+        _quizResults[previousIndex] = (direction == CardSwiperDirection.right);
+    }
+
+    if (direction == CardSwiperDirection.right) {
+      debugPrint("Knew it! -> $previousIndex");
+      // 緑にピカッとする
+      _flashBackground(Colors.green.withOpacity(0.3));
+    } else {
+      debugPrint("Didn't know -> $previousIndex");
+      // 赤にピカッとする
+      _flashBackground(Colors.red.withOpacity(0.3));
+    }
+
+    setState(() {
+      _currentIndex = previousIndex + 1;
+      _isFlipped = false; // 次のカードは必ず表面からスタート
+    });
+
+    // 全て終わった場合
+    final total = Provider.of<QuizProvider>(context, listen: false).slangList.length;
+    if (_currentIndex >= total) {
+      // 広告を出してからダイアログを出す
+      debugPrint("Showing Interstitial Ad...");
+      AdHelper.showInterstitialAd(onComplete: () {
+        // 広告を閉じた（または読み込めなかった）後に実行される
+        _showCompletionDialogWithReview();
+      });
+    }
+  }
+
+  // 背景を一時的に変更して戻すアニメーション処理
+  void _flashBackground(Color flashColor) {
+    setState(() {
+      _backgroundColor = flashColor;
+    });
+    Future.delayed(const Duration(milliseconds: 300), () {
+      if (mounted) {
+        setState(() {
+          _backgroundColor = Colors.grey[100]!;
+        });
+      }
+    });
+  }
+
+  // ▼▼▼ 修正: 結果ダイアログの表示メソッド ▼▼▼
+  void _showCompletionDialogWithReview() {
+    final provider = Provider.of<QuizProvider>(context, listen: false);
+    final total = provider.slangList.length;
+    final knownCount = _quizResults.where((result) => result == true).length;
+    final unknownCount = total - knownCount;
+
+    // スコアに応じたタイトル（絵文字は削除）
+    String title;
+    if (knownCount == total && total > 0) {
+      title = "Perfect Master!";
+    } else if (knownCount >= total * 0.8 && total > 0) {
+      title = "Awesome!";
+    } else {
+      title = "Good job!";
+    }
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+        backgroundColor: const Color(0xFFFFF5F0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        // タイトル部分 (スコアのみ表示)
+        title: Column(
+          children: [
+            const SizedBox(height: 10),
+            Text(title, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.brown), textAlign: TextAlign.center),
+            Text("$knownCount / $total", style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.brown)),
+          ],
+        ),
+        // コンテンツ部分 (全問リスト表示)
+        content: SizedBox(
+          // ダイアログの幅を確保
+          width: double.maxFinite,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Text(
+                  "Results List",
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.brown[400]),
+                ),
+              ),
+              Divider(color: Colors.brown[200], height: 1),
+              // ▼▼▼ ここが変更点: 全問をリスト表示 ▼▼▼
+              Flexible(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: provider.slangList.length,
+                  itemBuilder: (context, index) {
+                    final item = provider.slangList[index];
+                    final isKnown = _quizResults[index];
+
+                    return Container(
+                      decoration: BoxDecoration(
+                        border: Border(bottom: BorderSide(color: Colors.brown[100]!, width: 1)),
+                      ),
+                      child: ListTile(
+                        visualDensity: VisualDensity.compact, // リストの間隔を詰める
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                        // 左側のアイコン (✅ または ❌)
+                        leading: Icon(
+                          isKnown ? Icons.check_circle : Icons.cancel,
+                          color: isKnown ? Colors.green : Colors.red,
+                        ),
+                        // 単語
+                        title: Text(
+                          item.word,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: isKnown ? Colors.black87 : Colors.red[900], // 間違えた単語は少し赤く
+                          ),
+                        ),
+                        // 右側のアイコン (目のマークは削除)
+                        trailing: null,
+                        // タップ時の動作 (正解でも不正解でも詳細表示)
+                        onTap: () {
+                           _showReviewCardDialog(item);
+                        },
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Divider(color: Colors.brown[200], height: 1),
+            ],
+          ),
+        ),
+        // アクションボタン
+        actions: [
+          if (unknownCount > 0)
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.pop(context);
+                _startReviewSession(provider);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              ),
+              icon: const Icon(Icons.loop),
+              label: Text("Review $unknownCount Words"), // 間違えた数も表示
+            ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+                 child: const Text("Back to Menu", style: TextStyle(color: Colors.grey)),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  setState(() {
+                    _currentIndex = 0;
+                    _quizResults = List.filled(total, false);
+                  });
+                },
+                child: const Text("Replay All", style: TextStyle(color: Colors.brown, fontWeight: FontWeight.bold)),
+              ),
+            ],
+          )
+        ],
+        actionsAlignment: MainAxisAlignment.center,
+        actionsOverflowButtonSpacing: 10,
+        // ダイアログ全体の高さを少し広げる設定
+        insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+      ),
+    );
+  }
+
+  // ▼▼▼ 修正: 単語カードをポップアップ表示するメソッド (表裏反転機能付き) ▼▼▼
+  void _showReviewCardDialog(SlangItem item) {
+    // 初期状態は「裏面（意味）」を表示
+    bool isFlippedState = true;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        // StatefulBuilder を使ってダイアログ内で状態 (isFlippedState) を管理
+        return StatefulBuilder(
+          builder: (context, setStateInDialog) {
+            return Dialog(
+              backgroundColor: Colors.transparent,
+              insetPadding: const EdgeInsets.all(20),
+              child: SizedBox(
+                height: 500,
+                child: Stack(
+                  children: [
+                    // カード全体をタップ可能にする
+                    GestureDetector(
+                      onTap: () {
+                        // タップで表裏を反転させる
+                        setStateInDialog(() {
+                          isFlippedState = !isFlippedState;
+                        });
+                      },
+                      // 現在の状態 (isFlippedState) に基づいてカードを表示
+                      child: QuizCard(slangItem: item, isFlipped: isFlippedState),
+                    ),
+                    // 閉じるボタン
+                    Positioned(
+                      right: 10,
+                      top: 10,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.black54,
+                        child: IconButton(
+                          icon: const Icon(Icons.close, color: Colors.white),
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // ▼▼▼ 修正: 復習セッションを開始するメソッド ▼▼▼
+  void _startReviewSession(QuizProvider provider) {
+    // 「知らない(false)」と記録された単語だけのリストを作成
+    List<SlangItem> reviewList = [];
+    for (int i = 0; i < provider.slangList.length; i++) {
+        // 念のため範囲チェック
+      if (i < _quizResults.length && _quizResults[i] == false) {
+        reviewList.add(provider.slangList[i]);
+      }
+    }
+
+    if (reviewList.isEmpty) return; // エラー回避
+
+    // プロバイダーに復習用リストをセット
+    provider.setReviewList(reviewList);
+
+    // 画面遷移せずに状態だけリセットして再開する
+    // これにより AdWidget の再生成エラーを防げる
+    setState(() {
+      _currentIndex = 0;
+      _quizResults = List.filled(reviewList.length, false);
+      _isFlipped = false;
+    });
+  }
+
+  // 丸い大きなボタン
+  Widget _circleButton({required IconData icon, required Color color, required VoidCallback onTap}) {
+    return ElevatedButton(
+      onPressed: onTap,
+      style: ElevatedButton.styleFrom(
+        shape: const CircleBorder(),
+        padding: const EdgeInsets.all(20),
+        backgroundColor: Colors.white,
+        foregroundColor: color,
+        elevation: 5,
+        shadowColor: Colors.black26,
+      ),
+      child: Icon(icon, size: 36),
+    );
+  }
+
+  // 小さな機能ボタン
+  Widget _miniButton({required IconData icon, required VoidCallback onTap}) {
+    return IconButton(
+      onPressed: onTap,
+      icon: Icon(icon, color: Colors.grey, size: 24),
+      style: IconButton.styleFrom(
+        backgroundColor: Colors.white,
+        padding: const EdgeInsets.all(12),
+      ),
+    );
+  }
+
+  // ▼▼▼ 新規追加: スワイプ時のオーバーレイ表示を作成するメソッド ▼▼▼
+  Widget _buildSwipeOverlay({
+    required String text,
+    required Color color,
+    required Alignment alignment,
+    required double angle,
+    required double opacity, // 追加
+  }) {
+    // ふんわりアニメーションさせるために AnimatedOpacity を使用
+    return Positioned.fill(
+      child: AnimatedOpacity(
+        duration: const Duration(milliseconds: 200), // 変化にかかる時間
+        curve: Curves.easeOut, // 変化の仕方（最初は早く、最後はゆっくり）
+        opacity: opacity,
+        child: Container(
+          padding: const EdgeInsets.all(30),
+          alignment: alignment, // 指定した角に配置
+          child: Transform.rotate(
+            angle: angle, // テキストを少し傾ける
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: color, width: 4), // 枠線
+                borderRadius: BorderRadius.circular(10),
+                color: color.withOpacity(0.1), // 半透明の背景色
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Text(
+                text,
+                style: TextStyle(
+                  color: color,
+                  fontSize: 32,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 1.2,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
