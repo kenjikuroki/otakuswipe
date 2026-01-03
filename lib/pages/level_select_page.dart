@@ -7,6 +7,7 @@ import '../providers/quiz_provider.dart';
 import '../ad_helper.dart'; // 追加
 import '../widgets/ad_placeholder.dart'; // 追加
 import 'quiz_page.dart';
+import '../services/purchase_service.dart'; // 追加
 
 class LevelSelectPage extends StatefulWidget {
   const LevelSelectPage({super.key});
@@ -116,11 +117,33 @@ class _LevelSelectPageState extends State<LevelSelectPage> {
                             icon: Icons.favorite,
                           ),
                           _levelCard(
-                            id: 'bonus',
-                            title: "Bonus: Persona",
+                            id: 'lv5',
+                            title: "Level 5: Persona",
                             desc: "Ore, Boku, Watashi... Pronouns.",
                             color: Colors.teal,
                             icon: Icons.face,
+                          ),
+                          // Level 6: Yakuza (課金ロック付き)
+                          Consumer<PurchaseService>(
+                            builder: (context, purchaseService, child) {
+                              // isUnlocked チェックは不要になったので削除
+                              
+                              return _levelCard(
+                                id: 'lv6', // IDはダミーでもOKだが一応設定
+                                title: "Level 6: Yakuza / Underworld",
+                                desc: "Dangerous underworld slang.",
+                                color: Colors.black, // ヤクザをイメージした黒
+                                // 常時アイコンを表示（鍵マークにはしない）
+                                icon: Icons.sports_martial_arts, 
+                                // ロック中はボタンの見た目を少し暗くするなどの処理（お好みで）
+                                onTap: () {
+                                  // 未解放でもクイズ画面へ遷移（中で3問目まで無料）
+                                  // ※JSONデータのキーは "level6_yakuza" としてください
+                                  Provider.of<QuizProvider>(context, listen: false).selectLevel("level6_yakuza");
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => const QuizPage()));
+                                },
+                              );
+                            },
                           ),
                         ],
                       ),
@@ -147,15 +170,18 @@ class _LevelSelectPageState extends State<LevelSelectPage> {
     );
   }
 
+
+
   Widget _levelCard({
     required String id,
     required String title,
     required String desc,
     required Color color,
     required IconData icon,
+    VoidCallback? onTap, // 追加
   }) {
     return GestureDetector(
-      onTap: () {
+      onTap: onTap ?? () {
         // 1. レベルをセット
         final provider = Provider.of<QuizProvider>(context, listen: false);
         provider.selectLevel(id);
@@ -170,8 +196,8 @@ class _LevelSelectPageState extends State<LevelSelectPage> {
         });
       },
       child: Container(
-        margin: const EdgeInsets.only(bottom: 20),
-        padding: const EdgeInsets.all(20),
+        margin: const EdgeInsets.only(bottom: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),

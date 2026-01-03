@@ -7,15 +7,13 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'pages/level_select_page.dart';
 import 'pages/quiz_page.dart';
 import 'providers/quiz_provider.dart';
-// import 'widgets/ad_banner.dart';
+import 'services/purchase_service.dart'; // 追加
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // Try to initialize ads, but don't crash if AdManager is missing or fails
   try {
-     // Assuming AdManager exists from previous context
-     // AdManager.instance.initializeConsent(); 
      MobileAds.instance.initialize();
   } catch (e) {
     debugPrint("Ad init failed: $e");
@@ -28,6 +26,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => PurchaseService()), // 追加
         ChangeNotifierProvider(create: (_) => QuizProvider()),
       ],
       child: const MyApp(),

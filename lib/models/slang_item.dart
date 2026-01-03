@@ -41,14 +41,17 @@ class SlangData {
   final List<SlangItem> level2;
   final List<SlangItem> level3;
   final List<SlangItem> level4;
-  final List<SlangItem> bonus;
+
+  final List<SlangItem> level5; // bonus -> level5
+  final List<SlangItem> level6;
 
   SlangData({
     required this.level1,
     required this.level2,
     required this.level3,
     required this.level4,
-    required this.bonus,
+    required this.level5, // bonus -> level5
+    required this.level6,
   });
 
   factory SlangData.fromJson(Map<String, dynamic> json) {
@@ -65,7 +68,8 @@ class SlangData {
       level2: parseList('level2_otaku'),
       level3: parseList('level3_internet'),
       level4: parseList('level4_youth'),
-      bonus: parseList('bonus_persona'),
+      level5: parseList('level5_persona'), // bonus_persona -> level5_persona
+      level6: parseList('level6_yakuza'),
     );
   }
 }

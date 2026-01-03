@@ -1,5 +1,6 @@
 // lib/pages/quiz_page.dart
 
+import 'dart:ui'; // 追加
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -9,6 +10,7 @@ import '../widgets/quiz_card.dart';
 import '../ad_helper.dart';
 import '../widgets/ad_placeholder.dart';
 import '../models/slang_item.dart';
+import '../services/purchase_service.dart'; // 追加
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
@@ -136,16 +138,34 @@ class _QuizPageState extends State<QuizPage> {
                       
                       // スワイプした時の処理
                       onSwipe: (previousIndex, currentIndex, direction) {
+                        // ▼▼ ロックされているカードはスワイプ禁止（念のため） ▼▼
+                        final currentLevelId = provider.currentLevelId;
+                        final isYakuzaUnlocked = provider.isYakuzaUnlocked;
+                        // currentIndex は「次に表示されるカード」のインデックス
+                        // previousIndex は「今スワイプしてるカード」のインデックス
+                        // つまり、今スワイプしようとしているカードが「有料エリア(3問目以降=index 3以降)」なら禁止？
+                        // 要件：4問目(index 3)から見えない。
+                        // つまり index 3 のカードはスワイプできないようにする
+                        
+                        // Yakuzaレベル かつ 未解放 かつ 4枚目(index 3)以降ならスワイプ無効
+                        if (currentLevelId == 'level6_yakuza' && !isYakuzaUnlocked && previousIndex >= 3) {
+                          return false; 
+                        }
+
                         _handleSwipe(previousIndex, direction);
                         return true; // trueならスワイプ許可
                       },
                       
                       // カードの中身を作る
-                      // カードの中身を作る
                       cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
                         final item = slangList[index];
-                        // 今見ているカード(index)かつ、フラグがtrueなら裏面を表示
                         final isCurrentCardFlipped = (index == _currentIndex && _isFlipped);
+
+                        // ▼▼ 課金ロック判定 ▼▼
+                        final currentLevelId = provider.currentLevelId;
+                        final isYakuzaUnlocked = provider.isYakuzaUnlocked;
+                        // 4問目以降 (index 3, 4, 5...) はロック
+                        final isLockedItem = (currentLevelId == 'level6_yakuza' && !isYakuzaUnlocked && index >= 3);
 
                         // Stackを使ってカードの上にオーバーレイを重ねる構造にする
                         return Stack(
@@ -153,34 +173,94 @@ class _QuizPageState extends State<QuizPage> {
                             // 1. メインのカード (GestureDetectorでラップ)
                             GestureDetector(
                               onTap: () {
-                                setState(() {
-                                  _isFlipped = !_isFlipped;
-                                });
+                                if (isLockedItem) {
+                                   // ロック中はタップで課金ダイアログ
+                                   _showPurchaseDialogInQuiz(context);
+                                } else {
+                                  setState(() {
+                                    _isFlipped = !_isFlipped;
+                                  });
+                                }
                               },
-                              child: QuizCard(
-                                slangItem: item,
-                                isFlipped: isCurrentCardFlipped,
-                              ),
+                              child: isLockedItem 
+                                // ロック中は「すりガラス」表現
+                                ? Stack(
+                                    children: [
+                                      // 1. 元のカード (少し暗めにするなど調整しても良いが、ブラーだけで十分な場合も)
+                                      QuizCard(
+                                        slangItem: item,
+                                        isFlipped: false, // 裏面が見えないように表面固定
+                                      ),
+                                      // 2. すりガラスフィルター (ClipRRectで角丸を合わせる)
+                                      Positioned.fill(
+                                        child: ClipRRect(
+                                          // QuizCardのborderRadiusに合わせて20に設定
+                                          borderRadius: BorderRadius.circular(20),
+                                          child: BackdropFilter(
+                                            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), // 強めのブラー
+                                            child: Container(
+                                              color: Colors.white.withOpacity(0.2), // 半透明の白を重ねてフロスト感を出す
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                // 通常時
+                                : QuizCard(
+                                    slangItem: item,
+                                    isFlipped: isCurrentCardFlipped,
+                                  ),
                             ),
 
-                            // 2. 左スワイプ時のオーバーレイ (Don't Know / 赤)
-                            if (percentThresholdX < 0)
+                            // 2. ロック時のオーバーレイ (鍵アイコンとボタン)
+                            if (isLockedItem)
+                              Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.lock, size: 60, color: Colors.black87),
+                                    const SizedBox(height: 20),
+                                    const Text(
+                                      "Paid Content",
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black87),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    const Text(
+                                      "Unlock Level 6 to see more!",
+                                      style: TextStyle(color: Colors.black54),
+                                    ),
+                                    const SizedBox(height: 20),
+                                    ElevatedButton(
+                                      onPressed: () => _showPurchaseDialogInQuiz(context),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.black,
+                                        foregroundColor: Colors.white,
+                                      ),
+                                      child: const Text("Unlock Now"),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                            // 3. 左スワイプ時のオーバーレイ (Don't Know / 赤)
+                            if (!isLockedItem && percentThresholdX < 0)
                               _buildSwipeOverlay(
                                 text: "DON'T KNOW",
                                 color: Colors.red,
                                 alignment: Alignment.topRight,
                                 angle: 0.2, 
-                                opacity: (percentThresholdX.abs() * 2.0).clamp(0.0, 1.0), // 3.0 -> 2.0 にして変化を緩やかに
+                                opacity: (percentThresholdX.abs() * 2.0).clamp(0.0, 1.0),
                               ),
 
-                            // 3. 右スワイプ時のオーバーレイ (I KNOW IT! / 緑)
-                            if (percentThresholdX > 0)
+                            // 4. 右スワイプ時のオーバーレイ (I KNOW IT! / 緑)
+                            if (!isLockedItem && percentThresholdX > 0)
                               _buildSwipeOverlay(
                                 text: "I KNOW IT!",
                                 color: Colors.green,
                                 alignment: Alignment.topLeft,
                                 angle: -0.2,
-                                opacity: (percentThresholdX.abs() * 2.0).clamp(0.0, 1.0), // 3.0 -> 2.0 にして変化を緩やかに
+                                opacity: (percentThresholdX.abs() * 2.0).clamp(0.0, 1.0),
                               ),
                           ],
                         );
@@ -573,6 +653,37 @@ class _QuizPageState extends State<QuizPage> {
           ),
         ),
       ),
+    );
+  }
+  // クイズ画面内での課金ダイアログ
+  void _showPurchaseDialogInQuiz(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+         title: const Text("Unlock Yakuza Level"),
+         content: const Text("Unlock the full 50 words list?"),
+         actions: [
+            TextButton(onPressed: () => Navigator.pop(context), child: const Text("Cancel")),
+            ElevatedButton(
+              onPressed: () async {
+                 Navigator.pop(context); // Close dialog
+                 await PurchaseService().buyYakuzaLevel(); // 課金処理
+                 
+                 if (!context.mounted) return;
+                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Yakuza Unlocked!')));
+                 
+                 // リロード（レベル再選択）してシャッフルを適用
+                 final provider = Provider.of<QuizProvider>(context, listen: false);
+                 provider.selectLevel("level6_yakuza"); 
+                 
+                 setState(() {
+                   _currentIndex = 0; // 最初に戻る
+                 });
+              }, 
+              child: const Text("Buy ¥300")
+            )
+         ],
+      )
     );
   }
 }

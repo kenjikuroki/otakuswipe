@@ -36,12 +36,13 @@ dependencies:
   cupertino_icons: ^1.0.8
   provider: ^6.1.2
   appinio_swiper: ^2.1.1
-  shared_preferences: ^2.5.4
+  shared_preferences: ^2.2.0
   shimmer: ^3.0.0
   google_mobile_ads: ^7.0.0
   google_fonts: ^6.3.3
   app_tracking_transparency: ^2.0.6+1
   flutter_card_swiper: ^7.2.0
+  in_app_purchase: ^3.0.0
 
 dev_dependencies:
   flutter_test:
