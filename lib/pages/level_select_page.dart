@@ -8,6 +8,8 @@ import '../ad_helper.dart'; // 追加
 import '../widgets/ad_placeholder.dart'; // 追加
 import 'quiz_page.dart';
 import '../services/purchase_service.dart'; // 追加
+import '../utils/ad_manager.dart';
+import 'settings_page.dart';
 
 class LevelSelectPage extends StatefulWidget {
   const LevelSelectPage({super.key});
@@ -23,15 +25,32 @@ class _LevelSelectPageState extends State<LevelSelectPage> {
   @override
   void initState() {
     super.initState();
-    // 画面が開いたらデータを裏読みしておく
-    Future.microtask(() =>
-        Provider.of<QuizProvider>(context, listen: false).loadMasterData());
+    _initializeApp();
+  }
+
+  Future<void> _initializeApp() async {
+    // 1. UI描画完了後、少し待ってからダイアログを表示する (ATT対策)
+    await Future.delayed(const Duration(milliseconds: 1000));
+    
+    // 2. 同意フローの初期化 (完了を待つ)
+    await AdManager.instance.initializeConsent();
+    
+    // 3. Mobile Ads SDKの初期化 & 広告ロード
+    await MobileAds.instance.initialize();
     
     // バナー広告をロード
     _loadBannerAd();
 
-    // ★次の画面（クイズ画面）の広告を予約ロードしておく！
+    // 次の画面の広告をプリロード
     AdHelper.preloadQuizBanner();
+
+    // インタースティシャル広告もここでプリロード開始 (最速でロード)
+    AdHelper.loadInterstitialAd();
+
+    // 4. データロードなど既存の処理
+    if (mounted) {
+      Provider.of<QuizProvider>(context, listen: false).loadMasterData();
+    }
   }
 
   void _loadBannerAd() {
@@ -74,9 +93,23 @@ class _LevelSelectPageState extends State<LevelSelectPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 40),
-                    const Text(
-                      "Select Level",
-                      style: TextStyle(fontSize: 32, fontWeight: FontWeight.w900, color: Colors.brown),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Select Level",
+                          style: TextStyle(fontSize: 32, fontWeight: FontWeight.w900, color: Colors.brown),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.settings, color: Colors.brown, size: 30),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const SettingsPage()),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                     const Text(
                       "Choose your slang journey!",
@@ -97,24 +130,24 @@ class _LevelSelectPageState extends State<LevelSelectPage> {
                           ),
                           _levelCard(
                             id: 'lv2',
-                            title: "Level 2: Otaku",
+                            title: "Level 2: Youth",
+                            desc: "Trending words among Gen Z.",
+                            color: Colors.pink,
+                            icon: Icons.favorite,
+                          ),
+                          _levelCard(
+                            id: 'lv3',
+                            title: "Level 3: Otaku",
                             desc: "Anime & Manga culture terms.",
                             color: Colors.purple,
                             icon: Icons.auto_stories,
                           ),
                           _levelCard(
-                            id: 'lv3',
-                            title: "Level 3: Internet",
+                            id: 'lv4',
+                            title: "Level 4: Internet",
                             desc: "Net slang & Gaming chat.",
                             color: Colors.blue,
                             icon: Icons.wifi,
-                          ),
-                          _levelCard(
-                            id: 'lv4',
-                            title: "Level 4: Youth",
-                            desc: "Trending words among Gen Z.",
-                            color: Colors.pink,
-                            icon: Icons.favorite,
                           ),
                           _levelCard(
                             id: 'lv5',

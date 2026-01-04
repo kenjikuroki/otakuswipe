@@ -70,15 +70,15 @@ class QuizProvider with ChangeNotifier {
         break;
       case 'lv2':
         _currentList = _masterData!.level2;
-        _currentLevelTitle = "Level 2: Otaku";
+        _currentLevelTitle = "Level 2: Youth";
         break;
       case 'lv3':
         _currentList = _masterData!.level3;
-        _currentLevelTitle = "Level 3: Internet";
+        _currentLevelTitle = "Level 3: Otaku";
         break;
       case 'lv4':
         _currentList = _masterData!.level4;
-        _currentLevelTitle = "Level 4: Youth";
+        _currentLevelTitle = "Level 4: Internet";
         break;
       case 'lv5':
         _currentList = _masterData!.level5;

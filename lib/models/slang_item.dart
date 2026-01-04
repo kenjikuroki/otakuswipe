@@ -7,6 +7,7 @@ class SlangItem {
   final String usage;       // 使用シーン (Spoken, Text)
   final String? warning;    // 警告 (Rude etc) - null許容
   final String? example;    // 例文 - null許容
+  final String? romaji;     // ローマ字読み - null許容
 
   SlangItem({
     required this.word,
@@ -17,6 +18,7 @@ class SlangItem {
     required this.usage,
     this.warning,
     this.example,
+    this.romaji,
   });
 
   // JSONからクラスに変換する工場（ファクトリー）
@@ -31,6 +33,7 @@ class SlangItem {
       usage: json['usage'] ?? 'General',
       warning: json['warning'], // nullならnullのまま
       example: json['example'],
+      romaji: json['romaji'],
     );
   }
 }
@@ -65,10 +68,10 @@ class SlangData {
 
     return SlangData(
       level1: parseList('level1_survival'),
-      level2: parseList('level2_otaku'),
-      level3: parseList('level3_internet'),
-      level4: parseList('level4_youth'),
-      level5: parseList('level5_persona'), // bonus_persona -> level5_persona
+      level2: parseList('level2_youth_vibes'),
+      level3: parseList('level3_otaku_passion'),
+      level4: parseList('level4_net_streaming_game'),
+      level5: parseList('level5_persona_pronouns'), // bonus_persona -> level5_persona
       level6: parseList('level6_yakuza'),
     );
   }

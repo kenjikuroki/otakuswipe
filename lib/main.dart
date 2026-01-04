@@ -12,12 +12,7 @@ import 'services/purchase_service.dart'; // 追加
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Try to initialize ads, but don't crash if AdManager is missing or fails
-  try {
-     MobileAds.instance.initialize();
-  } catch (e) {
-    debugPrint("Ad init failed: $e");
-  }
+  // Removed MobileAds.instance.initialize() from here. Moved to LevelSelectPage.
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

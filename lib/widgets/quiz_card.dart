@@ -32,10 +32,11 @@ class QuizCard extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // 1. 画像エリア
-        Expanded(
-          flex: 4,
+        // 1. 画像エリア (16:9で固定)
+        AspectRatio(
+          aspectRatio: 3 / 2, // 16:9より少し縦長にして拡大表示（両端カット）
           child: Container(
+            width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
@@ -91,6 +92,24 @@ class QuizCard extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         
+        // 4. ローマ字 (Maji de)
+        if (slangItem.romaji != null && slangItem.romaji!.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 4.0),
+            child: Text(
+              slangItem.romaji!,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey,
+                letterSpacing: 1.0,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        
+        const SizedBox(height: 12), // スペース調整
+
         const Text(
           "Tap to see meaning",
           style: TextStyle(color: Colors.grey, fontSize: 12),

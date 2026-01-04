@@ -10,51 +10,102 @@ class AdHelper {
     await MobileAds.instance.initialize();
   }
 
-  // バナー広告のID（テスト用）
+  // バナー広告のID
   static String get bannerAdUnitId {
     if (Platform.isAndroid) {
-      return 'ca-app-pub-3940256099942544/6300978111';
+      return 'ca-app-pub-3331079517737737/9774578853';
     } else if (Platform.isIOS) {
-      return 'ca-app-pub-3940256099942544/2934735716';
+      return 'ca-app-pub-3331079517737737/9774578853';
     }
     throw UnsupportedError("Unsupported platform");
   }
 
-  // 全画面広告（インタースティシャル）のID（テスト用）
+  // 全画面広告（インタースティシャル）のID
   static String get interstitialAdUnitId {
     if (Platform.isAndroid) {
-      return 'ca-app-pub-3940256099942544/1033173712';
+      return 'ca-app-pub-3331079517737737/7998462754';
     } else if (Platform.isIOS) {
-      return 'ca-app-pub-3940256099942544/4411468910';
+      return 'ca-app-pub-3331079517737737/7998462754';
     }
     throw UnsupportedError("Unsupported platform");
   }
 
   // 全画面広告を表示するヘルパー関数
-  static void showInterstitialAd({required VoidCallback onComplete}) {
+  static InterstitialAd? _interstitialAd;
+  static bool _isInterstitialAdLoading = false;
+
+  // インタースティシャル広告を事前に読み込む
+  static void loadInterstitialAd() {
+    if (_interstitialAd != null || _isInterstitialAdLoading) return;
+
+    _isInterstitialAdLoading = true;
     InterstitialAd.load(
       adUnitId: interstitialAdUnitId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
-          ad.fullScreenContentCallback = FullScreenContentCallback(
-            onAdDismissedFullScreenContent: (ad) {
-              ad.dispose();
-              onComplete(); // 広告を閉じたら次の処理へ
-            },
-            onAdFailedToShowFullScreenContent: (ad, error) {
-              ad.dispose();
-              onComplete(); // 失敗しても次の処理へ進める
-            },
-          );
-          ad.show();
+          debugPrint('InterstitialAd loaded.');
+          _interstitialAd = ad;
+          _isInterstitialAdLoading = false;
         },
         onAdFailedToLoad: (LoadAdError error) {
           debugPrint('InterstitialAd failed to load: $error');
-          onComplete(); // ロード失敗時も止まらないように
+          _isInterstitialAdLoading = false;
         },
       ),
     );
+  }
+
+  // 全画面広告を表示するヘルパー関数
+  static void showInterstitialAd({required VoidCallback onComplete}) {
+    // 既に読み込まれていれば表示
+    if (_interstitialAd != null) {
+      _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+        onAdDismissedFullScreenContent: (ad) {
+          ad.dispose();
+          _interstitialAd = null; // 使い捨てなのでクリア
+          onComplete();
+          // 次のためにまたロードしておく
+          loadInterstitialAd();
+        },
+        onAdFailedToShowFullScreenContent: (ad, error) {
+          ad.dispose();
+          _interstitialAd = null;
+          onComplete();
+          loadInterstitialAd();
+        },
+      );
+      _interstitialAd!.show();
+      _interstitialAd = null; // 二重表示防止
+    } else {
+      // 読み込まれていなければロードしてから表示 (フォールバック)
+      debugPrint("Interstitial ad not ready, loading now...");
+      InterstitialAd.load(
+        adUnitId: interstitialAdUnitId,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+              onAdDismissedFullScreenContent: (ad) {
+                ad.dispose();
+                onComplete();
+                loadInterstitialAd();
+              },
+              onAdFailedToShowFullScreenContent: (ad, error) {
+                ad.dispose();
+                onComplete();
+                loadInterstitialAd();
+              },
+            );
+            ad.show();
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            debugPrint('InterstitialAd failed to load: $error');
+            onComplete(); // ロード失敗時も止まらないように
+          },
+        ),
+      );
+    }
   }
   // プレロードされたクイズ用バナー広告
   static BannerAd? _preloadedQuizBanner;

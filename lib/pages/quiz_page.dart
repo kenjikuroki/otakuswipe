@@ -25,6 +25,7 @@ class _QuizPageState extends State<QuizPage> {
   
   int _currentIndex = 0;
   bool _isFlipped = false; // 今のカードが裏返っているか
+  int _replayCount = 0; // リプレイ時にCardSwiperを再構築するためのキー用
 
   // 広告用の変数を追加
   BannerAd? _bannerAd;
@@ -45,6 +46,9 @@ class _QuizPageState extends State<QuizPage> {
 
     // バナー広告を読み込む
     _loadBannerAd();
+
+    // ▼▼▼ 追加: インタースティシャル広告も事前に読み込んでおく ▼▼▼
+    AdHelper.loadInterstitialAd();
 
     // ▼▼▼ 追加: 画面描画後にプロバイダーからリスト長を取得し、結果リストを初期化 ▼▼▼
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -115,21 +119,52 @@ class _QuizPageState extends State<QuizPage> {
                   // 1. プログレスバー (残り枚数)
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: LinearProgressIndicator(
-                        value: (_currentIndex + 1) / slangList.length,
-                        minHeight: 8,
-                        backgroundColor: Colors.grey[300],
-                        valueColor: const AlwaysStoppedAnimation<Color>(Colors.amber),
-                      ),
+                    child: Column(
+                      children: [
+                        // カウンター表示 (例: 1 / 10)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Question ${(_currentIndex + 1).clamp(1, slangList.length)}",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[600],
+                                  fontSize: 14,
+                                ),
+                              ),
+                              Text(
+                                "${(_currentIndex + 1).clamp(1, slangList.length)} / ${slangList.length}",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // プログレスバー
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: LinearProgressIndicator(
+                            value: _currentIndex / slangList.length, // 0からスタートし、最後は90%になるように変更
+                            minHeight: 8,
+                            backgroundColor: Colors.grey[300],
+                            valueColor: const AlwaysStoppedAnimation<Color>(Colors.amber),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
 
                   // 2. スワイプカードエリア
                   Expanded(
                     child: CardSwiper(
-                      key: ValueKey(slangList), // リストが変わったら再構築
+                      isLoop: false, // ループを無効化
+                      key: ValueKey("${slangList.hashCode}_$_replayCount"), // リスト変更 or リプレイで再構築
                       controller: _swiperController,
                       cardsCount: slangList.length,
                       numberOfCardsDisplayed: slangList.length < 3 ? slangList.length : 3, // 後ろに重なって見える枚数
@@ -447,6 +482,16 @@ class _QuizPageState extends State<QuizPage> {
                             color: isKnown ? Colors.black87 : Colors.red[900], // 間違えた単語は少し赤く
                           ),
                         ),
+                        // ローマ字を表示 (あれば)
+                        subtitle: (item.romaji != null && item.romaji!.isNotEmpty)
+                            ? Text(
+                                item.romaji!,
+                                style: TextStyle(
+                                  color: Colors.grey[600],
+                                  fontSize: 12,
+                                ),
+                              )
+                            : null,
                         // 右側のアイコン (目のマークは削除)
                         trailing: null,
                         // タップ時の動作 (正解でも不正解でも詳細表示)
@@ -495,6 +540,7 @@ class _QuizPageState extends State<QuizPage> {
                   setState(() {
                     _currentIndex = 0;
                     _quizResults = List.filled(total, false);
+                    _replayCount++; // CardSwiperを強制リセット
                   });
                 },
                 child: const Text("Replay All", style: TextStyle(color: Colors.brown, fontWeight: FontWeight.bold)),
@@ -583,6 +629,7 @@ class _QuizPageState extends State<QuizPage> {
       _currentIndex = 0;
       _quizResults = List.filled(reviewList.length, false);
       _isFlipped = false;
+      _replayCount++;
     });
   }
 
@@ -667,20 +714,10 @@ class _QuizPageState extends State<QuizPage> {
             ElevatedButton(
               onPressed: () async {
                  Navigator.pop(context); // Close dialog
-                 await PurchaseService().buyYakuzaLevel(); // 課金処理
-                 
-                 if (!context.mounted) return;
-                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Yakuza Unlocked!')));
-                 
-                 // リロード（レベル再選択）してシャッフルを適用
-                 final provider = Provider.of<QuizProvider>(context, listen: false);
-                 provider.selectLevel("level6_yakuza"); 
-                 
-                 setState(() {
-                   _currentIndex = 0; // 最初に戻る
-                 });
+                 // 購入処理開始 (結果はPurchaseServiceのストリームで監視される)
+                 await Provider.of<PurchaseService>(context, listen: false).buyYakuzaLevel(); 
               }, 
-              child: const Text("Buy ¥300")
+              child: const Text("Unlock"),
             )
          ],
       )
