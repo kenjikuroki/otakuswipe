@@ -661,22 +661,6 @@
             "romaji": "Kamieshi"
         },
         {
-            "word": "〇〇の女",
-            "meaning": "The woman of [Character]",
-            "explanation": "Female fans totally devoted to a specific male character.",
-            "example": "Watashi wa Amuro no onna. (I'm Amuro's girl.)",
-            "imagePath": "assets/images/slang/level3/lv3_no_onna.png",
-            "romaji": "No Onna"
-        },
-        {
-            "word": "隠しきれないヲタク",
-            "meaning": "Unconcealable Otaku",
-            "explanation": "When your otaku vibe shows even in normal clothes.",
-            "example": "Kakushikirenai otaku de gomen. (Sorry, my otaku is showing.)",
-            "imagePath": "assets/images/slang/level3/lv3_kakushikirenai.png",
-            "romaji": "Kakushikirenai"
-        },
-        {
             "word": "現場",
             "meaning": "The venue / The scene",
             "explanation": "The actual place where the event is happening.",

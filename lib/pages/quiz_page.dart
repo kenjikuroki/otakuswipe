@@ -112,10 +112,14 @@ class _QuizPageState extends State<QuizPage> {
             child: const SizedBox.expand(),
           ),
           
-          slangList.isEmpty
-            ? const Center(child: CircularProgressIndicator())
-            : Column(
-                children: [
+          
+          Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 600),
+              child: slangList.isEmpty
+                ? const Center(child: CircularProgressIndicator())
+                : Column(
+                    children: [
                   // 1. プログレスバー (残り枚数)
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
@@ -341,18 +345,24 @@ class _QuizPageState extends State<QuizPage> {
                     ),
                   ),
 
-                  // ▼▼ ここに広告エリアを追加 ▼▼
-                  if (_isBannerAdReady && _bannerAd != null)
-                    SizedBox(
-                      width: _bannerAd!.size.width.toDouble(),
-                      height: _bannerAd!.size.height.toDouble(),
-                      child: AdWidget(ad: _bannerAd!),
-                    )
-                  else
-                    const AdPlaceholder(adSize: AdSize.banner), // 読み込み中はキラキラ,
-                  const SizedBox(height: 10), // 下に少し余白
+                  // ▼▼ ここに広告エリアを追加 (Yakuzaレベル以外の場合のみ表示) ▼▼
+                  if (provider.currentLevelId != 'level6_yakuza') ...[
+                    if (_isBannerAdReady && _bannerAd != null)
+                      SizedBox(
+                        width: _bannerAd!.size.width.toDouble(),
+                        height: _bannerAd!.size.height.toDouble(),
+                        child: AdWidget(ad: _bannerAd!),
+                      )
+                    else
+                      const AdPlaceholder(adSize: AdSize.banner), // 読み込み中はキラキラ,
+                    const SizedBox(height: 10), // 下に少し余白
+                  ] else ...[
+                     const SizedBox(height: 20), // 広告がない場合の余白
+                  ],
                 ],
               ),
+            ),
+          ),
         ],
       ),
     );
@@ -384,12 +394,19 @@ class _QuizPageState extends State<QuizPage> {
     // 全て終わった場合
     final total = Provider.of<QuizProvider>(context, listen: false).slangList.length;
     if (_currentIndex >= total) {
-      // 広告を出してからダイアログを出す
-      debugPrint("Showing Interstitial Ad...");
-      AdHelper.showInterstitialAd(onComplete: () {
-        // 広告を閉じた（または読み込めなかった）後に実行される
-        _showCompletionDialogWithReview();
-      });
+      final provider = Provider.of<QuizProvider>(context, listen: false);
+      
+      // Yakuzaレベル(有料)の場合は広告を出さずに完了画面へ
+      if (provider.currentLevelId == 'level6_yakuza') {
+         _showCompletionDialogWithReview();
+      } else {
+        // 広告を出してからダイアログを出す
+        debugPrint("Showing Interstitial Ad...");
+        AdHelper.showInterstitialAd(onComplete: () {
+          // 広告を閉じた（または読み込めなかった）後に実行される
+          _showCompletionDialogWithReview();
+        });
+      }
     }
   }
 

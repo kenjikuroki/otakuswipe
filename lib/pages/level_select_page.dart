@@ -84,120 +84,125 @@ class _LevelSelectPageState extends State<LevelSelectPage> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFF5F0), // 薄いオレンジ背景
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 40),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 600),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Select Level",
-                          style: TextStyle(fontSize: 32, fontWeight: FontWeight.w900, color: Colors.brown),
+                        const SizedBox(height: 40),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Select Level",
+                              style: TextStyle(fontSize: 32, fontWeight: FontWeight.w900, color: Colors.brown),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.settings, color: Colors.brown, size: 30),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const SettingsPage()),
+                                );
+                              },
+                            ),
+                          ],
                         ),
-                        IconButton(
-                          icon: const Icon(Icons.settings, color: Colors.brown, size: 30),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const SettingsPage()),
-                            );
-                          },
+                        const Text(
+                          "Choose your slang journey!",
+                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                        ),
+                        const SizedBox(height: 30),
+                        
+                        // メニューリスト
+                        Expanded(
+                          child: ListView(
+                            children: [
+                              _levelCard(
+                                id: 'lv1',
+                                title: "Level 1: Survival",
+                                desc: "Essential words you must know.",
+                                color: Colors.orange,
+                                icon: Icons.local_fire_department,
+                              ),
+                              _levelCard(
+                                id: 'lv2',
+                                title: "Level 2: Youth",
+                                desc: "Trending words among Gen Z.",
+                                color: Colors.pink,
+                                icon: Icons.favorite,
+                              ),
+                              _levelCard(
+                                id: 'lv3',
+                                title: "Level 3: Otaku",
+                                desc: "Anime & Manga culture terms.",
+                                color: Colors.purple,
+                                icon: Icons.auto_stories,
+                              ),
+                              _levelCard(
+                                id: 'lv4',
+                                title: "Level 4: Internet",
+                                desc: "Net slang & Gaming chat.",
+                                color: Colors.blue,
+                                icon: Icons.wifi,
+                              ),
+                              _levelCard(
+                                id: 'lv5',
+                                title: "Level 5: Persona",
+                                desc: "Ore, Boku, Watashi... Pronouns.",
+                                color: Colors.teal,
+                                icon: Icons.face,
+                              ),
+                              // Level 6: Yakuza (課金ロック付き)
+                              Consumer<PurchaseService>(
+                                builder: (context, purchaseService, child) {
+                                  // isUnlocked チェックは不要になったので削除
+                                  
+                                  return _levelCard(
+                                    id: 'lv6', // IDはダミーでもOKだが一応設定
+                                    title: "Level 6: Yakuza / Underworld",
+                                    desc: "Dangerous underworld slang.",
+                                    color: Colors.black, // ヤクザをイメージした黒
+                                    // 常時アイコンを表示（鍵マークにはしない）
+                                    icon: Icons.sports_martial_arts, 
+                                    // ロック中はボタンの見た目を少し暗くするなどの処理（お好みで）
+                                    onTap: () {
+                                      // 未解放でもクイズ画面へ遷移（中で3問目まで無料）
+                                      // ※JSONデータのキーは "level6_yakuza" としてください
+                                      Provider.of<QuizProvider>(context, listen: false).selectLevel("level6_yakuza");
+                                      Navigator.push(context, MaterialPageRoute(builder: (_) => const QuizPage()));
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                    const Text(
-                      "Choose your slang journey!",
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
-                    ),
-                    const SizedBox(height: 30),
-                    
-                    // メニューリスト
-                    Expanded(
-                      child: ListView(
-                        children: [
-                          _levelCard(
-                            id: 'lv1',
-                            title: "Level 1: Survival",
-                            desc: "Essential words you must know.",
-                            color: Colors.orange,
-                            icon: Icons.local_fire_department,
-                          ),
-                          _levelCard(
-                            id: 'lv2',
-                            title: "Level 2: Youth",
-                            desc: "Trending words among Gen Z.",
-                            color: Colors.pink,
-                            icon: Icons.favorite,
-                          ),
-                          _levelCard(
-                            id: 'lv3',
-                            title: "Level 3: Otaku",
-                            desc: "Anime & Manga culture terms.",
-                            color: Colors.purple,
-                            icon: Icons.auto_stories,
-                          ),
-                          _levelCard(
-                            id: 'lv4',
-                            title: "Level 4: Internet",
-                            desc: "Net slang & Gaming chat.",
-                            color: Colors.blue,
-                            icon: Icons.wifi,
-                          ),
-                          _levelCard(
-                            id: 'lv5',
-                            title: "Level 5: Persona",
-                            desc: "Ore, Boku, Watashi... Pronouns.",
-                            color: Colors.teal,
-                            icon: Icons.face,
-                          ),
-                          // Level 6: Yakuza (課金ロック付き)
-                          Consumer<PurchaseService>(
-                            builder: (context, purchaseService, child) {
-                              // isUnlocked チェックは不要になったので削除
-                              
-                              return _levelCard(
-                                id: 'lv6', // IDはダミーでもOKだが一応設定
-                                title: "Level 6: Yakuza / Underworld",
-                                desc: "Dangerous underworld slang.",
-                                color: Colors.black, // ヤクザをイメージした黒
-                                // 常時アイコンを表示（鍵マークにはしない）
-                                icon: Icons.sports_martial_arts, 
-                                // ロック中はボタンの見た目を少し暗くするなどの処理（お好みで）
-                                onTap: () {
-                                  // 未解放でもクイズ画面へ遷移（中で3問目まで無料）
-                                  // ※JSONデータのキーは "level6_yakuza" としてください
-                                  Provider.of<QuizProvider>(context, listen: false).selectLevel("level6_yakuza");
-                                  Navigator.push(context, MaterialPageRoute(builder: (_) => const QuizPage()));
-                                },
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                
+                // ▼▼ 広告エリア（プレースホルダー付き） ▼▼
+                const SizedBox(height: 10),
+                if (_isBannerAdReady && _bannerAd != null)
+                  SizedBox(
+                    width: _bannerAd!.size.width.toDouble(),
+                    height: _bannerAd!.size.height.toDouble(),
+                    child: AdWidget(ad: _bannerAd!),
+                  )
+                else
+                  const AdPlaceholder(adSize: AdSize.banner), // 読み込み中はキラキラ
+                const SizedBox(height: 10),
+              ],
             ),
-            
-            // ▼▼ 広告エリア（プレースホルダー付き） ▼▼
-            const SizedBox(height: 10),
-            if (_isBannerAdReady && _bannerAd != null)
-              SizedBox(
-                width: _bannerAd!.size.width.toDouble(),
-                height: _bannerAd!.size.height.toDouble(),
-                child: AdWidget(ad: _bannerAd!),
-              )
-            else
-              const AdPlaceholder(adSize: AdSize.banner), // 読み込み中はキラキラ
-            const SizedBox(height: 10),
-          ],
+          ),
         ),
       ),
     );
@@ -214,10 +219,12 @@ class _LevelSelectPageState extends State<LevelSelectPage> {
     VoidCallback? onTap, // 追加
   }) {
     return GestureDetector(
-      onTap: onTap ?? () {
-        // 1. レベルをセット
+      onTap: onTap ?? () async {
+        // 1. レベルをセット (データロードを待機)
         final provider = Provider.of<QuizProvider>(context, listen: false);
-        provider.selectLevel(id);
+        await provider.selectLevel(id);
+
+        if (!context.mounted) return;
 
         // 2. クイズ画面へGO
         Navigator.push(

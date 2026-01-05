@@ -35,7 +35,7 @@ class QuizProvider with ChangeNotifier {
     });
     
     // サービスの初期化
-    _purchaseService.init();
+
     
     // (既存の処理)
     loadMasterData();
@@ -56,8 +56,12 @@ class QuizProvider with ChangeNotifier {
   }
 
   // レベルを選んでセットする関数
-  void selectLevel(String levelId) {
-    if (_masterData == null) return;
+  Future<void> selectLevel(String levelId) async {
+    // データがまだなければロードを待つ
+    if (_masterData == null) {
+      await loadMasterData();
+    }
+    if (_masterData == null) return; // それでもロード失敗したら終了
     
     _currentLevelId = levelId; // IDを保存
 
