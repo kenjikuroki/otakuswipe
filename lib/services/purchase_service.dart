@@ -44,23 +44,29 @@ class PurchaseService extends ChangeNotifier {
   Future<void> buyYakuzaLevel() async {
     final available = await _iap.isAvailable();
     if (!available) {
-      debugPrint("Store not available");
-      return;
+      throw Exception("Store not available");
     }
 
     // 商品情報を取得
     final Set<String> kIds = {_yakuzaProductId};
     final ProductDetailsResponse response = await _iap.queryProductDetails(kIds);
     
+    if (response.error != null) {
+      throw Exception("Store Error: ${response.error!.message} (Code: ${response.error!.code})");
+    }
+
     if (response.notFoundIDs.isNotEmpty) {
-      debugPrint("Product not found: ${response.notFoundIDs}");
+      debugPrint("Product not found in store: ${response.notFoundIDs}");
       // ストアにアイテムがまだ登録されていない、または有効化されていない場合
-      return;
+      throw Exception("Product Not Found: ${response.notFoundIDs.join(', ')}\n"
+          "Please check App Store Connect:\n"
+          "1. Is the Product ID correct?\n"
+          "2. Is the status 'Ready to Submit'?\n"
+          "3. Are Paid Applications agreements signed?");
     }
 
     if (response.productDetails.isEmpty) {
-      debugPrint("No product details found.");
-      return;
+      throw Exception("Product details are empty. Status might be 'Missing Metadata' or invalid ID.");
     }
 
     final ProductDetails productDetails = response.productDetails.first;

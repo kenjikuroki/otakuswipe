@@ -23,21 +23,33 @@ class QuizProvider with ChangeNotifier {
   String get currentLevelTitle => _currentLevelTitle;
 
   // ▼▼▼ 追加 ▼▼▼
-  final PurchaseService _purchaseService = PurchaseService();
+  // ▼▼▼ 追加 ▼▼▼
+  PurchaseService? _purchaseService;
 
   // 外部からロック状態を確認するためのゲッター
-  bool get isYakuzaUnlocked => _purchaseService.isYakuzaUnlocked;
+  bool get isYakuzaUnlocked => _purchaseService?.isYakuzaUnlocked ?? false;
+
+  void updatePurchaseService(PurchaseService service) {
+    // サービスが変わっていなければ何もしない
+    if (_purchaseService == service) return;
+    
+    // 古いリスナーを解除（もしあれば）
+    _purchaseService?.removeListener(_onPurchaseUpdated);
+    
+    // 新しいサービスをセットして監視開始
+    _purchaseService = service;
+    _purchaseService!.addListener(_onPurchaseUpdated);
+    
+    // 即座に一度更新通知
+    notifyListeners();
+  }
+
+  void _onPurchaseUpdated() {
+    notifyListeners();
+  }
 
   QuizProvider() {
-    // 課金状態が変わったら（購入完了したら）画面を更新するようにリスナー登録
-    _purchaseService.addListener(() {
-      notifyListeners();
-    });
-    
-    // サービスの初期化
-
-    
-    // (既存の処理)
+    // コンストラクタでの初期化は不要になり、updatePurchaseServiceで紐付けされます
     loadMasterData();
   }
   // ▲▲▲ 追加ここまで ▲▲▲

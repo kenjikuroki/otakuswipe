@@ -22,12 +22,16 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => PurchaseService()), // 追加
-        ChangeNotifierProvider(create: (_) => QuizProvider()),
+        ChangeNotifierProxyProvider<PurchaseService, QuizProvider>(
+          create: (_) => QuizProvider(),
+          update: (_, purchase, quiz) => quiz!..updatePurchaseService(purchase),
+        ),
       ],
       child: const MyApp(),
     ),
   );
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
