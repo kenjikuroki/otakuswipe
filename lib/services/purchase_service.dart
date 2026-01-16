@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class PurchaseService extends ChangeNotifier {
   // ストアに登録した製品ID (Non-Consumable)
-  static const String _yakuzaProductId = 'com.yourname.otaku.unlock_yakuza';
+  static const String _yakuzaProductId = 'com.yourname.otaku.unlock_yakuza_2';
   
   bool _isYakuzaUnlocked = false;
   bool get isYakuzaUnlocked => _isYakuzaUnlocked;
