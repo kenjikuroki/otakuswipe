@@ -13,6 +13,7 @@ import '../models/slang_item.dart';
 import '../services/purchase_service.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // 追加
 import 'package:in_app_review/in_app_review.dart'; // 追加
+import '../i18n/strings.g.dart'; // 追加
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
@@ -137,7 +138,7 @@ class _QuizPageState extends State<QuizPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Question ${(_currentIndex + 1).clamp(1, slangList.length)}",
+                                "${t.quiz.question} ${(_currentIndex + 1).clamp(1, slangList.length)}",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.grey[600],
@@ -323,14 +324,14 @@ class _QuizPageState extends State<QuizPage> {
                   children: [
                     const Icon(Icons.lock, size: 60, color: Colors.black87),
                     const SizedBox(height: 20),
-                    const Text(
-                      "Paid Content",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black87),
+                     Text(
+                      t.quiz.locked.label,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black87),
                     ),
                     const SizedBox(height: 10),
-                    const Text(
-                      "Unlock Level 6 to see more!",
-                      style: TextStyle(color: Colors.black54),
+                     Text(
+                      t.quiz.locked.desc,
+                      style: const TextStyle(color: Colors.black54),
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
@@ -339,7 +340,7 @@ class _QuizPageState extends State<QuizPage> {
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.white,
                       ),
-                      child: const Text("Unlock Now"),
+                      child: Text(t.quiz.locked.button),
                     ),
                   ],
                 ),
@@ -348,7 +349,7 @@ class _QuizPageState extends State<QuizPage> {
             // 3. 左スワイプ時のオーバーレイ (Don't Know / 赤)
             if (!isLockedItem && percentThresholdX < 0)
               _buildSwipeOverlay(
-                text: "DON'T KNOW",
+                text: t.quiz.dontKnow,
                 color: Colors.red,
                 alignment: Alignment.topRight,
                 angle: 0.2, 
@@ -358,7 +359,7 @@ class _QuizPageState extends State<QuizPage> {
             // 4. 右スワイプ時のオーバーレイ (I KNOW IT! / 緑)
             if (!isLockedItem && percentThresholdX > 0)
               _buildSwipeOverlay(
-                text: "I KNOW IT!",
+                text: t.quiz.iKnowIt,
                 color: Colors.green,
                 alignment: Alignment.topLeft,
                 angle: -0.2,
@@ -497,11 +498,11 @@ class _QuizPageState extends State<QuizPage> {
     // スコアに応じたタイトル（絵文字は削除）
     String title;
     if (knownCount == total && total > 0) {
-      title = "Perfect Master!";
+      title = t.quiz.result.perfect;
     } else if (knownCount >= total * 0.8 && total > 0) {
-      title = "Awesome!";
+      title = t.quiz.result.awesome;
     } else {
-      title = "Good job!";
+      title = t.quiz.result.goodJob;
     }
 
     showDialog(
@@ -528,7 +529,7 @@ class _QuizPageState extends State<QuizPage> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
                 child: Text(
-                  "Results List",
+                  t.quiz.result.listTitle,
                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.brown[400]),
                 ),
               ),
@@ -601,7 +602,7 @@ class _QuizPageState extends State<QuizPage> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
               ),
               icon: const Icon(Icons.loop),
-              label: Text("Review $unknownCount Words"), // 間違えた数も表示
+              label: Text(t.quiz.result.reviewButton(count: unknownCount)), // 間違えた数も表示
             ),
           const SizedBox(height: 10),
           Row(
@@ -612,7 +613,7 @@ class _QuizPageState extends State<QuizPage> {
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },
-                 child: const Text("Back to Menu", style: TextStyle(color: Colors.grey)),
+                 child: Text(t.quiz.result.backToMenu, style: const TextStyle(color: Colors.grey)),
               ),
               TextButton(
                 onPressed: () {
@@ -623,7 +624,7 @@ class _QuizPageState extends State<QuizPage> {
                     _replayCount++; // CardSwiperを強制リセット
                   });
                 },
-                child: const Text("Replay All", style: TextStyle(color: Colors.brown, fontWeight: FontWeight.bold)),
+                child: Text(t.quiz.result.replayAll, style: const TextStyle(color: Colors.brown, fontWeight: FontWeight.bold)),
               ),
             ],
           )
@@ -787,12 +788,12 @@ class _QuizPageState extends State<QuizPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-         title: const Text("Unlock Yakuza Level"),
-         content: const Text("Unlock the full 50 words list?"),
+         title: Text(t.quiz.locked.dialogTitle),
+         content: Text(t.quiz.locked.dialogDesc),
          actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text("Cancel")
+              child: Text(t.quiz.locked.cancel),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -807,7 +808,7 @@ class _QuizPageState extends State<QuizPage> {
                      showDialog(
                        context: context,
                        builder: (ctx) => AlertDialog(
-                         title: const Text("Purchase Failed"),
+                         title: const Text("Purchase Failed"), // エラー系は一旦英語のままか、必要ならローカライズ追加（今回はスコープ外）
                          content: Text(e.toString().replaceAll("Exception: ", "")),
                          actions: [
                            TextButton(
@@ -820,7 +821,7 @@ class _QuizPageState extends State<QuizPage> {
                    }
                  }
               }, 
-              child: const Text("Unlock"),
+              child: Text(t.quiz.locked.button),
             )
          ],
       )

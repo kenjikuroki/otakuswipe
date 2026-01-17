@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import '../models/slang_item.dart';
+import '../i18n/strings.g.dart'; // Localized strings
 
 class QuizCard extends StatelessWidget {
   final SlangItem slangItem;
@@ -111,9 +112,9 @@ class QuizCard extends StatelessWidget {
           
           const SizedBox(height: 12), // スペース調整
 
-          const Text(
-            "Tap to see meaning",
-            style: TextStyle(color: Colors.grey, fontSize: 12),
+          Text(
+            t.quiz.tapToSeeMeaning,
+            style: const TextStyle(color: Colors.grey, fontSize: 12),
           ),
           const Spacer(),
         ],

@@ -1,0 +1,75 @@
+{
+    "appTitle": "Otaku Swipe",
+    "home": {
+        "title": "Domine as Gírias Japonesas!",
+        "start": "Começar a Aprender"
+    },
+    "levelSelect": {
+        "title": "Selecione o Nível",
+        "subtitle": "Escolha sua jornada!",
+        "levels": {
+            "level1": {
+                "title": "Nível 1: Sobrevivência",
+                "desc": "Palavras essenciais para saber."
+            },
+            "level2": {
+                "title": "Nível 2: Juventude",
+                "desc": "Palavras da moda na Gen Z."
+            },
+            "level3": {
+                "title": "Nível 3: Otaku",
+                "desc": "Termos da cultura Anime & Mangá."
+            },
+            "level4": {
+                "title": "Nível 4: Internet",
+                "desc": "Gírias da web e jogos."
+            },
+            "level5": {
+                "title": "Nível 5: Persona",
+                "desc": "Ore, Boku, Watashi... Pronomes."
+            },
+            "level6": {
+                "title": "Nível 6: Yakuza",
+                "desc": "Gírias perigosas do submundo."
+            }
+        }
+    },
+    "quiz": {
+        "question": "Pergunta",
+        "dontKnow": "NÃO SEI",
+        "iKnowIt": "EU SEI!",
+        "tapToSeeMeaning": "Toque para ver o significado",
+        "reviewMode": "Modo Revisão",
+        "result": {
+            "perfect": "Mestre Perfeito!",
+            "awesome": "Incrível!",
+            "goodJob": "Bom trabalho!",
+            "listTitle": "Lista de Resultados",
+            "backToMenu": "Voltar ao Menu",
+            "replayAll": "Jogar Tudo de Novo",
+            "reviewButton": "Revisar ${count} palavras"
+        },
+        "locked": {
+            "label": "Conteúdo Pago",
+            "desc": "Desbloqueie o Nível 6 para ver mais!",
+            "button": "Desbloquear",
+            "dialogTitle": "Desbloquear Nível Yakuza",
+            "dialogDesc": "Desbloquear a lista completa de 50 palavras?",
+            "cancel": "Cancelar"
+        }
+    },
+    "settings": {
+        "title": "Configurações",
+        "legal": "LEGAL",
+        "privacyPolicy": "Política de Privacidade",
+        "termsOfUse": "Termos de Uso",
+        "tokusho": "Lei de Transações Comerciais",
+        "services": "SERVIÇOS",
+        "restore": "Restaurar Compras",
+        "restoreSubtitle": "Restaurar seus níveis comprados",
+        "restoreSuccess": "Restauração concluída.",
+        "restoreError": "Falha na restauração: ${error}",
+        "appInfo": "INFO DO APP",
+        "version": "Versão"
+    }
+}

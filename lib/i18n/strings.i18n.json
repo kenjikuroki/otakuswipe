@@ -1,0 +1,75 @@
+{
+    "appTitle": "Otaku Swipe",
+    "home": {
+        "title": "Master Japanese Slang!",
+        "start": "Start Learning"
+    },
+    "levelSelect": {
+        "title": "Select Level",
+        "subtitle": "Choose your slang journey!",
+        "levels": {
+            "level1": {
+                "title": "Level 1: Survival",
+                "desc": "Essential words you must know."
+            },
+            "level2": {
+                "title": "Level 2: Youth",
+                "desc": "Trending words among Gen Z."
+            },
+            "level3": {
+                "title": "Level 3: Otaku",
+                "desc": "Anime & Manga culture terms."
+            },
+            "level4": {
+                "title": "Level 4: Internet",
+                "desc": "Net slang & Gaming chat."
+            },
+            "level5": {
+                "title": "Level 5: Persona",
+                "desc": "Ore, Boku, Watashi... Pronouns."
+            },
+            "level6": {
+                "title": "Level 6: Yakuza",
+                "desc": "Dangerous underworld slang."
+            }
+        }
+    },
+    "quiz": {
+        "question": "Question",
+        "dontKnow": "DON'T KNOW",
+        "iKnowIt": "I KNOW IT!",
+        "tapToSeeMeaning": "Tap to see meaning",
+        "reviewMode": "Review Mode",
+        "result": {
+            "perfect": "Perfect Master!",
+            "awesome": "Awesome!",
+            "goodJob": "Good job!",
+            "listTitle": "Results List",
+            "backToMenu": "Back to Menu",
+            "replayAll": "Replay All",
+            "reviewButton": "Review ${count} Words"
+        },
+        "locked": {
+            "label": "Paid Content",
+            "desc": "Unlock Level 6 to see more!",
+            "button": "Unlock Now",
+            "dialogTitle": "Unlock Yakuza Level",
+            "dialogDesc": "Unlock the full 50 words list?",
+            "cancel": "Cancel"
+        }
+    },
+    "settings": {
+        "title": "Settings",
+        "legal": "LEGAL",
+        "privacyPolicy": "Privacy Policy",
+        "termsOfUse": "Terms of Use",
+        "tokusho": "Specified Commercial Transactions Act",
+        "services": "SERVICES",
+        "restore": "Restore Purchases",
+        "restoreSubtitle": "Restore your previously purchased levels",
+        "restoreSuccess": "Restore process completed.",
+        "restoreError": "Restore failed: ${error}",
+        "appInfo": "APP INFO",
+        "version": "Version"
+    }
+}

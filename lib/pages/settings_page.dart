@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../services/purchase_service.dart';
 import 'terms_page.dart';
 import 'tokusho_page.dart';
+import '../i18n/strings.g.dart'; // Localized strings
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -30,7 +31,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
+        title: Text(t.settings.title),
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
@@ -43,17 +44,17 @@ class SettingsPage extends StatelessWidget {
           child: ListView(
             children: [
               const SizedBox(height: 20),
-              _buildSectionHeader("Legal"),
+              _buildSectionHeader(t.settings.legal),
               _buildListTile(
                 context,
                 icon: Icons.privacy_tip_outlined,
-                title: "Privacy Policy",
+                title: t.settings.privacyPolicy,
                 onTap: () => _launchUrl(context, _privacyPolicyUrl),
               ),
               _buildListTile(
                 context,
                 icon: Icons.description_outlined,
-                title: "Terms of Use",
+                title: t.settings.termsOfUse,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -64,7 +65,7 @@ class SettingsPage extends StatelessWidget {
               _buildListTile(
                 context,
                 icon: Icons.store_outlined,
-                title: "Specified Commercial Transactions Act",
+                title: t.settings.tokusho,
                 onTap: () {
                   Navigator.push(
                     context,
@@ -73,12 +74,12 @@ class SettingsPage extends StatelessWidget {
                 },
               ),
               const Divider(height: 40),
-              _buildSectionHeader("Services"),
+              _buildSectionHeader(t.settings.services),
               _buildListTile(
                 context,
                 icon: Icons.restore_outlined,
-                title: "Restore Purchases",
-                subtitle: "Restore your previously purchased levels",
+                title: t.settings.restore,
+                subtitle: t.settings.restoreSubtitle,
                 onTap: () async {
                   // 復元処理の呼び出し
                   try {
@@ -86,24 +87,24 @@ class SettingsPage extends StatelessWidget {
                         .restorePurchases();
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Restore process completed.')),
+                         SnackBar(content: Text(t.settings.restoreSuccess)),
                       );
                     }
                   } catch (e) {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Restore failed: $e')),
+                        SnackBar(content: Text(t.settings.restoreError(error: e))),
                       );
                     }
                   }
                 },
               ),
               const Divider(height: 40),
-              _buildSectionHeader("App Info"),
-              const ListTile(
-                leading: Icon(Icons.info_outline),
-                title: Text("Version"),
-                trailing: Text("1.0.0"), // 必要に応じてpackage_info_plusで動的に取得
+              _buildSectionHeader(t.settings.appInfo),
+              ListTile(
+                leading: const Icon(Icons.info_outline),
+                title: Text(t.settings.version),
+                trailing: const Text("1.0.0"), // 必要に応じてpackage_info_plusで動的に取得
               ),
             ],
           ),

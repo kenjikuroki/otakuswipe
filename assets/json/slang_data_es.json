@@ -1,0 +1,1464 @@
+{
+    "level1_survival": [
+        {
+            "word": "マジで",
+            "meaning": "¿En serio? / ¿De verdad?",
+            "explanation": "Énfasis universal. Esencial para la charla diaria.",
+            "example": "Maji de? (¿En serio?)",
+            "imagePath": "assets/images/slang/level1/lv1_maji_de.png",
+            "romaji": "Maji de"
+        },
+        {
+            "word": "ガチで",
+            "meaning": "Totalmente / 100% serio",
+            "explanation": "Más fuerte que 'Maji'. Implica cero exageración.",
+            "example": "Gachi de oishii. (Está legítimamente delicioso.)",
+            "imagePath": "assets/images/slang/level1/lv1_gachi_de.png",
+            "romaji": "Gachi de"
+        },
+        {
+            "word": "やばい",
+            "meaning": "¡Increíble! / ¡Locura! / ¡Mal!",
+            "explanation": "La palabra divina para cualquier emoción intensa.",
+            "example": "Kore yabai! (¡Esto es una locura!)",
+            "imagePath": "assets/images/slang/level1/lv1_yabai.png",
+            "romaji": "Yabai"
+        },
+        {
+            "word": "めっちゃ",
+            "meaning": "Muy / Súper",
+            "explanation": "Un intensificador informal muy común.",
+            "example": "Meccha suki. (Me encanta muchísimo.)",
+            "imagePath": "assets/images/slang/level1/lv1_meccha.png",
+            "romaji": "Meccha"
+        },
+        {
+            "word": "〜すぎる",
+            "meaning": "Demasiado... / Tan...",
+            "explanation": "Se adjunta a adjetivos para mostrar emoción intensa.",
+            "example": "Kawai-sugiru. (Demasiado lindo, no puedo más.)",
+            "imagePath": "assets/images/slang/level1/lv1_sugiru.png",
+            "romaji": "Sugiru"
+        },
+        {
+            "word": "それな",
+            "meaning": "Tal cual / Exacto",
+            "explanation": "La palabra definitiva para estar de acuerdo.",
+            "example": "A: Nemui. B: Sorena. (A: Tengo sueño. B: Tal cual.)",
+            "imagePath": "assets/images/slang/level1/lv1_sorena.png",
+            "romaji": "Sorena"
+        },
+        {
+            "word": "ウケる",
+            "meaning": "Gracioso / LOL",
+            "explanation": "Se usa cuando algo es divertido o irónico.",
+            "example": "Sore ukeru! (¡Eso es muy gracioso!)",
+            "imagePath": "assets/images/slang/level1/lv1_ukeru.png",
+            "romaji": "Ukeru"
+        },
+        {
+            "word": "キモい",
+            "meaning": "Asqueroso / Grima",
+            "explanation": "Expresa fuerte disgusto o repulsión.",
+            "example": "Aitsu kimoi. (Ese tipo da grima.)",
+            "imagePath": "assets/images/slang/level1/lv1_kimoi.png",
+            "romaji": "Kimoi"
+        },
+        {
+            "word": "うざい",
+            "meaning": "Molesto / Pesado",
+            "explanation": "Se usa cuando alguien o algo te está fastidiando.",
+            "example": "Maji de uzai. (Es seriamente molesto.)",
+            "imagePath": "assets/images/slang/level1/lv1_uzai.png",
+            "romaji": "Uzai"
+        },
+        {
+            "word": "ムカつく",
+            "meaning": "Irritante / Me cabrea",
+            "explanation": "Expresión directa de enojo.",
+            "example": "Sore kiku to mukatsuku. (Escuchar eso me cabrea.)",
+            "imagePath": "assets/images/slang/level1/lv1_mukatsuku.png",
+            "romaji": "Mukatsuku"
+        },
+        {
+            "word": "だるい",
+            "meaning": "Pereza / Pesado",
+            "explanation": "Se usa para cansancio físico o pereza.",
+            "example": "Jugyou darui. (La clase es una pereza.)",
+            "imagePath": "assets/images/slang/level1/lv1_darui.png",
+            "romaji": "Darui"
+        },
+        {
+            "word": "しんどい",
+            "meaning": "Duro / Agotador",
+            "explanation": "Mental o físicamente drenado.",
+            "example": "Zangyou wa shindoi. (Las horas extra son brutales.)",
+            "imagePath": "assets/images/slang/level1/lv1_shindoi.png",
+            "romaji": "Shindoi"
+        },
+        {
+            "word": "びびる",
+            "meaning": "Asustarse / Sobresaltarse",
+            "explanation": "Se usa cuando te sorprenden o intimidan.",
+            "example": "Bibitta! (¡Me asustaste!)",
+            "imagePath": "assets/images/slang/level1/lv1_bibiru.png",
+            "romaji": "Bibiru"
+        },
+        {
+            "word": "きつい",
+            "meaning": "Difícil / Severo",
+            "explanation": "Se usa para un horario o situación difícil.",
+            "example": "Kono shift wa kitsui. (Este turno es matador.)",
+            "imagePath": "assets/images/slang/level1/lv1_kitsui.png",
+            "romaji": "Kitsui"
+        },
+        {
+            "word": "普通に",
+            "meaning": "Honestamente / Sorprendentemente",
+            "explanation": "Significa 'contrario a lo esperado, es bueno'.",
+            "example": "Futsuu ni oishii. (Honestamente, está rico.)",
+            "imagePath": "assets/images/slang/level1/lv1_futsuu_ni.png",
+            "romaji": "Futsuu ni"
+        },
+        {
+            "word": "微妙",
+            "meaning": "Ni fu ni fa / Regular",
+            "explanation": "La forma educada de decir 'es malo'.",
+            "example": "Kono fuku wa bimyou. (Esta ropa es ni fu ni fa.)",
+            "imagePath": "assets/images/slang/level1/lv1_bimyou.png",
+            "romaji": "Bimyou"
+        },
+        {
+            "word": "ありえない",
+            "meaning": "Imposible",
+            "explanation": "Expresa incredulidad total.",
+            "example": "Arienai desho! (¡Ni de broma!)",
+            "imagePath": "assets/images/slang/level1/lv1_arienai.png",
+            "romaji": "Arienai"
+        },
+        {
+            "word": "余裕",
+            "meaning": "Fácil / Sin problema",
+            "explanation": "Cuando una tarea es pan comido.",
+            "example": "Konna no yoyuu. (Esto está chupado.)",
+            "imagePath": "assets/images/slang/level1/lv1_yoyuu.png",
+            "romaji": "Yoyuu"
+        },
+        {
+            "word": "テキトーに",
+            "meaning": "A la ligera / Como sea",
+            "explanation": "Tomárselo con calma o hacerlo descuidadamente.",
+            "example": "Tekitou ni yattoke. (Hazlo como sea.)",
+            "imagePath": "assets/images/slang/level1/lv1_tekitou_ni.png",
+            "romaji": "Tekitou ni"
+        },
+        {
+            "word": "とりあえず",
+            "meaning": "Por ahora / Para empezar",
+            "explanation": "La palabra más usada en restaurantes.",
+            "example": "Toriaezu beer. (Cerveza para empezar.)",
+            "imagePath": "assets/images/slang/level1/lv1_toriaezu.png",
+            "romaji": "Toriaezu"
+        },
+        {
+            "word": "ワンチャン",
+            "meaning": "Quizás / Hay una posibilidad",
+            "explanation": "Abreviatura de 'One Chance'.",
+            "example": "Wan-chan ikeru! (¡Quizás podamos lograrlo!)",
+            "imagePath": "assets/images/slang/level1/lv1_wanchan.png",
+            "romaji": "Wanchan"
+        },
+        {
+            "word": "詰んだ",
+            "meaning": "Estoy jodido / Fin del juego",
+            "explanation": "Se usa en una situación sin esperanza.",
+            "example": "Saifu wasureta, tsunda. (Olvidé mi cartera, estoy muerto.)",
+            "imagePath": "assets/images/slang/level1/lv1_tsunda.png",
+            "romaji": "Tsunda"
+        },
+        {
+            "word": "ミスった",
+            "meaning": "La cagué / Me equivoqué",
+            "explanation": "Forma casual de decir que cometiste un error.",
+            "example": "Maji de misutta! (¡En serio la cagué!)",
+            "imagePath": "assets/images/slang/level1/lv1_misutta.png",
+            "romaji": "Misutta"
+        },
+        {
+            "word": "ドタキャン",
+            "meaning": "Cancelar a última hora",
+            "explanation": "Cancelar planes en el último segundo.",
+            "example": "Dotakyan sareta. (Me plantaron a última hora.)",
+            "imagePath": "assets/images/slang/level1/lv1_dotakyan.png",
+            "romaji": "Dotakyan"
+        },
+        {
+            "word": "パクる",
+            "meaning": "Copiar / Robar",
+            "explanation": "Robar ideas u objetos.",
+            "example": "Idea wo pakurareta. (Me robaron la idea.)",
+            "imagePath": "assets/images/slang/level1/lv1_pakuru.png",
+            "romaji": "Pakuru"
+        },
+        {
+            "word": "引く",
+            "meaning": "Dar repelús / Desanimarse",
+            "explanation": "Cuando alguien hace algo raro o asqueroso.",
+            "example": "Sore wa hiku wa. (Eso da repelús.)",
+            "imagePath": "assets/images/slang/level1/lv1_hiku.png",
+            "romaji": "Hiku"
+        },
+        {
+            "word": "えぐい",
+            "meaning": "Brutal / Intenso",
+            "explanation": "Para habilidades asombrosas o shocks terribles.",
+            "example": "Ima no play, egui! (¡Esa jugada fue brutal!)",
+            "imagePath": "assets/images/slang/level1/lv1_egui.png",
+            "romaji": "Egui"
+        },
+        {
+            "word": "メンタル",
+            "meaning": "Mentalidad / Estado mental",
+            "explanation": "A menudo 'Mental yarareta' (Mentalmente agotado).",
+            "example": "Mental kita wa. (Eso me afectó mentalmente.)",
+            "imagePath": "assets/images/slang/level1/lv1_mental.png",
+            "romaji": "Mental"
+        },
+        {
+            "word": "やっぱり",
+            "meaning": "Lo sabía / Como pensaba",
+            "explanation": "Cuando tu predicción se cumple.",
+            "example": "Yappari sou da! (¡Sabía que era así!)",
+            "imagePath": "assets/images/slang/level1/lv1_yappari.png",
+            "romaji": "Yappari"
+        },
+        {
+            "word": "あーね",
+            "meaning": "Ah, ya veo",
+            "explanation": "Versión súper corta de 'Aa, naruhodo ne'.",
+            "example": "B: A-ne. (B: Ah, ya.)",
+            "imagePath": "assets/images/slang/level1/lv1_a_ne.png",
+            "romaji": "A-ne"
+        }
+    ],
+    "level2_youth_vibes": [
+        {
+            "word": "エモい",
+            "meaning": "Emotivo / Nostálgico",
+            "explanation": "Se usa para atardeceres, canciones antiguas o vibras profundas.",
+            "example": "Kono kyoku emoi. (Esta canción me llega.)",
+            "imagePath": "assets/images/slang/level2/lv2_emoi.png",
+            "romaji": "Emoi"
+        },
+        {
+            "word": "チルい",
+            "meaning": "Chill / Relajante",
+            "explanation": "Pasar el rato y relajarse con estilo.",
+            "example": "Cafe de chiru. (Relajándose en un café.)",
+            "imagePath": "assets/images/slang/level2/lv2_chirui.png",
+            "romaji": "Chirui"
+        },
+        {
+            "word": "優勝",
+            "meaning": "La victoria / Lo mejor",
+            "explanation": "Sentirse genial después de comer algo rico o ganar.",
+            "example": "Ramen tabete yuushou. (Comí ramen y gané en la vida.)",
+            "imagePath": "assets/images/slang/level2/lv2_yuushou.png",
+            "romaji": "Yuushou"
+        },
+        {
+            "word": "レベチ",
+            "meaning": "Otro nivel",
+            "explanation": "Abreviatura de 'Level chigai' (Nivel diferente).",
+            "example": "Kare wa rebechi. (Él está en otro nivel.)",
+            "imagePath": "assets/images/slang/level2/lv2_rebechi.png",
+            "romaji": "Rebechi"
+        },
+        {
+            "word": "映え (ばえ)",
+            "meaning": "Instagrameable",
+            "explanation": "Que se ve bien en las fotos.",
+            "example": "Kore wa bae-ru ne. (Esto se ve genial para la foto.)",
+            "imagePath": "assets/images/slang/level2/lv2_bae.png",
+            "romaji": "Bae"
+        },
+        {
+            "word": "好 (ハオ)",
+            "meaning": "Me encanta / Like",
+            "explanation": "Lectura china de 'Suki'. De moda en redes sociales.",
+            "example": "Kono visual, hao. (Amo estos visuales.)",
+            "imagePath": "assets/images/slang/level2/lv2_hao.png",
+            "romaji": "Hao"
+        },
+        {
+            "word": "スパダリ",
+            "meaning": "Súper Novio",
+            "explanation": "Una pareja romántica perfecta y de alto nivel.",
+            "example": "Maji de supadari. (Es el hombre perfecto.)",
+            "imagePath": "assets/images/slang/level2/lv2_supadari.png",
+            "romaji": "Supadari"
+        },
+        {
+            "word": "界隈 (かいわい)",
+            "meaning": "Comunidad / Círculo",
+            "explanation": "Un grupo específico o ambiente.",
+            "example": "Gamer-kaiwai. (El círculo gamer.)",
+            "imagePath": "assets/images/slang/level2/lv2_kaiwai.png",
+            "romaji": "Kaiwai"
+        },
+        {
+            "word": "陽キャ",
+            "meaning": "Extrovertido / Cool",
+            "explanation": "Gente alegre y popular.",
+            "example": "Aitsu you-kya da ne. (Él es muy extrovertido.)",
+            "imagePath": "assets/images/slang/level2/lv2_youkya.png",
+            "romaji": "Youkya"
+        },
+        {
+            "word": "陰キャ",
+            "meaning": "Introvertido / Sombrío",
+            "explanation": "Gente tranquila, tímida o tipo otaku.",
+            "example": "Wai wa in-kya dakara. (Como soy introvertido...)",
+            "imagePath": "assets/images/slang/level2/lv2_inkya.png",
+            "romaji": "Inkya"
+        },
+        {
+            "word": "地雷系",
+            "meaning": "Estilo 'Mina Terrestre'",
+            "explanation": "Moda subcultural; también implica personalidad compleja.",
+            "example": "Jirai-kei fashion.",
+            "imagePath": "assets/images/slang/level2/lv2_jiraikei.png",
+            "romaji": "Jiraikei"
+        },
+        {
+            "word": "加工 (かこう)",
+            "meaning": "Filtro / Edición",
+            "explanation": "Editar fotos para verse mejor.",
+            "example": "Kono shashin kako-sugi. (Esto tiene demasiado filtro.)",
+            "imagePath": "assets/images/slang/level2/lv2_kakou.png",
+            "romaji": "Kakou"
+        },
+        {
+            "word": "バズる",
+            "meaning": "Viralizarse",
+            "explanation": "Obtener atención masiva en internet.",
+            "example": "Twitter de bazutta. (Se hizo viral en Twitter.)",
+            "imagePath": "assets/images/slang/level2/lv2_bazuru.png",
+            "romaji": "Bazuru"
+        },
+        {
+            "word": "匂わせ (におわせ)",
+            "meaning": "Insinuar / Indirecta",
+            "explanation": "Insinuar sutilmente una relación en redes.",
+            "example": "Kore niowase da yo ne? (¿Esto es una indirecta, no?)",
+            "imagePath": "assets/images/slang/level2/lv2_niowase.png",
+            "romaji": "Niowase"
+        },
+        {
+            "word": "マウント",
+            "meaning": "Presumir / Darse aires",
+            "explanation": "Intentar mostrar que eres superior.",
+            "example": "Mount torareta. (Me lo restregó en la cara.)",
+            "imagePath": "assets/images/slang/level2/lv2_mount.png",
+            "romaji": "Mount"
+        },
+        {
+            "word": "リア凸 (りあとつ)",
+            "meaning": "Encuentro en persona (IRL)",
+            "explanation": "Encontrarse inesperadamente con un amigo en línea.",
+            "example": "Riatotsu shite mita. (Intenté conocerlos en persona.)",
+            "imagePath": "assets/images/slang/level2/lv2_riatotsu.png",
+            "romaji": "Riatotsu"
+        },
+        {
+            "word": "パワーワード",
+            "meaning": "Frase potente",
+            "explanation": "Una palabra o frase con gran impacto.",
+            "example": "Sore pawa-wa da wa. (Esa es una frase fuerte.)",
+            "imagePath": "assets/images/slang/level2/lv2_pawawa.png",
+            "romaji": "Pawaa Waado"
+        },
+        {
+            "word": "おしゃん",
+            "meaning": "Elegante / Fashion",
+            "explanation": "Versión linda y corta de 'Oshare'.",
+            "example": "Meccha oshan! (¡Qué elegante!)",
+            "imagePath": "assets/images/slang/level2/lv2_oshan.png",
+            "romaji": "Oshan"
+        },
+        {
+            "word": "パケ買い",
+            "meaning": "Comprar por el envase",
+            "explanation": "Comprar solo porque se ve genial/lindo.",
+            "example": "Pake-gai shita. (Lo compré por la caja.)",
+            "imagePath": "assets/images/slang/level2/lv2_pakegai.png",
+            "romaji": "Pakegai"
+        },
+        {
+            "word": "ぴえん",
+            "meaning": "🥺 (Triste/Llorando)",
+            "explanation": "Sonido de llanto ligero.",
+            "example": "Test yabai, pien. (Fallé el examen, pien.)",
+            "imagePath": "assets/images/slang/level2/lv2_pien.png",
+            "romaji": "Pien"
+        },
+        {
+            "word": "ぱおん",
+            "meaning": "Súper 🥺",
+            "explanation": "La forma \"evolucionada\" de 'pien'.",
+            "example": "Pien koete paon. (Más allá de la tristeza.)",
+            "imagePath": "assets/images/slang/level2/lv2_paon.png",
+            "romaji": "Paon"
+        },
+        {
+            "word": "ビミョい",
+            "meaning": "Meh / Sospechoso",
+            "explanation": "Versión juvenil de 'Bimyou'.",
+            "example": "Kore maji bimyo-i. (Esto es realmente meh.)",
+            "imagePath": "assets/images/slang/level2/lv2_bimyoi.png",
+            "romaji": "Bimyoi"
+        },
+        {
+            "word": "無双 (むそう)",
+            "meaning": "Imparable",
+            "explanation": "Dominar un campo o juego.",
+            "example": "Kyou no ore musou shiteru. (Hoy estoy imparable.)",
+            "imagePath": "assets/images/slang/level2/lv2_musou.png",
+            "romaji": "Musou"
+        },
+        {
+            "word": "〇〇み",
+            "meaning": "...idad / Vibra",
+            "explanation": "Convertir adjetivos en sustantivos (ej. Wakarimi).",
+            "example": "Yaba-mi ga fukai. (La locura es profunda.)",
+            "imagePath": "assets/images/slang/level2/lv2_mi.png",
+            "romaji": "Mi"
+        },
+        {
+            "word": "メンヘラ",
+            "meaning": "Inestable / Necesitado",
+            "explanation": "Históricamente sobre salud mental, ahora una vibra.",
+            "example": "Kanojo wa menhera. (Ella es muy inestable.)",
+            "imagePath": "assets/images/slang/level2/lv2_menhera.png",
+            "romaji": "Menhera"
+        },
+        {
+            "word": "ほぼほぼ",
+            "meaning": "Casi casi / Prácticamente",
+            "explanation": "Un 'Hobo' duplicado para énfasis.",
+            "example": "Hobo hobo dekita. (Está prácticamente hecho.)",
+            "imagePath": "assets/images/slang/level2/lv2_hobohobo.png",
+            "romaji": "Hobohobo"
+        },
+        {
+            "word": "ニコイチ",
+            "meaning": "Inseparables",
+            "explanation": "Mejores amigos que siempre están juntos.",
+            "example": "Uchira niko-ichi. (Somos un par.)",
+            "imagePath": "assets/images/slang/level2/lv2_nikoichi.png",
+            "romaji": "Nikoichi"
+        },
+        {
+            "word": "自撮り界隈",
+            "meaning": "Círculo de selfies",
+            "explanation": "Gente que publica selfies en X/TikTok.",
+            "example": "Jidori-kaiwai no hito.",
+            "imagePath": "assets/images/slang/level2/lv2_jidorikaiwai.png",
+            "romaji": "Jidorikaiwai"
+        },
+        {
+            "word": "詰み (つみ)",
+            "meaning": "Jaque mate / Fin",
+            "explanation": "Finalidad del fracaso.",
+            "example": "Maji de tsumi da wa. (Estoy totalmente acabado.)",
+            "imagePath": "assets/images/slang/level2/lv2_tsumi.png",
+            "romaji": "Tsumi"
+        }
+    ],
+    "level3_otaku_passion": [
+        {
+            "word": "推し",
+            "meaning": "Mi favorito / Bias",
+            "explanation": "El personaje o persona que más apoyas.",
+            "example": "Oshi ga toutoi. (Mi favorito es precioso.)",
+            "imagePath": "assets/images/slang/level3/lv3_oshi.png",
+            "romaji": "Oshi"
+        },
+        {
+            "word": "尊い",
+            "meaning": "Precioso / Sagrado",
+            "explanation": "Se usa cuando algo es tan puro/perfecto que se siente santo.",
+            "example": "Kono couple, toutoi. (Esta pareja es divina.)",
+            "imagePath": "assets/images/slang/level3/lv3_toutoi.png",
+            "romaji": "Toutoi"
+        },
+        {
+            "word": "語彙力",
+            "meaning": "Vocabulario (murió)",
+            "explanation": "Usualmente 'Goiryoku shinda' (Sin palabras).",
+            "example": "Goiryoku shinda. (Mi vocabulario ha muerto / Sin palabras.)",
+            "imagePath": "assets/images/slang/level3/lv3_goiryoku.png",
+            "romaji": "Goiryoku"
+        },
+        {
+            "word": "限界",
+            "meaning": "Al límite",
+            "explanation": "Estar tan conmovido que no puedes actuar como humano normal.",
+            "example": "Genkai otaku. (Un otaku al límite emocional.)",
+            "imagePath": "assets/images/slang/level3/lv3_genkai.png",
+            "romaji": "Genkai"
+        },
+        {
+            "word": "解釈違い",
+            "meaning": "Error de interpretación",
+            "explanation": "Cuando el contenido oficial no coincide con tu canon mental.",
+            "example": "Kore wa kaishaku-chigai da wa. (Esto no es correcto.)",
+            "imagePath": "assets/images/slang/level3/lv3_kaishakuchigai.png",
+            "romaji": "Kaishakuchigai"
+        },
+        {
+            "word": "沼",
+            "meaning": "Pantano / Adicción",
+            "explanation": "Caer profundo en un fandom o hobby.",
+            "example": "VTuber no numa ni hamaru. (Caer en el pantano VTuber.)",
+            "imagePath": "assets/images/slang/level3/lv3_numa.png",
+            "romaji": "Numa"
+        },
+        {
+            "word": "聖地巡礼",
+            "meaning": "Peregrinaje sagrado",
+            "explanation": "Visitar lugares reales de un anime.",
+            "example": "Seichi-junrei ni iku. (Ir a un peregrinaje de anime.)",
+            "imagePath": "assets/images/slang/level3/lv3_seichijunrei.png",
+            "romaji": "Seichijunrei"
+        },
+        {
+            "word": "箱推し",
+            "meaning": "Fan del grupo",
+            "explanation": "Apoyar al grupo entero en lugar de solo a un miembro.",
+            "example": "Watashi wa hako-oshi desu. (Amo a todo el grupo.)",
+            "imagePath": "assets/images/slang/level3/lv3_hakooshi.png",
+            "romaji": "Hakooshi"
+        },
+        {
+            "word": "神回",
+            "meaning": "Episodio divino",
+            "explanation": "Un episodio con calidad o trama legendaria.",
+            "example": "Konshuu wa kamikai datta. (Esta semana fue legendaria.)",
+            "imagePath": "assets/images/slang/level3/lv3_kamikai.png",
+            "romaji": "Kamikai"
+        },
+        {
+            "word": "供給",
+            "meaning": "Suministro / Contenido",
+            "explanation": "Actualizaciones oficiales o noticias.",
+            "example": "Kyoukyuu ga oosugiru. (¡Demasiado contenido nuevo!)",
+            "imagePath": "assets/images/slang/level3/lv3_kyoukyuu.png",
+            "romaji": "Kyoukyuu"
+        },
+        {
+            "word": "布教",
+            "meaning": "Evangelizar",
+            "explanation": "Intentar meter a tus amigos en tu serie favorita.",
+            "example": "Oshi wo fukyou suru. (Difundiendo la palabra de mi favorito.)",
+            "imagePath": "assets/images/slang/level3/lv3_fukyou.png",
+            "romaji": "Fukyou"
+        },
+        {
+            "word": "祭壇",
+            "meaning": "Altar",
+            "explanation": "Un espacio en tu cuarto dedicado a productos de un personaje.",
+            "example": "Saidan wo tsukuru. (Construyendo un altar de personaje.)",
+            "imagePath": "assets/images/slang/level3/lv3_saidan.png",
+            "romaji": "Saidan"
+        },
+        {
+            "word": "アクスタ",
+            "meaning": "Stand de acrílico",
+            "explanation": "Figuras planas. El merch moderno más común.",
+            "example": "Akusta to issho ni shashin toru. (Fotos con mi standee.)",
+            "imagePath": "assets/images/slang/level3/lv3_akusuta.png",
+            "romaji": "Akusuta"
+        },
+        {
+            "word": "ぬい",
+            "meaning": "Peluche",
+            "explanation": "Abreviatura de 'Nuigurumi'. A menudo llevados a cafés.",
+            "example": "Nui-dori. (Tomar fotos de peluches.)",
+            "imagePath": "assets/images/slang/level3/lv3_nui.png",
+            "romaji": "Nui"
+        },
+        {
+            "word": "概念",
+            "meaning": "Concepto / Vibra",
+            "explanation": "Artículos que representan a un personaje (ej. sus colores).",
+            "example": "Oshi-gainen color. (El color de mi personaje favorito.)",
+            "imagePath": "assets/images/slang/level3/lv3_gainen.png",
+            "romaji": "Gainen"
+        },
+        {
+            "word": "リアタイ",
+            "meaning": "Ver en vivo",
+            "explanation": "Ver un programa exactamente cuando se transmite.",
+            "example": "Riatai chuu. (Viéndolo en vivo ahora mismo.)",
+            "imagePath": "assets/images/slang/level3/lv3_riatai.png",
+            "romaji": "Riatai"
+        },
+        {
+            "word": "古参",
+            "meaning": "Fan veterano",
+            "explanation": "Fans que han estado ahí desde el principio.",
+            "example": "Watashi wa kosan da yo. (Soy un fan veterano.)",
+            "imagePath": "assets/images/slang/level3/lv3_kosan.png",
+            "romaji": "Kosan"
+        },
+        {
+            "word": "新参",
+            "meaning": "Fan novato",
+            "explanation": "Alguien que acaba de unirse al fandom.",
+            "example": "Shinzan desu, yoroshiku. (Soy nuevo aquí.)",
+            "imagePath": "assets/images/slang/level3/lv3_shinzan.png",
+            "romaji": "Shinzan"
+        },
+        {
+            "word": "DD",
+            "meaning": "Le gusta cualquiera",
+            "explanation": "Abreviatura de 'Daredemo Daisuki'. Un fan un poco infiel.",
+            "example": "Kare wa DD dakara. (Él se enamora de cualquiera.)",
+            "imagePath": "assets/images/slang/level3/lv3_dd.png",
+            "romaji": "DD"
+        },
+        {
+            "word": "フラゲ",
+            "meaning": "Flying Get",
+            "explanation": "Conseguir un CD/juego un día antes del lanzamiento oficial.",
+            "example": "New album wo furage. (Conseguí el álbum antes.)",
+            "imagePath": "assets/images/slang/level3/lv3_furage.png",
+            "romaji": "Furage"
+        },
+        {
+            "word": "全通",
+            "meaning": "Asistencia total",
+            "explanation": "Ir a cada actuación de una gira.",
+            "example": "Tour zentsuu suru. (Ir a cada concierto.)",
+            "imagePath": "assets/images/slang/level3/lv3_zentsuu.png",
+            "romaji": "Zentsuu"
+        },
+        {
+            "word": "積む",
+            "meaning": "Acumular / Comprar en masa",
+            "explanation": "Comprar muchas copias de un CD para apoyar al artista.",
+            "example": "CD wo 50-mai tsunda. (Acumulé 50 copias del CD.)",
+            "imagePath": "assets/images/slang/level3/lv3_tsumu.png",
+            "romaji": "Tsumu"
+        },
+        {
+            "word": "神絵師",
+            "meaning": "Artista divino",
+            "explanation": "Artistas en redes que dibujan fan-art legendario.",
+            "example": "Kono kamieshi, maji yabai. (Este artista es un dios.)",
+            "imagePath": "assets/images/slang/level3/lv3_kamieshi.png",
+            "romaji": "Kamieshi"
+        },
+        {
+            "word": "現場",
+            "meaning": "El lugar / El evento",
+            "explanation": "El lugar real donde ocurre el evento.",
+            "example": "Kyou wa genba ni imasu. (Estoy en el evento hoy.)",
+            "imagePath": "assets/images/slang/level3/lv3_genba.png",
+            "romaji": "Genba"
+        },
+        {
+            "word": "遠征",
+            "meaning": "Expedición / Viaje",
+            "explanation": "Viajar a otra ciudad solo para un concierto.",
+            "example": "Osaka made ensei suru. (Expedición a Osaka para el show.)",
+            "imagePath": "assets/images/slang/level3/lv3_ensei.png",
+            "romaji": "Ensei"
+        },
+        {
+            "word": "待機",
+            "meaning": "En espera",
+            "explanation": "Esperando a que comience un stream o venta.",
+            "example": "21-ji kara taiki. (En espera desde las 9 PM.)",
+            "imagePath": "assets/images/slang/level3/lv3_taiki.png",
+            "romaji": "Taiki"
+        },
+        {
+            "word": "昇天",
+            "meaning": "Ascensión",
+            "explanation": "Cuando algo es tan bueno que sientes que mueres.",
+            "example": "Egao mite shouten. (Vi esa sonrisa y ascendí.)",
+            "imagePath": "assets/images/slang/level3/lv3_shouten.png",
+            "romaji": "Shouten"
+        }
+    ],
+    "level4_net_streaming_game": [
+        {
+            "word": "草",
+            "meaning": "LOL / Jajaja",
+            "explanation": "El moderno 'www'. Porque la 'w' se parece a la hierba (kusa).",
+            "example": "Kore wa kusa. (¡Qué risa!)",
+            "imagePath": "assets/images/slang/level4/lv4_kusa.png",
+            "romaji": "Kusa"
+        },
+        {
+            "word": "大草原",
+            "meaning": "LMAO / Gran pradera",
+            "explanation": "Más gracioso que 'Kusa'. Un campo de hierba.",
+            "example": "Daisougen fukahi. (No puedo evitar reírme.)",
+            "imagePath": "assets/images/slang/level4/lv4_daisougen.png",
+            "romaji": "Daisougen"
+        },
+        {
+            "word": "イキる",
+            "meaning": "Dérselas de guay",
+            "explanation": "Actuar como rudo o genial en línea.",
+            "example": "Net de ikiru. (Haciéndose el duro en internet.)",
+            "imagePath": "assets/images/slang/level4/lv4_ikiru.png",
+            "romaji": "Ikiru"
+        },
+        {
+            "word": "情弱",
+            "meaning": "Desinformado",
+            "explanation": "Insulto para quienes no saben hechos básicos de la red.",
+            "example": "Konna no mo shiranai no? Joujaku da na. (¿No sabes? Noob.)",
+            "imagePath": "assets/images/slang/level4/lv4_joujaku.png",
+            "romaji": "Joujaku"
+        },
+        {
+            "word": "初見殺し",
+            "meaning": "Mata-novatos",
+            "explanation": "Trampas imposibles que te matan la primera vez.",
+            "example": "Kono boss, shoken-goroshi da. (Este jefe es una trampa.)",
+            "imagePath": "assets/images/slang/level4/lv4_shokengoroshi.png",
+            "romaji": "Shokengoroshi"
+        },
+        {
+            "word": "特定班",
+            "meaning": "Los Identificadores",
+            "explanation": "Detectives de internet que encuentran ubicaciones/identidades.",
+            "example": "Tokutei-han hayai wa. (Los detectives son rápidos.)",
+            "imagePath": "assets/images/slang/level4/lv4_tokuteihan.png",
+            "romaji": "Tokuteihan"
+        },
+        {
+            "word": "晒し",
+            "meaning": "Exponer / Doxing",
+            "explanation": "Compartir info/ID de alguien para avergonzarlo.",
+            "example": "Sarashi-age. (Publicación de exposición.)",
+            "imagePath": "assets/images/slang/level4/lv4_sarashi.png",
+            "romaji": "Sarashi"
+        },
+        {
+            "word": "炎上",
+            "meaning": "Polémica / Linchamiento en redes",
+            "explanation": "Una reacción masiva negativa en línea; el tema “arde” en redes.",
+            "example": "SNS de enjou shiteru. (Está ardiendo en redes.)",
+            "imagePath": "assets/images/slang/level4/lv4_enjou.png",
+            "romaji": "Enjou"
+        },
+        {
+            "word": "中の人",
+            "meaning": "La persona detrás (de la cuenta)",
+            "explanation": "El actor de voz o la persona real que maneja una cuenta.",
+            "example": "Naka-no-hito nante inai yo. (No hay nadie detrás.)",
+            "imagePath": "assets/images/slang/level4/lv4_naka_no_hito.png",
+            "romaji": "Naka no Hito"
+        },
+        {
+            "word": "見る専",
+            "meaning": "Solo mirar",
+            "explanation": "Alguien que ve streams pero nunca comenta.",
+            "example": "Wai wa miru-sen desu. (Yo solo miro.)",
+            "imagePath": "assets/images/slang/level4/lv4_mirusen.png",
+            "romaji": "Mirusen"
+        },
+        {
+            "word": "凸る",
+            "meaning": "Invadir / Entrar",
+            "explanation": "Enviar mensajes directos o unirse al stream/directo de alguien (a veces sin avisar).",
+            "example": "Dentsu-totsu. (Me metí a la llamada sin avisar.)",
+            "imagePath": "assets/images/slang/level4/lv4_totsuru.png",
+            "romaji": "Totsuru"
+        },
+        {
+            "word": "野良",
+            "meaning": "Randoms / Desconocidos",
+            "explanation": "Jugar con gente aleatoria en línea, no amigos.",
+            "example": "Nora de rank-match. (Jugando ranked con randoms.)",
+            "imagePath": "assets/images/slang/level4/lv4_nora.png",
+            "romaji": "Nora"
+        },
+        {
+            "word": "キャリー",
+            "meaning": "Carrear",
+            "explanation": "Cuando un jugador fuerte lleva a un compañero débil.",
+            "example": "Master ni carry sareta. (Fui carreado por un Master.)",
+            "imagePath": "assets/images/slang/level4/lv4_carry.png",
+            "romaji": "Carry"
+        },
+        {
+            "word": "煽り",
+            "meaning": "Provocación / Troleo",
+            "explanation": "Acciones destinadas a irritar al oponente.",
+            "example": "Aori-play wa yamete. (Deja de provocar.)",
+            "imagePath": "assets/images/slang/level4/lv4_aori.png",
+            "romaji": "Aori"
+        },
+        {
+            "word": "地雷",
+            "meaning": "Mina terrestre / Problema",
+            "explanation": "Una persona o tema que causa problemas instantáneos.",
+            "example": "Aitsu maji de jirai da wa. (Ese tipo es una mina total.)",
+            "imagePath": "assets/images/slang/level4/lv4_jirai.png",
+            "romaji": "Jirai"
+        },
+        {
+            "word": "鍵垢",
+            "meaning": "Cuenta candado",
+            "explanation": "Una cuenta de SNS privada/bloqueada.",
+            "example": "Kagi-aka de tsubuyaku. (Tuitear en mi cuenta privada.)",
+            "imagePath": "assets/images/slang/level4/lv4_kagiaka.png",
+            "romaji": "Kagiaka"
+        },
+        {
+            "word": "垢BAN",
+            "meaning": "Ban de cuenta",
+            "explanation": "Tener tu cuenta baneada por la plataforma.",
+            "example": "Aka-ban sareta. (Me banearon.)",
+            "imagePath": "assets/images/slang/level4/lv4_akaban.png",
+            "romaji": "Akaban"
+        },
+        {
+            "word": "鯖落ち",
+            "meaning": "Caída del servidor",
+            "explanation": "Cuando el servidor del juego se cae.",
+            "example": "Saba-ochi shite keta. (Me echaron porque el servidor cayó.)",
+            "imagePath": "assets/images/slang/level4/lv4_sabaochi.png",
+            "romaji": "Sabaochi"
+        },
+        {
+            "word": "ガチ恋距離",
+            "meaning": "Distancia de amor serio",
+            "explanation": "Distancia de cámara tan cercana que sonroja a los fans.",
+            "example": "Kono angle wa gachikoi-kyori. (¡Esto es demasiado cerca!)",
+            "imagePath": "assets/images/slang/level4/lv4_gachikoikyori.png",
+            "romaji": "Gachikoi-kyori"
+        },
+        {
+            "word": "〇〇ニキ",
+            "meaning": "Hermano [Nombre]",
+            "explanation": "Sufijo respetuoso para personas confiables/notables.",
+            "example": "Kaisetsu-niki. (El hermano explicador.)",
+            "imagePath": "assets/images/slang/level4/lv4_niki.png",
+            "romaji": "Niki"
+        },
+        {
+            "word": "お気持ち表明",
+            "meaning": "Expresar sentimientos",
+            "explanation": "Término sarcástico para publicaciones largas de quejas.",
+            "example": "Okimochi-hyoumei kitar. (Llegó la queja larga.)",
+            "imagePath": "assets/images/slang/level4/lv4_okimochi.png",
+            "romaji": "Okimochi"
+        },
+        {
+            "word": "ニワカ",
+            "meaning": "Poser / Fan falso",
+            "explanation": "Alguien que finge ser un fan de hace tiempo.",
+            "example": "Niwaka wa damattore. (Posers, cállense.)",
+            "imagePath": "assets/images/slang/level4/lv4_niwaka.png",
+            "romaji": "Niwaka"
+        },
+        {
+            "word": "神ゲー",
+            "meaning": "Juego divino",
+            "explanation": "Un juego obra maestra.",
+            "example": "Maji de kamige! (¡Literalmente un juego de dioses!)",
+            "imagePath": "assets/images/slang/level4/lv4_kamige.png",
+            "romaji": "Kamige"
+        },
+        {
+            "word": "チーター",
+            "meaning": "Cheater / Tramposo",
+            "explanation": "Alguien usando herramientas ilegales en juegos.",
+            "example": "Cheater uzasugi. (Los tramposos son tan molestos.)",
+            "imagePath": "assets/images/slang/level4/lv4_cheater.png",
+            "romaji": "Cheater"
+        },
+        {
+            "word": "投げ銭",
+            "meaning": "Donar / Propinas",
+            "explanation": "Dar dinero a streamers (Super Chat).",
+            "example": "Nagesen de oshi wo sasaeru. (Apoyo a mi favorito con donaciones.)",
+            "imagePath": "assets/images/slang/level4/lv4_nagesen.png",
+            "romaji": "Nagesen"
+        },
+        {
+            "word": "切り抜き",
+            "meaning": "Clip / Recorte",
+            "explanation": "Extractos cortos de un stream largo.",
+            "example": "Kirinuki-douga de miru. (Lo vi en clips.)",
+            "imagePath": "assets/images/slang/level4/lv4_kirinuki.png",
+            "romaji": "Kirinuki"
+        },
+        {
+            "word": "リスナー",
+            "meaning": "Oyente / Espectador",
+            "explanation": "Como llaman los streamers a su audiencia.",
+            "example": "Listener no minna, ohayou. (Buenos días a todos mis oyentes.)",
+            "imagePath": "assets/images/slang/level4/lv4_listener.png",
+            "romaji": "Listener"
+        },
+        {
+            "word": "囲い",
+            "meaning": "Séquito / Simps",
+            "explanation": "Fans que protegen obsesivamente a un streamer.",
+            "example": "Aitsu no kakoi wa kowai. (Su séquito da miedo.)",
+            "imagePath": "assets/images/slang/level4/lv4_kakoi.png",
+            "romaji": "Kakoi"
+        },
+        {
+            "word": "アンチ",
+            "meaning": "Anti / Hater",
+            "explanation": "Alguien que odia/aca activamente a una persona.",
+            "example": "Anti-comment wa through. (Ignora los comentarios de haters.)",
+            "imagePath": "assets/images/slang/level4/lv4_anti.png",
+            "romaji": "Anti"
+        }
+    ],
+    "level5_persona_pronouns": [
+        {
+            "word": "俺 (Ore)",
+            "meaning": "Yo (Hombre / Casual)",
+            "explanation": "La forma más común y genial para hombres de referirse a sí mismos.",
+            "example": "Ore no ban da. (Es mi turno.)",
+            "imagePath": "assets/images/slang/level5/lv5_ore.png",
+            "romaji": "Ore"
+        },
+        {
+            "word": "僕 (Boku)",
+            "meaning": "Yo (Hombre / Suave)",
+            "explanation": "Usado por chicos u hombres que quieren sonar humildes o gentiles.",
+            "example": "Boku mo iku yo. (Yo también iré.)",
+            "imagePath": "assets/images/slang/level5/lv5_boku.png",
+            "romaji": "Boku"
+        },
+        {
+            "word": "私 (Watashi)",
+            "meaning": "Yo (Neutral / Formal)",
+            "explanation": "Estándar para mujeres. Para hombres, suena profesional/formal.",
+            "example": "Watashi ga yarimasu. (Yo lo haré.)",
+            "imagePath": "assets/images/slang/level5/lv5_watashi.png",
+            "romaji": "Watashi"
+        },
+        {
+            "word": "自分 (Jibun)",
+            "meaning": "Yo (Estoico / Atleta)",
+            "explanation": "Usado por atletas o tipos disciplinados. Suena un poco rígido pero genial.",
+            "example": "Jibun, bukyou desu kara. (Soy una persona torpe.)",
+            "imagePath": "assets/images/slang/level5/lv5_jibun.png",
+            "romaji": "Jibun"
+        },
+        {
+            "word": "あたし (Atashi)",
+            "meaning": "Yo (Mujer / Muy Casual)",
+            "explanation": "Una versión más suave y femenina de 'Watashi'.",
+            "example": "Atashi wa kocchi! (¡Yo quiero este!)",
+            "imagePath": "assets/images/slang/level5/lv5_atashi.png",
+            "romaji": "Atashi"
+        },
+        {
+            "word": "うち (Uchi)",
+            "meaning": "Yo (Mujer / Amigable)",
+            "explanation": "Común entre chicas jóvenes. Originalmente vibra de dialecto Kansai.",
+            "example": "Uchira saikou! (¡Somos las mejores!)",
+            "imagePath": "assets/images/slang/level5/lv5_uchi.png",
+            "romaji": "Uchi"
+        },
+        {
+            "word": "ワイ (Wai)",
+            "meaning": "Yo (Internet / Otaku)",
+            "explanation": "Estándar 'net-speak' para 'Mí'. Originalmente dialecto masculino de Kansai.",
+            "example": "Wai no kachi ya! (¡Es mi victoria!)",
+            "imagePath": "assets/images/slang/level5/lv5_wai.png",
+            "romaji": "Wai"
+        },
+        {
+            "word": "俺様 (Ore-sama)",
+            "meaning": "El Gran Yo (Arrogante)",
+            "explanation": "Extremadamente narcisista. Usado por villanos de anime o patanes confiados.",
+            "example": "Ore-sama no toori da! (¡Abran paso al Gran Yo!)",
+            "imagePath": "assets/images/slang/level5/lv5_ore_sama.png",
+            "romaji": "Ore-sama"
+        },
+        {
+            "word": "僕ちゃん (Boku-chan)",
+            "meaning": "Yo (Niño mimado)",
+            "explanation": "Usado por niños mimados o irónicamente por adultos actuando lindos.",
+            "example": "Boku-chan, nemui. (Tengo sueñito.)",
+            "imagePath": "assets/images/slang/level5/lv5_boku_chan.png",
+            "romaji": "Boku-chan"
+        },
+        {
+            "word": "ワシ (Washi)",
+            "meaning": "Yo (Viejo estilo)",
+            "explanation": "Usado por ancianos o maestros sabios en anime.",
+            "example": "Washi no deban ja. (Es mi turno de actuar.)",
+            "imagePath": "assets/images/slang/level5/lv5_washi.png",
+            "romaji": "Washi"
+        },
+        {
+            "word": "拙者 (Sessha)",
+            "meaning": "Yo (Samurái / Ninja)",
+            "explanation": "Arcaico. Usado por personajes que siguen el camino de la espada.",
+            "example": "Sessha wa samurai degozaru. (Soy un samurái.)",
+            "imagePath": "assets/images/slang/level5/lv5_sessha.png",
+            "romaji": "Sessha"
+        },
+        {
+            "word": "あたい (Atai)",
+            "meaning": "Yo (Chica ruda)",
+            "explanation": "Usado por rebeldes o tomboys en ficción.",
+            "example": "Atai ni makashina! (¡Déjamelo a mí!)",
+            "imagePath": "assets/images/slang/level5/lv5_atai.png",
+            "romaji": "Atai"
+        },
+        {
+            "word": "我輩 (Wagahai)",
+            "meaning": "Yo (Intelectual / Altivo)",
+            "explanation": "Suena pomposo y anticuado. Famoso por 'Soy un Gato'.",
+            "example": "Wagahai wa neko de aru. (Soy un gato.)",
+            "imagePath": "assets/images/slang/level5/lv5_wagahai.png",
+            "romaji": "Wagahai"
+        },
+        {
+            "word": "おいら (Oira)",
+            "meaning": "Yo (Chico de campo / Mascota)",
+            "explanation": "Suena rústico y energético. A menudo usado por mascotas animales.",
+            "example": "Oira mo asobu! (¡Yo también quiero jugar!)",
+            "imagePath": "assets/images/slang/level5/lv5_oira.png",
+            "romaji": "Oira"
+        },
+        {
+            "word": "オラ (Ora)",
+            "meaning": "Yo (Salvaje / Campo)",
+            "explanation": "Famoso por Goku. Suena crudo y poderoso.",
+            "example": "Ora wakuwaku suru zo! (¡Me estoy emocionando!)",
+            "imagePath": "assets/images/slang/level5/lv5_ora.png",
+            "romaji": "Ora"
+        },
+        {
+            "word": "某 (Soregashi)",
+            "meaning": "Yo (Samurái rígido)",
+            "explanation": "Muy arcaico. Usado por samuráis humildes pero serios.",
+            "example": "Soregashi no misu degozaru. (Fue mi error.)",
+            "imagePath": "assets/images/slang/level5/lv5_soregashi.png",
+            "romaji": "Soregashi"
+        },
+        {
+            "word": "妾 (Warawa)",
+            "meaning": "Yo (Princesa / Noble)",
+            "explanation": "Usado por personajes femeninos arcaicos de clase alta o emperatrices.",
+            "example": "Warawa wa manzoku ja. (Estoy satisfecha.)",
+            "imagePath": "assets/images/slang/level5/lv5_warawa.png",
+            "romaji": "Warawa"
+        },
+        {
+            "word": "余 (Yo)",
+            "meaning": "Yo (El Gobernante / Emperador)",
+            "explanation": "El 'Nosotros Real'. Usado por Reyes Demonio o emperadores antiguos.",
+            "example": "Yo wa ningen ga suki da. (Me gustan los humanos.)",
+            "imagePath": "assets/images/slang/level5/lv5_yo.png",
+            "romaji": "Yo"
+        },
+        {
+            "word": "我 (Ware)",
+            "meaning": "Yo (El Ego / Épico)",
+            "explanation": "Muy literario. Usado por personajes con complejo de 'Dios'.",
+            "example": "Ware koso ga kamii da. (Yo soy el dios.)",
+            "imagePath": "assets/images/slang/level5/lv5_ware.png",
+            "romaji": "Ware"
+        },
+        {
+            "word": "ワイ氏 (Wai-shi)",
+            "meaning": "Mr. Me (Internet Humor)",
+            "explanation": "Usado en X/Twitter para hablar de uno mismo objetiva o graciosamente.",
+            "example": "Wai-shi, kyou mo zangyou. (Mr. Me trabajando tarde de nuevo.)",
+            "imagePath": "assets/images/slang/level5/lv5_wai_shi.png",
+            "romaji": "Wai-shi"
+        },
+        {
+            "word": "あーし (A-shi)",
+            "meaning": "Yo (Gyaru / Gal)",
+            "explanation": "Versión muy arrastrada de 'Atashi'. Vibra total de chica de Tokio.",
+            "example": "A-shi, maji de kireta. (Estaba súper enojada.)",
+            "imagePath": "assets/images/slang/level5/lv5_a_shi.png",
+            "romaji": "A-shi"
+        },
+        {
+            "word": "本官 (Honkan)",
+            "meaning": "Yo (Oficial de policía)",
+            "explanation": "Usado por personajes policías en anime/manga.",
+            "example": "Honkan ga taiho suru! (¡Yo te arrestaré!)",
+            "imagePath": "assets/images/slang/level5/lv5_honkan.png",
+            "romaji": "Honkan"
+        },
+        {
+            "word": "小生 (Shousei)",
+            "meaning": "Yo (Erudito humilde)",
+            "explanation": "Usado en cartas formales o por hombres intelectuales/rígidos.",
+            "example": "Shousei no kenkai desu. (Es mi humilde opinión.)",
+            "imagePath": "assets/images/slang/level5/lv5_shousei.png",
+            "romaji": "Shousei"
+        },
+        {
+            "word": "朕 (Chin)",
+            "meaning": "Yo (Emperador)",
+            "explanation": "Históricamente solo usado por el Emperador japonés. Máxima autoridad.",
+            "example": "Chin wa yurusan. (No perdonaré esto.)",
+            "imagePath": "assets/images/slang/level5/lv5_chin.png",
+            "romaji": "Chin"
+        },
+        {
+            "word": "あっし (Asshi)",
+            "meaning": "Yo (Plebeyo de Edo)",
+            "explanation": "Forma humilde para plebeyos de hablar en el antiguo Tokio.",
+            "example": "Asshi ni wa muri desu. (Es imposible para mí.)",
+            "imagePath": "assets/images/slang/level5/lv5_asshi.png",
+            "romaji": "Asshi"
+        },
+        {
+            "word": "わたくし (Watakushi)",
+            "meaning": "Yo (Muy formal / Dama)",
+            "explanation": "Ultra cortés. Usado por damas de clase alta o en ámbitos corporativos muy formales.",
+            "example": "Watakushi ga go-annai shimasu. (Yo le guiaré.)",
+            "imagePath": "assets/images/slang/level5/lv5_watakushi.png",
+            "romaji": "Watakushi"
+        },
+        {
+            "word": "ミー (Me)",
+            "meaning": "Yo (Llamativo / Retornado)",
+            "explanation": "Usado por personajes que fingen ser de Occidente.",
+            "example": "Me no idea wa perfect ne! (¡Mi idea es perfecta!)",
+            "imagePath": "assets/images/slang/level5/lv5_me.png",
+            "romaji": "Me"
+        },
+        {
+            "word": "自分氏 (Jibun-shi)",
+            "meaning": "Yo (humilde en internet)",
+            "explanation": "Forma nerd de referirse a uno mismo en foros en línea.",
+            "example": "Jibun-shi, kore suki. (Me gusta esto.)",
+            "imagePath": "assets/images/slang/level5/lv5_jibun_shi.png",
+            "romaji": "Jibun-shi"
+        },
+        {
+            "word": "あちき (Achiki)",
+            "meaning": "Yo (Estilo cortesana)",
+            "explanation": "Usado por personajes 'Oiran' en dramas históricos.",
+            "example": "Achiki wa shiranai nushi. (No sabría decirle.)",
+            "imagePath": "assets/images/slang/level5/lv5_achiki.png",
+            "romaji": "Achiki"
+        },
+        {
+            "word": "愚生 (Gusei)",
+            "meaning": "Yo (Hombre autodespreciativo)",
+            "explanation": "Literalmente 'yo estúpido'. Usado por hombres humildes a la antigua.",
+            "example": "Gusei no itaru tokoro. (Se debe a mi falta de sabiduría.)",
+            "imagePath": "assets/images/slang/level5/lv5_gusei.png",
+            "romaji": "Gusei"
+        }
+    ],
+    "level6_yakuza": [
+        {
+            "word": "コラ！ (Kora!)",
+            "meaning": "¡Oye! (Grito)",
+            "explanation": "Un grito fuerte y agresivo para detener o regañar a alguien. Intimidante.",
+            "example": "Kora! Nani shiten da! (¡Oye! ¿Qué crees que haces?)",
+            "style": "劇画・迫力顔芸風",
+            "prompt": "Gekiga style. Extreme close-up of a terrifying yakuza man shouting aggressively. Spit flying, veins popping on forehead, intense angry eyes. High contrast shadows, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_kora.png",
+            "romaji": "Kora!"
+        },
+        {
+            "word": "ナメる (Nameru)",
+            "meaning": "Subestimar / Faltar al respeto",
+            "explanation": "En jerga de tipos duros: 'No me tomes a la ligera'.",
+            "example": "Ore o nameteru no ka? (¿Me estás subestimando?)",
+            "style": "ローアングル・威圧風",
+            "prompt": "Yakuza movie anime style. Low angle shot looking up at a thug in a suit who is looking down at the camera with a disdainful, threatening sneer. Cigarette smoke, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_nameru.png",
+            "romaji": "Nameru"
+        },
+        {
+            "word": "ケジメ (Kejime)",
+            "meaning": "Ajustar cuentas / Responsabilidad",
+            "explanation": "Asumir la responsabilidad correctamente, a menudo con un tono pesado.",
+            "example": "Kejime tsukeyou ka. (Vamos a ajustar cuentas.)",
+            "style": "シリアス・静寂風",
+            "prompt": "Serious drama anime style. A solemn atmosphere in a tatami room. A man in a white kimono sitting formally on his heels (seiza), staring at a short sword wrapped in white cloth on the floor. Tension, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_kejime.png",
+            "romaji": "Kejime"
+        },
+        {
+            "word": "シャバ (Shaba)",
+            "meaning": "El mundo exterior",
+            "explanation": "Jerga para la sociedad normal, dicho desde prisión.",
+            "example": "Shaba no kuuuki wa umai na. (El aire del mundo exterior es bueno.)",
+            "style": "映画的・逆光風",
+            "prompt": "Cinematic anime style. A silhouette of a man stepping out of a heavy prison gate into blinding bright sunlight. Freedom atmosphere, dust particles in the air, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_shaba.png",
+            "romaji": "Shaba"
+        },
+        {
+            "word": "カチコミ (Kachikomi)",
+            "meaning": "Redada / Asalto",
+            "explanation": "Un asalto grupal repentino a un lugar rival.",
+            "example": "Kachikomi ikuzo! (¡Vamos a asaltarlos!)",
+            "style": "アクション・疾走感風",
+            "prompt": "Dynamic action anime style. A group of men in black suits sprinting down a hallway, kicking a door open. Debris flying, motion blur, intense rage, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_kachikomi.png",
+            "romaji": "Kachikomi"
+        },
+        {
+            "word": "ハジく (Hajiku)",
+            "meaning": "Disparar / Liquidar",
+            "explanation": "Jerga 'Hard-boiled' para disparar un arma.",
+            "example": "Yattara, hajiku zo. (Si lo haces, disparo.)",
+            "style": "ハードボイルド・ノワール風",
+            "prompt": "Film noir anime style. A man in a fedora hat holding a handgun with smoke rising from the barrel. His face is hidden in shadow. Rainy city background at night, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_hajiku.png",
+            "romaji": "Hajiku"
+        },
+        {
+            "word": "メンツ (Mentsu)",
+            "meaning": "Honor / Reputación",
+            "explanation": "Tu dignidad pública y orgullo.",
+            "example": "Mentsu tsubusuna. (No arruines mi reputación.)",
+            "style": "ダンディズム・肖像画風",
+            "prompt": "Seinen manga style. A dignified boss adjusting his necktie in front of a mirror. Sharp suit, stoic expression, aura of pride and honor, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_mentsu.png",
+            "romaji": "Mentsu"
+        },
+        {
+            "word": "サツ (Satsu)",
+            "meaning": "La Policía (Satsu)",
+            "explanation": "Jerga corta y brusca para la policía.",
+            "example": "Satsu ga kiteiru. (Viene la poli.)",
+            "style": "サイバーパンク・雨夜風",
+            "prompt": "Dark urban anime style. Red and blue police siren lights reflecting on wet pavement at night in the rain. A blurry figure running away in the distance, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_satsu.png",
+            "romaji": "Satsu"
+        },
+        {
+            "word": "ガサ入れ (Gasa-ire)",
+            "meaning": "Redada policial",
+            "explanation": "Una búsqueda/redada repentina de la policía.",
+            "example": "Gasa-ire ga haitta. (Hubo una redada.)",
+            "style": "サスペンス・混乱風",
+            "prompt": "Suspense anime style. An office room turned upside down. Papers flying everywhere, drawers pulled out. A chaotic aftermath of a police search, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_gasa_ire.png",
+            "romaji": "Gasa-ire"
+        },
+        {
+            "word": "シマ (Shima)",
+            "meaning": "Territorio",
+            "explanation": "El área controlada por una banda.",
+            "example": "Koko wa ore no shima da. (Este es mi territorio.)",
+            "style": "90年代OVA・夜景風",
+            "prompt": "90s OVA style. Back view of a boss in a coat standing on a rooftop, overlooking a sprawling city at night with neon lights. \"This is my city\" vibe, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_shima.png",
+            "romaji": "Shima"
+        },
+        {
+            "word": "舎弟 (Shatei)",
+            "meaning": "Subordinado / Hermano menor",
+            "explanation": "Un miembro de rango inferior que sirve a los mayores.",
+            "example": "Shatei ni yari-naoshisaseta. (Hice que mi subordinado lo rehiciera.)",
+            "style": "任侠・師弟関係風",
+            "prompt": "Traditional Yakuza anime style. A younger member in a track suit bowing exactly 90 degrees to an older member in a suit. Respect and hierarchy, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_shatei.png",
+            "romaji": "Shatei"
+        },
+        {
+            "word": "オジキ (Ojiki)",
+            "meaning": "Tío (Jefe)",
+            "explanation": "En yakuza, un superior respetado (no tu tío real).",
+            "example": "Ojiki, otsukaresama desu. (Jefe, gracias por su trabajo.)",
+            "style": "渋い老人キャラ風",
+            "prompt": "Character portrait style. An elderly man with gray hair and sunglasses, wearing a casual kimono, sipping tea calmly. An aura of dangerous wisdom, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_ojiki.png",
+            "romaji": "Ojiki"
+        },
+        {
+            "word": "親分 (Oyabun)",
+            "meaning": "El Jefe / Padrino",
+            "explanation": "El líder supremo al que juras lealtad.",
+            "example": "Oyabun no meirei da. (Es una orden del jefe.)",
+            "style": "重厚な油絵風アニメ",
+            "prompt": "Heavy atmospheric anime style. A powerful man sitting on a fancy leather chair in a dimly lit room. Cigar smoke, gold jewelry, imposing presence, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_oyabun.png",
+            "romaji": "Oyabun"
+        },
+        {
+            "word": "盃 (Sakazuki)",
+            "meaning": "Juramento de copas",
+            "explanation": "Intercambio ceremonial de copas de sake para formar un vínculo.",
+            "example": "Sakazuki wo kawashita. (Intercambiamos las copas del juramento.)",
+            "style": "儀式・和風美学",
+            "prompt": "Aesthetic traditional style. Close-up of two red lacquer sake cups being exchanged. Background shows a golden folding screen. Ritual atmosphere, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_sakazuki.png",
+            "romaji": "Sakazuki"
+        },
+        {
+            "word": "代紋 (Daimon)",
+            "meaning": "Emblema del clan",
+            "explanation": "Una insignia simbólica que muestra a qué 'familia' perteneces.",
+            "example": "Daimon ni kizutsuke ru na. (No deshonres nuestro emblema.)",
+            "style": "クローズアップ・シンボル風",
+            "prompt": "Detailed close-up style. A gold lapel pin (badge) with a fierce clan crest attached to a black suit collar. Symbol of authority, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_daimon.png",
+            "romaji": "Daimon"
+        },
+        {
+            "word": "ムショ (Musho)",
+            "meaning": "Prisión / La cárcel",
+            "explanation": "Jerga ruda para prisión.",
+            "example": "Musho iri shita koto ga aru. (He estado en la cárcel antes.)",
+            "style": "冷たいコンクリート風",
+            "prompt": "Gritty realism anime style. A high gray concrete wall with barbed wire on top against a cloudy gray sky. Cold, isolating atmosphere, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_musho.png",
+            "romaji": "Musho"
+        },
+        {
+            "word": "ヤサ (Yasa)",
+            "meaning": "Escondite",
+            "explanation": "Jerga del bajo mundo para una casa segura o escondite.",
+            "example": "Yasa ni modoru zo. (Volvamos al escondite.)",
+            "style": "路地裏・アンダーグラウンド風",
+            "prompt": "Underground anime style. A dirty metal door in a dimly lit, narrow alleyway with graffiti. A single lightbulb flickering above. Secret hideout vibe, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_yasa.png",
+            "romaji": "Yasa"
+        },
+        {
+            "word": "ガセ (Gase)",
+            "meaning": "Info falsa / Mentira",
+            "explanation": "Abreviatura de 'gase-neta'. Info falsa.",
+            "example": "Sore, gase da. (Eso es mentira.)",
+            "style": "怒り・破壊風",
+            "prompt": "Intense action style. A hand crushing a smartphone or piece of paper in anger. Veins popping on the hand. Realizing the info was fake, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_gase.png",
+            "romaji": "Gase"
+        },
+        {
+            "word": "パクられる (Pakurareru)",
+            "meaning": "Ser arrestado",
+            "explanation": "Jerga criminal casual para ser atrapado por la policía.",
+            "example": "Yabai, pakurareru! (¡Mierda, me van a arrestar!)",
+            "style": "ポリスドラマ風",
+            "prompt": "Police drama anime style. A first-person view of being pushed into the back seat of a police car. Rain on the window, view of handcuffs, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_pakurareru.png",
+            "romaji": "Pakurareru"
+        },
+        {
+            "word": "チンコロ (Chinkoro)",
+            "meaning": "Soplón / Rata",
+            "explanation": "Insulto duro para alguien que filtra información a la policía.",
+            "example": "Aitsu wa chinkoro da. (Ese tipo es un soplón.)",
+            "style": "スパイ・影絵風",
+            "prompt": "Mystery thriller style. A silhouette of a man in a phone booth at night, whispering. Shadowy, treacherous atmosphere. Snitching, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_chinkoro.png",
+            "romaji": "Chinkoro"
+        },
+        {
+            "word": "スジ (Suji)",
+            "meaning": "El código / Principios",
+            "explanation": "Hacer las cosas 'correctamente' según un código estricto.",
+            "example": "Suji touse. (Sigue el código apropiado.)",
+            "style": "硬派・説教風",
+            "prompt": "Hard-boiled style. A man pointing a finger sternly at another man's chest. Lecturing about the code of honor. Serious facial expression, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_suji.png",
+            "romaji": "Suji"
+        },
+        {
+            "word": "カタギ (Katagi)",
+            "meaning": "Civil / Gente normal",
+            "explanation": "Gente no involucrada en el crimen.",
+            "example": "Katagi ni meiwaku kakeru na. (No molestes a los civiles.)",
+            "style": "対比・群衆風",
+            "prompt": "Cinematic contrast style. A scary-looking man in a suit walking through a crowd of normal, colorful civilians who are parting ways to avoid him. Isolation, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_katagi.png",
+            "romaji": "Katagi"
+        },
+        {
+            "word": "タマ (Tama)",
+            "meaning": "Bala",
+            "explanation": "Jerga callejera para balas.",
+            "example": "Tama ga tarinai. (Nos faltan balas.)",
+            "style": "スナイパー・視点風",
+            "prompt": "Action movie style. A view through a telescopic sight or crosshair focusing on a silhouette in a window. Tension of assassination, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_tama.png",
+            "romaji": "Tama"
+        },
+        {
+            "word": "ドス (Dosu)",
+            "meaning": "Cuchillo / Daga",
+            "explanation": "Jerga del bajo mundo para un cuchillo.",
+            "example": "Dosu motte koi. (Trae la daga.)",
+            "style": "日本刀・冷徹風",
+            "prompt": "Traditional Japanese noir style. A short sword (tanto) being slightly unsheathed, revealing the gleaming sharp blade in the dark. Dangerous glint, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_dosu.png",
+            "romaji": "Dosu"
+        },
+        {
+            "word": "カネ (Kane)",
+            "meaning": "Dinero / Pasta",
+            "explanation": "Forma brusca de decir dinero.",
+            "example": "Kane ga ugokya, subete ugoku. (Si el dinero se mueve, todo se mueve.)",
+            "style": "強欲・クライム風",
+            "prompt": "Crime anime style. An open black leather bag filled with stacks of used bills. Dim lighting, greed atmosphere, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_kane.png",
+            "romaji": "Kane"
+        },
+        {
+            "word": "エンコ (Enko)",
+            "meaning": "Dedo cortado",
+            "explanation": "Castigo de cortar el dedo para expiar una falta.",
+            "example": "Enko tsumeru koto ni natta. (Tuvo que cortarse el dedo.)",
+            "style": "暗示的・ノワール風",
+            "prompt": "Suggestive noir style. A hand holding a sake cup, but the pinky finger is heavily bandaged. Subtle storytelling of past mistakes, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_enko.png",
+            "romaji": "Enko"
+        },
+        {
+            "word": "ヤクザ (Yakuza)",
+            "meaning": "Yakuza / Gángster",
+            "explanation": "Estereotipo del crimen organizado en Japón.",
+            "example": "Aitsu, yakuza rashii. (Parece que es yakuza.)",
+            "style": "集合写真・威圧風",
+            "prompt": "Group portrait style. Five men in flashy suits standing in a V-formation. Sunglasses, punch perms, confident stances. Typical gang vibe, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_yakuza.png",
+            "romaji": "Yakuza"
+        },
+        {
+            "word": "極道 (Gokudou)",
+            "meaning": "Gokudou / Outlaw",
+            "explanation": "Más 'camino del proscrito' que solo yakuza. Suena intenso.",
+            "example": "Gokudou ni wa gokudou no michi ga aru. (Los outlaws tienen su propio código.)",
+            "style": "背中・刺青風",
+            "prompt": "Artistic tattoo style. Back view of a man removing one shoulder of his kimono to reveal a vibrant dragon tattoo. Traditional Japanese aesthetic, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_gokudou.png",
+            "romaji": "Gokudou"
+        },
+        {
+            "word": "凄む (Sugomu)",
+            "meaning": "Intimidar",
+            "explanation": "Presionar a alguien con una presencia aterradora.",
+            "example": "Sore ijou, sugumanaide kure. (No me intimides más.)",
+            "style": "ホラー・プレッシャー風",
+            "prompt": "Psychological horror anime style. Extreme close-up of an eye staring intensely. Dark aura surrounding the face. Intimidation pressure, no text, no speech bubbles, no letters, no watermark, aspect ratio 16:9",
+            "imagePath": "assets/images/slang/level6/lv6_sugomu.png",
+            "romaji": "Sugomu"
+        }
+    ]
+}

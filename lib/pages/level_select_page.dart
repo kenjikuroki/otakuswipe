@@ -2,14 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart'; // 追加
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../providers/quiz_provider.dart';
-import '../ad_helper.dart'; // 追加
-import '../widgets/ad_placeholder.dart'; // 追加
+import '../ad_helper.dart';
+import '../widgets/ad_placeholder.dart';
 import 'quiz_page.dart';
-import '../services/purchase_service.dart'; // 追加
+import '../services/purchase_service.dart';
 import '../utils/ad_manager.dart';
 import 'settings_page.dart';
+import '../i18n/strings.g.dart'; // 追加
 
 class LevelSelectPage extends StatefulWidget {
   const LevelSelectPage({super.key});
@@ -99,9 +100,9 @@ class _LevelSelectPageState extends State<LevelSelectPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              "Select Level",
-                              style: TextStyle(fontSize: 32, fontWeight: FontWeight.w900, color: Colors.brown),
+                             Text(
+                              t.levelSelect.title, // "Select Level"
+                              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w900, color: Colors.brown),
                             ),
                             IconButton(
                               icon: const Icon(Icons.settings, color: Colors.brown, size: 30),
@@ -114,9 +115,9 @@ class _LevelSelectPageState extends State<LevelSelectPage> {
                             ),
                           ],
                         ),
-                        const Text(
-                          "Choose your slang journey!",
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                         Text(
+                          t.levelSelect.subtitle, // "Choose your slang journey!"
+                          style: const TextStyle(fontSize: 16, color: Colors.grey),
                         ),
                         const SizedBox(height: 30),
                         
@@ -126,52 +127,48 @@ class _LevelSelectPageState extends State<LevelSelectPage> {
                             children: [
                               _levelCard(
                                 id: 'lv1',
-                                title: "Level 1: Survival",
-                                desc: "Essential words you must know.",
+                                title: t.levelSelect.levels.level1.title,
+                                desc: t.levelSelect.levels.level1.desc,
                                 color: Colors.orange,
                                 icon: Icons.local_fire_department,
                               ),
                               _levelCard(
                                 id: 'lv2',
-                                title: "Level 2: Youth",
-                                desc: "Trending words among Gen Z.",
+                                title: t.levelSelect.levels.level2.title,
+                                desc: t.levelSelect.levels.level2.desc,
                                 color: Colors.pink,
                                 icon: Icons.favorite,
                               ),
                               _levelCard(
                                 id: 'lv3',
-                                title: "Level 3: Otaku",
-                                desc: "Anime & Manga culture terms.",
+                                title: t.levelSelect.levels.level3.title,
+                                desc: t.levelSelect.levels.level3.desc,
                                 color: Colors.purple,
                                 icon: Icons.auto_stories,
                               ),
                               _levelCard(
                                 id: 'lv4',
-                                title: "Level 4: Internet",
-                                desc: "Net slang & Gaming chat.",
+                                title: t.levelSelect.levels.level4.title,
+                                desc: t.levelSelect.levels.level4.desc,
                                 color: Colors.blue,
                                 icon: Icons.wifi,
                               ),
                               _levelCard(
                                 id: 'lv5',
-                                title: "Level 5: Persona",
-                                desc: "Ore, Boku, Watashi... Pronouns.",
+                                title: t.levelSelect.levels.level5.title,
+                                desc: t.levelSelect.levels.level5.desc,
                                 color: Colors.teal,
                                 icon: Icons.face,
                               ),
                               // Level 6: Yakuza (課金ロック付き)
                               Consumer<PurchaseService>(
                                 builder: (context, purchaseService, child) {
-                                  // isUnlocked チェックは不要になったので削除
-                                  
                                   return _levelCard(
                                     id: 'lv6', // IDはダミーでもOKだが一応設定
-                                    title: "Level 6: Yakuza / Underworld",
-                                    desc: "Dangerous underworld slang.",
+                                    title: t.levelSelect.levels.level6.title,
+                                    desc: t.levelSelect.levels.level6.desc,
                                     color: Colors.black, // ヤクザをイメージした黒
-                                    // 常時アイコンを表示（鍵マークにはしない）
                                     icon: Icons.sports_martial_arts, 
-                                    // ロック中はボタンの見た目を少し暗くするなどの処理（お好みで）
                                     onTap: () {
                                       // 未解放でもクイズ画面へ遷移（中で3問目まで無料）
                                       // ※JSONデータのキーは "level6_yakuza" としてください

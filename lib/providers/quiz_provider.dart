@@ -4,7 +4,8 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import '../models/slang_item.dart';
-import '../services/purchase_service.dart'; // インポート追加
+import '../services/purchase_service.dart';
+import '../i18n/strings.g.dart';
 
 class QuizProvider with ChangeNotifier {
   // 全データ保持用
@@ -54,14 +55,29 @@ class QuizProvider with ChangeNotifier {
   }
   // ▲▲▲ 追加ここまで ▲▲▲
 
-  // 最初にアプリ起動時に一度だけ呼ぶ
+  // Loaded locale to check for changes
+  AppLocale? _loadedLocale;
+
+  // 最初にアプリ起動時に一度だけ呼ぶ、または言語変更時に呼ぶ
   Future<void> loadMasterData() async {
-    if (_masterData != null) return; // 既に読み込み済みなら何もしない
+    final currentLocale = LocaleSettings.currentLocale;
+    // 既にデータがあり、かつ言語が変わっていなければ何もしない
+    if (_masterData != null && _loadedLocale == currentLocale) return;
 
     try {
-      final String response = await rootBundle.loadString('assets/json/slang_data.json');
+      String fileName = 'slang_data.json';
+      if (currentLocale == AppLocale.es) {
+        fileName = 'slang_data_es.json';
+      } else if (currentLocale == AppLocale.fr) {
+        fileName = 'slang_data_fr.json';
+      } else if (currentLocale == AppLocale.pt) {
+        fileName = 'slang_data_pt.json';
+      }
+      
+      final String response = await rootBundle.loadString('assets/json/$fileName');
       final data = json.decode(response);
       _masterData = SlangData.fromJson(data);
+      _loadedLocale = currentLocale;
     } catch (e) {
       debugPrint("Error loading JSON: $e");
     }
@@ -69,10 +85,9 @@ class QuizProvider with ChangeNotifier {
 
   // レベルを選んでセットする関数
   Future<void> selectLevel(String levelId) async {
-    // データがまだなければロードを待つ
-    if (_masterData == null) {
-      await loadMasterData();
-    }
+    // データをロード（言語変更に対応するため毎回呼び出す。内部でキャッシュチェックあり）
+    await loadMasterData();
+    
     if (_masterData == null) return; // それでもロード失敗したら終了
     
     _currentLevelId = levelId; // IDを保存
@@ -82,27 +97,27 @@ class QuizProvider with ChangeNotifier {
     switch (levelId) {
       case 'lv1':
         _currentList = _masterData!.level1;
-        _currentLevelTitle = "Level 1: Survival";
+        _currentLevelTitle = t.levelSelect.levels.level1.title;
         break;
       case 'lv2':
         _currentList = _masterData!.level2;
-        _currentLevelTitle = "Level 2: Youth";
+        _currentLevelTitle = t.levelSelect.levels.level2.title;
         break;
       case 'lv3':
         _currentList = _masterData!.level3;
-        _currentLevelTitle = "Level 3: Otaku";
+        _currentLevelTitle = t.levelSelect.levels.level3.title;
         break;
       case 'lv4':
         _currentList = _masterData!.level4;
-        _currentLevelTitle = "Level 4: Internet";
+        _currentLevelTitle = t.levelSelect.levels.level4.title;
         break;
       case 'lv5':
         _currentList = _masterData!.level5;
-        _currentLevelTitle = "Level 5: Persona";
+        _currentLevelTitle = t.levelSelect.levels.level5.title;
         break;
       case 'level6_yakuza':
         _currentList = _masterData!.level6;
-        _currentLevelTitle = "Level 6: Yakuza";
+        _currentLevelTitle = t.levelSelect.levels.level6.title;
         
         // データがない場合のフォールバック（テスト用：Level 1のデータを使う）
         if (_currentList.isEmpty) {
@@ -146,7 +161,7 @@ class QuizProvider with ChangeNotifier {
     // 渡された復習用リストをコピーして現在のリストに設定
     _currentList = List.from(reviewList);
     // タイトルを「復習モード」に変更
-    _currentLevelTitle = "Review Mode";
+    _currentLevelTitle = t.quiz.reviewMode;
     // 画面を更新
     notifyListeners();
   }
