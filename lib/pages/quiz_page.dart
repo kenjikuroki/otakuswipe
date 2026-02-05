@@ -24,10 +24,11 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   // スワイプ操作をボタンから操るためのコントローラー
-  final CardSwiperController _swiperController = CardSwiperController();
   
   int _currentIndex = 0;
-  bool _isFlipped = false; // 今のカードが裏返っているか
+  bool _showFeedback = false; // クイズのフィードバック（解説）を表示しているか
+  List<String> _currentChoices = []; // 現在の選択肢
+  int? _selectedChoiceIndex; // ユーザーが選択したインデックス
   int _replayCount = 0; // リプレイ時にCardSwiperを再構築するためのキー用
 
   // 広告用の変数を追加
@@ -59,8 +60,37 @@ class _QuizPageState extends State<QuizPage> {
       setState(() {
         // 初期値はすべて false (未回答/知らない) で埋める
         _quizResults = List.filled(provider.slangList.length, false);
+        _generateChoicesForCurrentIndex();
       });
     });
+  }
+
+  // 現在の問題に対する選択肢を生成する
+  void _generateChoicesForCurrentIndex() {
+    final provider = Provider.of<QuizProvider>(context, listen: false);
+    if (_currentIndex >= provider.slangList.length) return;
+
+    final correctItem = provider.slangList[_currentIndex];
+    final allItems = provider.slangList;
+
+    List<String> choices = [correctItem.meaning];
+    
+    // 他の単語から選択肢を3つ選ぶ
+    List<SlangItem> others = allItems.where((item) => item.word != correctItem.word).toList();
+    others.shuffle();
+    
+    // 他の単語の意味を追加（重複しないように、かつ足りない場合は適当な文字を入れるなどの考慮が必要だが、基本4つ以上ある前提）
+    choices.addAll(others.take(3).map((e) => e.meaning));
+    
+    // 4つに満たない場合のフォールバック（あまりないが）
+    while (choices.length < 4) {
+      choices.add("---");
+    }
+
+    choices.shuffle();
+    _currentChoices = choices;
+    _selectedChoiceIndex = null;
+    _showFeedback = false;
   }
 
   void _loadBannerAd() {
@@ -88,7 +118,6 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   void dispose() {
-    _swiperController.dispose();
     _bannerAd?.dispose(); // 広告破棄
     super.dispose();
   }
@@ -160,7 +189,7 @@ class _QuizPageState extends State<QuizPage> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: LinearProgressIndicator(
-                            value: _currentIndex / slangList.length, // 0からスタートし、最後は90%になるように変更
+                            value: slangList.isEmpty ? 0 : (_currentIndex + (_showFeedback ? 1 : 0)) / slangList.length,
                             minHeight: 8,
                             backgroundColor: Colors.grey[300],
                             valueColor: const AlwaysStoppedAnimation<Color>(Colors.amber),
@@ -170,39 +199,11 @@ class _QuizPageState extends State<QuizPage> {
                     ),
                   ),
 
-                  // 2. メインエリア (カード + ボタン)
-                  // 画面が小さい場合はボタンを重ねて表示(Stack)、十分にある場合は分けて表示(Column)
                   Expanded(
-                    child: isSmallScreen
-                        ? Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              // カード (少し下のスペースを空けてボタンと被りすぎないように調整しつつ、最大限広げる)
-                              // ボタンが被ってもOKとのことなので、paddingは最小限または0に
-                              Container(
-                                margin: const EdgeInsets.only(bottom: 60), // ボタンの高さ分くらい少し空けるが、被らせるなら0でも良い
-                                child: _buildCardSwiper(slangList, provider),
-                              ),
-                              // ボタン (下に配置)
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 10), // 少し浮かす
-                                  child: _buildControlButtons(),
-                                ),
-                              ),
-                            ],
-                          )
-                        : Column(
-                            children: [
-                              Expanded(child: _buildCardSwiper(slangList, provider)),
-                              const SizedBox(height: 10),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 20, left: 40, right: 40),
-                                child: _buildControlButtons(),
-                              ),
-                            ],
-                          ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                      child: _buildQuizContent(slangList, provider),
+                    ),
                   ),
 
                   // 3. 広告エリア (Yakuzaレベル以外の場合のみ表示)
@@ -228,227 +229,254 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 
-  // カードスワイパー部分のビルド
-  Widget _buildCardSwiper(List<SlangItem> slangList, QuizProvider provider) {
-    return CardSwiper(
-      isLoop: false, // ループを無効化
-      key: ValueKey("${slangList.hashCode}_$_replayCount"), // リスト変更 or リプレイで再構築
-      controller: _swiperController,
-      cardsCount: slangList.length,
-      numberOfCardsDisplayed: slangList.length < 3 ? slangList.length : 3, // 後ろに重なって見える枚数
-      backCardOffset: const Offset(0, 40), // 重なりのズレ幅
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10), // パディングを少し調整
-      
-      // スワイプした時の処理
-      onSwipe: (previousIndex, currentIndex, direction) {
-        // ▼▼ ロックされているカードはスワイプ禁止（念のため） ▼▼
-        final currentLevelId = provider.currentLevelId;
-        final isYakuzaUnlocked = provider.isYakuzaUnlocked;
-        // currentIndex は「次に表示されるカード」のインデックス
-        // previousIndex は「今スワイプしてるカード」のインデックス
-        // つまり、今スワイプしようとしているカードが「有料エリア(3問目以降=index 3以降)」なら禁止？
-        // 要件：4問目(index 3)から見えない。
-        // つまり index 3 のカードはスワイプできないようにする
-        
-        // Yakuzaレベル かつ 未解放 かつ 4枚目(index 3)以降ならスワイプ無効
-        if (currentLevelId == 'level6_yakuza' && !isYakuzaUnlocked && previousIndex >= 3) {
-          return false; 
-        }
+  // クイズのメインコンテンツ（カード + 4択 または 解説）
+  Widget _buildQuizContent(List<SlangItem> slangList, QuizProvider provider) {
+    if (slangList.isEmpty) return const Center(child: CircularProgressIndicator());
+    if (_currentIndex >= slangList.length) return const SizedBox.shrink();
 
-        _handleSwipe(previousIndex, direction);
-        return true; // trueならスワイプ許可
-      },
-      
-      // カードの中身を作る
-      cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
-        final item = slangList[index];
-        final isCurrentCardFlipped = (index == _currentIndex && _isFlipped);
+    final item = slangList[_currentIndex];
 
-        // ▼▼ 課金ロック判定 ▼▼
-        final currentLevelId = provider.currentLevelId;
-        final isYakuzaUnlocked = provider.isYakuzaUnlocked;
-        // 4問目以降 (index 3, 4, 5...) はロック
-        final isLockedItem = (currentLevelId == 'level6_yakuza' && !isYakuzaUnlocked && index >= 3);
+    // ロック判定 (Yakuzaレベル用)
+    final isLockedItem = (provider.currentLevelId == 'level6_yakuza' && !provider.isYakuzaUnlocked && _currentIndex >= 3);
 
-        // Stackを使ってカードの上にオーバーレイを重ねる構造にする
-        return Stack(
-          children: [
-            // 1. メインのカード (GestureDetectorでラップ)
-            GestureDetector(
-              onTap: () {
-                if (isLockedItem) {
-                   // ロック中はタップで課金ダイアログ
-                   _showPurchaseDialogInQuiz(context);
-                } else {
-                  setState(() {
-                    _isFlipped = !_isFlipped;
-                  });
-                }
-              },
-              child: isLockedItem 
-                // ロック中は「すりガラス」表現
-                ? Stack(
-                    children: [
-                      // 1. 元のカード (少し暗めにするなど調整しても良いが、ブラーだけで十分な場合も)
-                      QuizCard(
-                        slangItem: item,
-                        isFlipped: false, // 裏面が見えないように表面固定
-                      ),
-                      // 2. すりガラスフィルター (ClipRRectで角丸を合わせる)
-                      Positioned.fill(
-                        child: ClipRRect(
-                          // QuizCardのborderRadiusに合わせて20に設定
-                          borderRadius: BorderRadius.circular(20),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0), // 強めのブラー
-                            child: Container(
-                              color: Colors.white.withOpacity(0.2), // 半透明の白を重ねてフロスト感を出す
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                // 通常時
-                : QuizCard(
-                    slangItem: item,
-                    isFlipped: isCurrentCardFlipped,
-                  ),
+    return Column(
+      children: [
+        Expanded(
+          flex: 2,
+          child: _showFeedback 
+            ? _buildFeedbackCard(item)
+            : _buildQuestionCard(item, isLockedItem),
+        ),
+        const SizedBox(height: 20),
+        if (!_showFeedback && !isLockedItem)
+          Expanded(
+            flex: 3,
+            child: _buildChoiceButtons(item),
+          ),
+        if (_showFeedback)
+          _buildNextButton(),
+        if (isLockedItem && !_showFeedback)
+           ElevatedButton(
+            onPressed: () => _showPurchaseDialogInQuiz(context),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             ),
+            child: Text(t.quiz.locked.button),
+          ),
+      ],
+    );
+  }
 
-            // 2. ロック時のオーバーレイ (鍵アイコンとボタン)
-            if (isLockedItem)
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.lock, size: 60, color: Colors.black87),
-                    const SizedBox(height: 20),
-                     Text(
-                      t.quiz.locked.label,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.black87),
-                    ),
-                    const SizedBox(height: 10),
-                     Text(
-                      t.quiz.locked.desc,
-                      style: const TextStyle(color: Colors.black54),
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () => _showPurchaseDialogInQuiz(context),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        foregroundColor: Colors.white,
+  // 問題カード（単語のみ）
+  Widget _buildQuestionCard(SlangItem item, bool isLocked) {
+     return Stack(
+       children: [
+         Card(
+          elevation: 8,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Spacer(),
+                Text(
+                  item.word,
+                  style: const TextStyle(fontSize: 42, fontWeight: FontWeight.w900, color: Colors.black87),
+                  textAlign: TextAlign.center,
+                ),
+                if (item.romaji != null && item.romaji!.isNotEmpty)
+                  Text(
+                    item.romaji!,
+                    style: const TextStyle(fontSize: 18, color: Colors.grey),
+                  ),
+                const Spacer(),
+              ],
+            ),
+          ),
+         ),
+         if (isLocked)
+            Positioned.fill(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                  child: Container(
+                    color: Colors.white.withOpacity(0.2),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.lock, size: 60, color: Colors.black87),
+                          const SizedBox(height: 10),
+                          Text(t.quiz.locked.label, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                        ],
                       ),
-                      child: Text(t.quiz.locked.button),
                     ),
-                  ],
+                  ),
                 ),
               ),
+            ),
+       ],
+     );
+  }
 
-            // 3. 左スワイプ時のオーバーレイ (Don't Know / 赤)
-            if (!isLockedItem && percentThresholdX < 0)
-              _buildSwipeOverlay(
-                text: t.quiz.dontKnow,
-                color: Colors.red,
-                alignment: Alignment.topRight,
-                angle: 0.2, 
-                opacity: (percentThresholdX.abs() * 2.0).clamp(0.0, 1.0),
-              ),
+  // フィードバックカード（解説 + 画像）
+  Widget _buildFeedbackCard(SlangItem item) {
+    final isCorrect = _selectedChoiceIndex != null && _currentChoices[_selectedChoiceIndex!] == item.meaning;
 
-            // 4. 右スワイプ時のオーバーレイ (I KNOW IT! / 緑)
-            if (!isLockedItem && percentThresholdX > 0)
-              _buildSwipeOverlay(
-                text: t.quiz.iKnowIt,
-                color: Colors.green,
-                alignment: Alignment.topLeft,
-                angle: -0.2,
-                opacity: (percentThresholdX.abs() * 2.0).clamp(0.0, 1.0),
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 8,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              // 正解・不正解表示
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    isCorrect ? Icons.check_circle : Icons.cancel,
+                    color: isCorrect ? Colors.green : Colors.red,
+                    size: 40,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    isCorrect ? "CORRECT!" : "WRONG!",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: isCorrect ? Colors.green : Colors.red,
+                    ),
+                  ),
+                ],
               ),
-          ],
+              const SizedBox(height: 20),
+              // 画像
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.asset(
+                  item.imagePath,
+                  height: 180,
+                  fit: BoxFit.cover,
+                  errorBuilder: (c, o, s) => const Icon(Icons.image, size: 100, color: Colors.grey),
+                ),
+              ),
+              const SizedBox(height: 15),
+              // 意味
+              Text(
+                item.meaning,
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.deepPurple),
+                textAlign: TextAlign.center,
+              ),
+              const Divider(height: 30),
+              // 解説
+              Text(
+                item.explanation,
+                style: const TextStyle(fontSize: 16, height: 1.4),
+                textAlign: TextAlign.left,
+              ),
+              const SizedBox(height: 15),
+              if (item.example != null)
+                Text(
+                  "Example: ${item.example}",
+                  style: const TextStyle(fontSize: 15, fontStyle: FontStyle.italic, color: Colors.black54),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // 4択ボタン
+  Widget _buildChoiceButtons(SlangItem item) {
+    return ListView.builder(
+      itemCount: _currentChoices.length,
+      itemBuilder: (context, index) {
+        final choice = _currentChoices[index];
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: ElevatedButton(
+            onPressed: () => _onChoiceSelected(index, item),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: Colors.black87,
+              elevation: 4,
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+                side: const BorderSide(color: Colors.amber, width: 2),
+              ),
+            ),
+            child: Text(
+              choice,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+          ),
         );
       },
     );
   }
 
-  // ボタンエリアのビルド
-  Widget _buildControlButtons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center, // Stack内での配置用にcenter寄せ
-      mainAxisSize: MainAxisSize.min, // なるべく小さく
-      children: [
-        // 左スワイプボタン (Don't know)
-        _circleButton(
-          icon: Icons.close,
-          color: Colors.red,
-          onTap: () => _swiperController.swipe(CardSwiperDirection.left),
-        ),
-        
-        const SizedBox(width: 40), // 間隔
-
-        // 戻るボタン (Undo)
-        _miniButton(
-          icon: Icons.replay,
-          onTap: () {
-             _swiperController.undo();
-             setState(() {
-               if (_currentIndex > 0) _currentIndex--;
-               _isFlipped = false;
-             });
-          },
-        ),
-
-        const SizedBox(width: 40), // 間隔
-
-        // 右スワイプボタン (I know)
-        _circleButton(
-          icon: Icons.favorite, // ハートに変更（Tinder感）
-          color: Colors.green,
-          onTap: () => _swiperController.swipe(CardSwiperDirection.right),
-        ),
-      ],
+  // 次へボタン
+  Widget _buildNextButton() {
+    return ElevatedButton(
+      onPressed: _goToNextQuestion,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.amber,
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        elevation: 5,
+      ),
+      child: const Text("NEXT", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
     );
   }
 
-  // スワイプされた後のロジック
-  void _handleSwipe(int previousIndex, CardSwiperDirection direction) {
-    // 結果リストの範囲内かチェック
-    if (previousIndex < _quizResults.length) {
-        // 右スワイプなら true (知ってる)、左なら false (知らない) を記録
-        _quizResults[previousIndex] = (direction == CardSwiperDirection.right);
-    }
-
-    if (direction == CardSwiperDirection.right) {
-      debugPrint("Knew it! -> $previousIndex");
-      // 緑にピカッとする
-      _flashBackground(Colors.green.withOpacity(0.3));
-    } else {
-      debugPrint("Didn't know -> $previousIndex");
-      // 赤にピカッとする
-      _flashBackground(Colors.red.withOpacity(0.3));
-    }
-
+  void _onChoiceSelected(int index, SlangItem item) {
     setState(() {
-      _currentIndex = previousIndex + 1;
-      _isFlipped = false; // 次のカードは必ず表面からスタート
+      _selectedChoiceIndex = index;
+      _showFeedback = true;
+      _quizResults[_currentIndex] = (_currentChoices[index] == item.meaning);
     });
 
-    // 全て終わった場合
-    final total = Provider.of<QuizProvider>(context, listen: false).slangList.length;
-    if (_currentIndex >= total) {
-      final provider = Provider.of<QuizProvider>(context, listen: false);
-      
-      // Yakuzaレベル(有料)の場合は広告を出さずに完了画面へ
-      if (provider.currentLevelId == 'level6_yakuza') {
-         _showCompletionDialogWithReview();
-      } else {
-        // 広告を出してからダイアログを出す
-        debugPrint("Showing Interstitial Ad...");
-        AdHelper.showInterstitialAd(onComplete: () {
-          // 広告を閉じた（または読み込めなかった）後に実行される
-          _showCompletionDialogWithReview();
-        });
-      }
+    // 背景をピカッとする
+    if (_currentChoices[index] == item.meaning) {
+       _flashBackground(Colors.green.withOpacity(0.3));
+    } else {
+       _flashBackground(Colors.red.withOpacity(0.3));
+    }
+  }
+
+  void _goToNextQuestion() {
+    final provider = Provider.of<QuizProvider>(context, listen: false);
+    if (_currentIndex < provider.slangList.length - 1) {
+      setState(() {
+        _currentIndex++;
+        _generateChoicesForCurrentIndex();
+      });
+    } else {
+      // 全て終わった場合
+      _finishQuiz();
+    }
+  }
+
+  void _finishQuiz() {
+    final provider = Provider.of<QuizProvider>(context, listen: false);
+    if (provider.currentLevelId == 'level6_yakuza') {
+       _showCompletionDialogWithReview();
+    } else {
+      AdHelper.showInterstitialAd(onComplete: () {
+        _showCompletionDialogWithReview();
+      });
     }
   }
 
@@ -622,6 +650,7 @@ class _QuizPageState extends State<QuizPage> {
                     _currentIndex = 0;
                     _quizResults = List.filled(total, false);
                     _replayCount++; // CardSwiperを強制リセット
+                    _generateChoicesForCurrentIndex();
                   });
                 },
                 child: Text(t.quiz.result.replayAll, style: const TextStyle(color: Colors.brown, fontWeight: FontWeight.bold)),
@@ -709,80 +738,12 @@ class _QuizPageState extends State<QuizPage> {
     setState(() {
       _currentIndex = 0;
       _quizResults = List.filled(reviewList.length, false);
-      _isFlipped = false;
+      _showFeedback = false;
       _replayCount++;
+      _generateChoicesForCurrentIndex();
     });
   }
 
-  // 丸い大きなボタン
-  Widget _circleButton({required IconData icon, required Color color, required VoidCallback onTap}) {
-    return ElevatedButton(
-      onPressed: onTap,
-      style: ElevatedButton.styleFrom(
-        shape: const CircleBorder(),
-        padding: const EdgeInsets.all(20),
-        backgroundColor: Colors.white,
-        foregroundColor: color,
-        elevation: 5,
-        shadowColor: Colors.black26,
-      ),
-      child: Icon(icon, size: 36),
-    );
-  }
-
-  // 小さな機能ボタン
-  Widget _miniButton({required IconData icon, required VoidCallback onTap}) {
-    return IconButton(
-      onPressed: onTap,
-      icon: Icon(icon, color: Colors.grey, size: 24),
-      style: IconButton.styleFrom(
-        backgroundColor: Colors.white,
-        padding: const EdgeInsets.all(12),
-      ),
-    );
-  }
-
-  // ▼▼▼ 新規追加: スワイプ時のオーバーレイ表示を作成するメソッド ▼▼▼
-  Widget _buildSwipeOverlay({
-    required String text,
-    required Color color,
-    required Alignment alignment,
-    required double angle,
-    required double opacity, // 追加
-  }) {
-    // ふんわりアニメーションさせるために AnimatedOpacity を使用
-    return Positioned.fill(
-      child: AnimatedOpacity(
-        duration: const Duration(milliseconds: 200), // 変化にかかる時間
-        curve: Curves.easeOut, // 変化の仕方（最初は早く、最後はゆっくり）
-        opacity: opacity,
-        child: Container(
-          padding: const EdgeInsets.all(30),
-          alignment: alignment, // 指定した角に配置
-          child: Transform.rotate(
-            angle: angle, // テキストを少し傾ける
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: color, width: 4), // 枠線
-                borderRadius: BorderRadius.circular(10),
-                color: color.withOpacity(0.1), // 半透明の背景色
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Text(
-                text,
-                style: TextStyle(
-                  color: color,
-                  fontSize: 32,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 1.2,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
   // クイズ画面内での課金ダイアログ
   void _showPurchaseDialogInQuiz(BuildContext context) {
     showDialog(
