@@ -38,6 +38,7 @@
         "question": "Question",
         "dontKnow": "JE NE SAIS PAS",
         "iKnowIt": "JE SAIS !",
+        "submit": "Valider",
         "tapToSeeMeaning": "Appuyez pour voir le sens",
         "reviewMode": "Mode Révision",
         "result": {
@@ -56,7 +57,44 @@
             "dialogTitle": "Débloquer le niveau Yakuza",
             "dialogDesc": "Débloquer la liste complète de 50 mots ?",
             "cancel": "Annuler"
+        },
+        "mode": {
+            "shuffle": "Aléatoire",
+            "sequential": "Dans l'ordre"
         }
+    },
+    "premium": {
+        "dialog": {
+            "title": "Mise à niveau Premium",
+            "feature1": "Débloquer le mode séquentiel : résolvez toutes les questions dans l'ordre en commençant par la première.",
+            "feature2": "Complètement sans publicité : supprimez toutes les publicités (bannières, vidéos, etc.) de l'application.",
+            "feature3": "Révision par catégorie : concentrez-vous sur vos points faibles en filtrant par partie.",
+            "buy": "Passer au Premium",
+            "cancel": "Plus tard"
+        },
+        "upgradeCard": {
+            "title": "Passer au Premium",
+            "subtitle": "Supprimez les pubs et concentrez-vous !",
+            "buy": "Acheter",
+            "restore": "Restaurer l'achat"
+        },
+        "specialOffer": {
+            "title": "Offre à Durée Limitée",
+            "subtitle": "Premium Sans Publicité",
+            "desc": "Débloquez toutes les fonctionnalités à un prix spécial maintenant !",
+            "priceBefore": "390 JPY",
+            "priceAfter": "190 JPY",
+            "buyNow": "Acheter Maintenant",
+            "later": "Plus tard"
+        }
+    },
+    "review": {
+        "modal": {
+            "title": "Sélectionner la catégorie",
+            "allQuestions": "Toutes les catégories",
+            "questionCount": "${count} questions"
+        },
+        "button": "Réviser les faiblesses"
     },
     "settings": {
         "title": "Paramètres",

@@ -3,6 +3,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'services/purchase_manager.dart';
+import 'widgets/special_offer_dialog.dart';
 
 class AdHelper {
   // 初期化
@@ -57,7 +60,13 @@ class AdHelper {
   }
 
   // 全画面広告を表示するヘルパー関数
-  static void showInterstitialAd({required VoidCallback onComplete}) {
+  static void showInterstitialAd({required BuildContext context, required VoidCallback onComplete}) {
+    // プレミアム会員なら即座に完了
+    if (PurchaseManager.instance.isPremium) {
+      onComplete();
+      return;
+    }
+
     // 既に読み込まれていれば表示
     if (_interstitialAd != null) {
       _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
@@ -65,6 +74,8 @@ class AdHelper {
           ad.dispose();
           _interstitialAd = null; // 使い捨てなのでクリア
           onComplete();
+          // 特典オファー表示
+          _showSpecialOfferIfEligible(context);
           // 次のためにまたロードしておく
           loadInterstitialAd();
         },
@@ -89,6 +100,7 @@ class AdHelper {
               onAdDismissedFullScreenContent: (ad) {
                 ad.dispose();
                 onComplete();
+                _showSpecialOfferIfEligible(context);
                 loadInterstitialAd();
               },
               onAdFailedToShowFullScreenContent: (ad, error) {
@@ -105,6 +117,25 @@ class AdHelper {
           },
         ),
       );
+    }
+  }
+
+  static Future<void> _showSpecialOfferIfEligible(BuildContext context) async {
+    if (PurchaseManager.instance.isPremium) return;
+
+    final prefs = await SharedPreferences.getInstance();
+    final hasShownOffer = prefs.getBool('has_shown_special_offer') ?? false;
+    if (hasShownOffer) return;
+
+    final limitDate = DateTime(2026, 3, 1);
+    if (DateTime.now().isAfter(limitDate)) return;
+
+    if (context.mounted) {
+      showDialog(
+        context: context,
+        builder: (context) => const SpecialOfferDialog(),
+      );
+      await prefs.setBool('has_shown_special_offer', true);
     }
   }
   // プレロードされたクイズ用バナー広告

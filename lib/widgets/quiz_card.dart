@@ -2,11 +2,12 @@
 
 import 'package:flutter/material.dart';
 import '../models/slang_item.dart';
-import '../i18n/strings.g.dart'; // Localized strings
+import '../i18n/strings.g.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QuizCard extends StatelessWidget {
   final SlangItem slangItem;
-  final bool isFlipped; // ← これを追加！
+  final bool isFlipped;
 
   const QuizCard({
     super.key,
@@ -16,13 +17,21 @@ class QuizCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 8,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(20),
-        // isFlipped が true なら裏面、false なら表面を表示
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: const Color(0xFFF7F2FF), // Very Light Purple
+        borderRadius: BorderRadius.circular(32),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF2D0B5A).withOpacity(0.08),
+            blurRadius: 30,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(24),
         child: isFlipped ? _buildBackSide() : _buildFrontSide(),
       ),
     );
@@ -34,26 +43,26 @@ class QuizCard extends StatelessWidget {
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // 1. 画像エリア (16:9で固定)
+          // 1. 画像エリア
           AspectRatio(
-            aspectRatio: 3 / 2, // 16:9より少し縦長にして拡大表示（両端カット）
+            aspectRatio: 3 / 2,
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(24),
                 boxShadow: [
-                  BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 5))
+                  BoxShadow(color: const Color(0xFF2D0B5A).withOpacity(0.1), blurRadius: 15, offset: const Offset(0, 8))
                 ],
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(24),
                 child: Image.asset(
                   slangItem.imagePath,
                   fit: BoxFit.cover,
                   errorBuilder: (c, o, s) => Container(
-                    color: Colors.grey[100],
+                    color: const Color(0xFF2D0B5A).withOpacity(0.05),
                     child: const Center(
-                      child: Icon(Icons.image, size: 50, color: Colors.grey),
+                      child: Icon(Icons.image_rounded, size: 50, color: Colors.grey),
                     ),
                   ),
                 ),
@@ -61,60 +70,63 @@ class QuizCard extends StatelessWidget {
             ),
           ),
           
-          const SizedBox(height: 20),
+          const SizedBox(height: 24),
 
           // 2. タグ
           Wrap(
             spacing: 8,
-            children: slangItem.tags.map((tag) => Chip(
-              label: Text(
+            runSpacing: 8,
+            children: slangItem.tags.map((tag) => Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color(0xFF2D0B5A).withOpacity(0.05),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
                 "#$tag", 
-                style: const TextStyle(
-                  fontSize: 10, 
+                style: GoogleFonts.outfit(
+                  fontSize: 11, 
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF4E342E), // Colors.brown[800]
+                  color: const Color(0xFF2D0B5A).withOpacity(0.5),
                 )
               ),
-              backgroundColor: Colors.amber[100],
-              padding: EdgeInsets.zero,
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             )).toList(),
           ),
 
           const Spacer(),
 
-          // 3. 単語 (Maji)
+          // 3. 単語
           Text(
             slangItem.word,
-            style: const TextStyle(
-              fontSize: 42,
+            style: GoogleFonts.outfit(
+              fontSize: 48,
               fontWeight: FontWeight.w900,
-              color: Colors.black87,
+              color: const Color(0xFF2D0B5A),
             ),
             textAlign: TextAlign.center,
           ),
           
-          // 4. ローマ字 (Maji de)
+          // 4. ローマ字
           if (slangItem.romaji != null && slangItem.romaji!.isNotEmpty)
             Padding(
               padding: const EdgeInsets.only(top: 4.0),
               child: Text(
                 slangItem.romaji!,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey,
-                  letterSpacing: 1.0,
+                style: GoogleFonts.outfit(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  color: const Color(0xFF2D0B5A).withOpacity(0.4),
+                  letterSpacing: 2.0,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
           
-          const SizedBox(height: 12), // スペース調整
+          const SizedBox(height: 20),
 
           Text(
             t.quiz.tapToSeeMeaning,
-            style: const TextStyle(color: Colors.grey, fontSize: 12),
+            style: GoogleFonts.outfit(color: const Color(0xFF2D0B5A).withOpacity(0.3), fontSize: 13),
           ),
           const Spacer(),
         ],
@@ -128,73 +140,110 @@ class QuizCard extends StatelessWidget {
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // 1. 意味 (Really?)
+          // 1. 意味
           Text(
             slangItem.meaning,
-            style: const TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              color: Colors.deepPurple,
+            style: GoogleFonts.outfit(
+              fontSize: 36,
+              fontWeight: FontWeight.w900,
+              color: const Color(0xFF2D0B5A),
             ),
             textAlign: TextAlign.center,
           ),
           
-          const Divider(height: 40, thickness: 2),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 32),
+            child: Divider(height: 1, thickness: 1, color: Color(0xFF2D0B5A) ,), // Color(0xFF2D0B5A).withOpacity(0.1) would be better but let's see
+          ),
 
           // 2. 解説
           Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(20),
+            width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.purple[50],
-              borderRadius: BorderRadius.circular(12),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFF2D0B5A).withOpacity(0.04),
+                   blurRadius: 10,
+                   offset: const Offset(0, 4),
+                )
+              ],
             ),
             child: Column(
               children: [
-                const Text("📝 Explanation", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.purple)),
-                const SizedBox(height: 8),
+                Text(
+                  "NOTES", 
+                  style: GoogleFonts.outfit(
+                    fontWeight: FontWeight.w900, 
+                    color: const Color(0xFF2D0B5A).withOpacity(0.3),
+                    letterSpacing: 1.5,
+                    fontSize: 12,
+                  )
+                ),
+                const SizedBox(height: 12),
                 Text(
                   slangItem.explanation,
-                  style: const TextStyle(fontSize: 16, height: 1.4),
+                  style: GoogleFonts.outfit(fontSize: 16, height: 1.5, color: const Color(0xFF2D0B5A).withOpacity(0.8)),
                   textAlign: TextAlign.center,
                 ),
               ],
             ),
           ),
 
-          const SizedBox(height: 20),
+          const SizedBox(height: 24),
 
-          // 3. 例文 (あれば)
+          // 3. 例文
           if (slangItem.example != null) ...[
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
-              child: Text("🗣 Usage:", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+              child: Text(
+                "EXAMPLE", 
+                style: GoogleFonts.outfit(
+                  fontWeight: FontWeight.w900, 
+                  color: const Color(0xFF2D0B5A).withOpacity(0.3),
+                  fontSize: 11,
+                  letterSpacing: 1.2,
+                )
+              ),
             ),
-            const SizedBox(height: 4),
-            Text(
-              slangItem.example!,
-              style: const TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
-              textAlign: TextAlign.center,
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.all(16),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color(0xFF2D0B5A).withOpacity(0.04),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Text(
+                slangItem.example!,
+                style: GoogleFonts.outfit(fontSize: 17, fontStyle: FontStyle.italic, color: const Color(0xFF2D0B5A)),
+                textAlign: TextAlign.center,
+              ),
             ),
           ],
 
-          // 4. 警告 (あれば)
+          // 4. 警告
           if (slangItem.warning != null) ...[
             const Spacer(),
             Container(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.red[50],
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.red[200]!),
+                color: const Color(0xFFF44336).withOpacity(0.05),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: const Color(0xFFF44336).withOpacity(0.1)),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.warning_amber, color: Colors.red, size: 20),
+                  const Icon(Icons.warning_amber_rounded, color: Color(0xFFF44336), size: 20),
                   const SizedBox(width: 8),
-                  Text(
-                    slangItem.warning!,
-                    style: TextStyle(color: Colors.red[800], fontSize: 12, fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Text(
+                      slangItem.warning!,
+                      style: GoogleFonts.outfit(color: const Color(0xFFF44336), fontSize: 13, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
@@ -207,11 +256,11 @@ class QuizCard extends StatelessWidget {
   }
 
   // スクローラブルなコンテナのラッパー
-  // 中身が画面に収まる場合は中央寄せ(Spacer有効)、あふれる場合はスクロール可能にする
   Widget _buildScrollableContent(Widget child) {
     return LayoutBuilder(
       builder: (context, constraints) {
         return SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: ConstrainedBox(
             constraints: BoxConstraints(minHeight: constraints.maxHeight),
             child: IntrinsicHeight(

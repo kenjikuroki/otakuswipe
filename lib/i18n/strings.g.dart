@@ -3,10 +3,10 @@
 /// Original: lib/i18n
 /// To regenerate, run: `dart run slang`
 ///
-/// Locales: 4
-/// Strings: 188 (47 per locale)
+/// Locales: 5
+/// Strings: 355 (71 per locale)
 ///
-/// Built on 2026-01-16 at 10:23 UTC
+/// Built on 2026-02-07 at 10:11 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -28,6 +28,7 @@ enum AppLocale with BaseAppLocale<AppLocale, Translations> {
 	en(languageCode: 'en', build: Translations.build),
 	es(languageCode: 'es', build: _StringsEs.build),
 	fr(languageCode: 'fr', build: _StringsFr.build),
+	ja(languageCode: 'ja', build: _StringsJa.build),
 	pt(languageCode: 'pt', build: _StringsPt.build);
 
 	const AppLocale({required this.languageCode, this.scriptCode, this.countryCode, required this.build}); // ignore: unused_element
@@ -154,6 +155,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final _StringsHomeEn home = _StringsHomeEn._(_root);
 	late final _StringsLevelSelectEn levelSelect = _StringsLevelSelectEn._(_root);
 	late final _StringsQuizEn quiz = _StringsQuizEn._(_root);
+	late final _StringsPremiumEn premium = _StringsPremiumEn._(_root);
+	late final _StringsReviewEn review = _StringsReviewEn._(_root);
 	late final _StringsSettingsEn settings = _StringsSettingsEn._(_root);
 }
 
@@ -190,10 +193,35 @@ class _StringsQuizEn {
 	String get question => 'Question';
 	String get dontKnow => 'DON\'T KNOW';
 	String get iKnowIt => 'I KNOW IT!';
+	String get submit => 'Submit';
 	String get tapToSeeMeaning => 'Tap to see meaning';
 	String get reviewMode => 'Review Mode';
 	late final _StringsQuizResultEn result = _StringsQuizResultEn._(_root);
 	late final _StringsQuizLockedEn locked = _StringsQuizLockedEn._(_root);
+	late final _StringsQuizModeEn mode = _StringsQuizModeEn._(_root);
+}
+
+// Path: premium
+class _StringsPremiumEn {
+	_StringsPremiumEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final _StringsPremiumDialogEn dialog = _StringsPremiumDialogEn._(_root);
+	late final _StringsPremiumUpgradeCardEn upgradeCard = _StringsPremiumUpgradeCardEn._(_root);
+	late final _StringsPremiumSpecialOfferEn specialOffer = _StringsPremiumSpecialOfferEn._(_root);
+}
+
+// Path: review
+class _StringsReviewEn {
+	_StringsReviewEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final _StringsReviewModalEn modal = _StringsReviewModalEn._(_root);
+	String get button => 'Review Weakness';
 }
 
 // Path: settings
@@ -261,6 +289,73 @@ class _StringsQuizLockedEn {
 	String get dialogTitle => 'Unlock Yakuza Level';
 	String get dialogDesc => 'Unlock the full 50 words list?';
 	String get cancel => 'Cancel';
+}
+
+// Path: quiz.mode
+class _StringsQuizModeEn {
+	_StringsQuizModeEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get shuffle => 'Shuffle';
+	String get sequential => 'Sequential';
+}
+
+// Path: premium.dialog
+class _StringsPremiumDialogEn {
+	_StringsPremiumDialogEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Premium Upgrade';
+	String get feature1 => 'Unlock Sequential Mode: Solve all questions in order from the first one.';
+	String get feature2 => 'Completely Ad-Free: Remove all ads (banners, videos, etc.) from the app.';
+	String get feature3 => 'Category-based Review: Focus on your weak spots by filtering by part.';
+	String get buy => 'Upgrade Now';
+	String get cancel => 'Later';
+}
+
+// Path: premium.upgradeCard
+class _StringsPremiumUpgradeCardEn {
+	_StringsPremiumUpgradeCardEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Upgrade to Premium';
+	String get subtitle => 'Remove ads and focus!';
+	String get buy => 'Buy';
+	String get restore => 'Restore purchase';
+}
+
+// Path: premium.specialOffer
+class _StringsPremiumSpecialOfferEn {
+	_StringsPremiumSpecialOfferEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Limited Time Offer';
+	String get subtitle => 'Premium Ad-Free';
+	String get desc => 'Unlock all features at a special price now!';
+	String get priceBefore => '390 JPY';
+	String get priceAfter => '190 JPY';
+	String get buyNow => 'Buy Now';
+	String get later => 'Maybe Later';
+}
+
+// Path: review.modal
+class _StringsReviewModalEn {
+	_StringsReviewModalEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Select Category';
+	String get allQuestions => 'All Categories';
+	String questionCount({required Object count}) => '${count} questions';
 }
 
 // Path: levelSelect.levels.level1
@@ -359,6 +454,8 @@ class _StringsEs extends Translations {
 	@override late final _StringsHomeEs home = _StringsHomeEs._(_root);
 	@override late final _StringsLevelSelectEs levelSelect = _StringsLevelSelectEs._(_root);
 	@override late final _StringsQuizEs quiz = _StringsQuizEs._(_root);
+	@override late final _StringsPremiumEs premium = _StringsPremiumEs._(_root);
+	@override late final _StringsReviewEs review = _StringsReviewEs._(_root);
 	@override late final _StringsSettingsEs settings = _StringsSettingsEs._(_root);
 }
 
@@ -395,10 +492,35 @@ class _StringsQuizEs extends _StringsQuizEn {
 	@override String get question => 'Pregunta';
 	@override String get dontKnow => 'NO SÉ';
 	@override String get iKnowIt => '¡LO SÉ!';
+	@override String get submit => 'Responder';
 	@override String get tapToSeeMeaning => 'Toca para ver el significado';
 	@override String get reviewMode => 'Modo Repaso';
 	@override late final _StringsQuizResultEs result = _StringsQuizResultEs._(_root);
 	@override late final _StringsQuizLockedEs locked = _StringsQuizLockedEs._(_root);
+	@override late final _StringsQuizModeEs mode = _StringsQuizModeEs._(_root);
+}
+
+// Path: premium
+class _StringsPremiumEs extends _StringsPremiumEn {
+	_StringsPremiumEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override late final _StringsPremiumDialogEs dialog = _StringsPremiumDialogEs._(_root);
+	@override late final _StringsPremiumUpgradeCardEs upgradeCard = _StringsPremiumUpgradeCardEs._(_root);
+	@override late final _StringsPremiumSpecialOfferEs specialOffer = _StringsPremiumSpecialOfferEs._(_root);
+}
+
+// Path: review
+class _StringsReviewEs extends _StringsReviewEn {
+	_StringsReviewEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override late final _StringsReviewModalEs modal = _StringsReviewModalEs._(_root);
+	@override String get button => 'Repasar Debilidades';
 }
 
 // Path: settings
@@ -466,6 +588,73 @@ class _StringsQuizLockedEs extends _StringsQuizLockedEn {
 	@override String get dialogTitle => 'Desbloquear Nivel Yakuza';
 	@override String get dialogDesc => '¿Desbloquear la lista completa de 50 palabras?';
 	@override String get cancel => 'Cancelar';
+}
+
+// Path: quiz.mode
+class _StringsQuizModeEs extends _StringsQuizModeEn {
+	_StringsQuizModeEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get shuffle => 'Aleatorio';
+	@override String get sequential => 'En orden';
+}
+
+// Path: premium.dialog
+class _StringsPremiumDialogEs extends _StringsPremiumDialogEn {
+	_StringsPremiumDialogEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Mejora Premium';
+	@override String get feature1 => 'Desbloquear Modo Secuencial: Resuelve todas las preguntas en orden desde la primera.';
+	@override String get feature2 => 'Sin Anuncios: Elimina todos los anuncios (banners, videos, etc.) de la aplicación.';
+	@override String get feature3 => 'Repaso por Categoría: Enfócate en tus debilidades filtrando por parte.';
+	@override String get buy => 'Mejorar Ahora';
+	@override String get cancel => 'Más tarde';
+}
+
+// Path: premium.upgradeCard
+class _StringsPremiumUpgradeCardEs extends _StringsPremiumUpgradeCardEn {
+	_StringsPremiumUpgradeCardEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Mejora a Premium';
+	@override String get subtitle => '¡Elimina anuncios y enfócate!';
+	@override String get buy => 'Comprar';
+	@override String get restore => 'Restaurar compra';
+}
+
+// Path: premium.specialOffer
+class _StringsPremiumSpecialOfferEs extends _StringsPremiumSpecialOfferEn {
+	_StringsPremiumSpecialOfferEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Oferta por Tiempo Limitado';
+	@override String get subtitle => 'Premium Sin Anuncios';
+	@override String get desc => '¡Desbloquea todas las funciones a un precio especial ahora!';
+	@override String get priceBefore => '390 JPY';
+	@override String get priceAfter => '190 JPY';
+	@override String get buyNow => 'Comprar Ahora';
+	@override String get later => 'Tal vez luego';
+}
+
+// Path: review.modal
+class _StringsReviewModalEs extends _StringsReviewModalEn {
+	_StringsReviewModalEs._(_StringsEs root) : this._root = root, super._(root);
+
+	@override final _StringsEs _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Seleccionar Categoría';
+	@override String get allQuestions => 'Todas las Categorías';
+	@override String questionCount({required Object count}) => '${count} preguntas';
 }
 
 // Path: levelSelect.levels.level1
@@ -564,6 +753,8 @@ class _StringsFr extends Translations {
 	@override late final _StringsHomeFr home = _StringsHomeFr._(_root);
 	@override late final _StringsLevelSelectFr levelSelect = _StringsLevelSelectFr._(_root);
 	@override late final _StringsQuizFr quiz = _StringsQuizFr._(_root);
+	@override late final _StringsPremiumFr premium = _StringsPremiumFr._(_root);
+	@override late final _StringsReviewFr review = _StringsReviewFr._(_root);
 	@override late final _StringsSettingsFr settings = _StringsSettingsFr._(_root);
 }
 
@@ -600,10 +791,35 @@ class _StringsQuizFr extends _StringsQuizEn {
 	@override String get question => 'Question';
 	@override String get dontKnow => 'JE NE SAIS PAS';
 	@override String get iKnowIt => 'JE SAIS !';
+	@override String get submit => 'Valider';
 	@override String get tapToSeeMeaning => 'Appuyez pour voir le sens';
 	@override String get reviewMode => 'Mode Révision';
 	@override late final _StringsQuizResultFr result = _StringsQuizResultFr._(_root);
 	@override late final _StringsQuizLockedFr locked = _StringsQuizLockedFr._(_root);
+	@override late final _StringsQuizModeFr mode = _StringsQuizModeFr._(_root);
+}
+
+// Path: premium
+class _StringsPremiumFr extends _StringsPremiumEn {
+	_StringsPremiumFr._(_StringsFr root) : this._root = root, super._(root);
+
+	@override final _StringsFr _root; // ignore: unused_field
+
+	// Translations
+	@override late final _StringsPremiumDialogFr dialog = _StringsPremiumDialogFr._(_root);
+	@override late final _StringsPremiumUpgradeCardFr upgradeCard = _StringsPremiumUpgradeCardFr._(_root);
+	@override late final _StringsPremiumSpecialOfferFr specialOffer = _StringsPremiumSpecialOfferFr._(_root);
+}
+
+// Path: review
+class _StringsReviewFr extends _StringsReviewEn {
+	_StringsReviewFr._(_StringsFr root) : this._root = root, super._(root);
+
+	@override final _StringsFr _root; // ignore: unused_field
+
+	// Translations
+	@override late final _StringsReviewModalFr modal = _StringsReviewModalFr._(_root);
+	@override String get button => 'Réviser les faiblesses';
 }
 
 // Path: settings
@@ -673,6 +889,73 @@ class _StringsQuizLockedFr extends _StringsQuizLockedEn {
 	@override String get cancel => 'Annuler';
 }
 
+// Path: quiz.mode
+class _StringsQuizModeFr extends _StringsQuizModeEn {
+	_StringsQuizModeFr._(_StringsFr root) : this._root = root, super._(root);
+
+	@override final _StringsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get shuffle => 'Aléatoire';
+	@override String get sequential => 'Dans l\'ordre';
+}
+
+// Path: premium.dialog
+class _StringsPremiumDialogFr extends _StringsPremiumDialogEn {
+	_StringsPremiumDialogFr._(_StringsFr root) : this._root = root, super._(root);
+
+	@override final _StringsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Mise à niveau Premium';
+	@override String get feature1 => 'Débloquer le mode séquentiel : résolvez toutes les questions dans l\'ordre en commençant par la première.';
+	@override String get feature2 => 'Complètement sans publicité : supprimez toutes les publicités (bannières, vidéos, etc.) de l\'application.';
+	@override String get feature3 => 'Révision par catégorie : concentrez-vous sur vos points faibles en filtrant par partie.';
+	@override String get buy => 'Passer au Premium';
+	@override String get cancel => 'Plus tard';
+}
+
+// Path: premium.upgradeCard
+class _StringsPremiumUpgradeCardFr extends _StringsPremiumUpgradeCardEn {
+	_StringsPremiumUpgradeCardFr._(_StringsFr root) : this._root = root, super._(root);
+
+	@override final _StringsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Passer au Premium';
+	@override String get subtitle => 'Supprimez les pubs et concentrez-vous !';
+	@override String get buy => 'Acheter';
+	@override String get restore => 'Restaurer l\'achat';
+}
+
+// Path: premium.specialOffer
+class _StringsPremiumSpecialOfferFr extends _StringsPremiumSpecialOfferEn {
+	_StringsPremiumSpecialOfferFr._(_StringsFr root) : this._root = root, super._(root);
+
+	@override final _StringsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Offre à Durée Limitée';
+	@override String get subtitle => 'Premium Sans Publicité';
+	@override String get desc => 'Débloquez toutes les fonctionnalités à un prix spécial maintenant !';
+	@override String get priceBefore => '390 JPY';
+	@override String get priceAfter => '190 JPY';
+	@override String get buyNow => 'Acheter Maintenant';
+	@override String get later => 'Plus tard';
+}
+
+// Path: review.modal
+class _StringsReviewModalFr extends _StringsReviewModalEn {
+	_StringsReviewModalFr._(_StringsFr root) : this._root = root, super._(root);
+
+	@override final _StringsFr _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Sélectionner la catégorie';
+	@override String get allQuestions => 'Toutes les catégories';
+	@override String questionCount({required Object count}) => '${count} questions';
+}
+
 // Path: levelSelect.levels.level1
 class _StringsLevelSelectLevelsLevel1Fr extends _StringsLevelSelectLevelsLevel1En {
 	_StringsLevelSelectLevelsLevel1Fr._(_StringsFr root) : this._root = root, super._(root);
@@ -740,6 +1023,305 @@ class _StringsLevelSelectLevelsLevel6Fr extends _StringsLevelSelectLevelsLevel6E
 }
 
 // Path: <root>
+class _StringsJa extends Translations {
+	/// You can call this constructor and build your own translation instance of this locale.
+	/// Constructing via the enum [AppLocale.build] is preferred.
+	_StringsJa.build({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver})
+		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
+		  $meta = TranslationMetadata(
+		    locale: AppLocale.ja,
+		    overrides: overrides ?? {},
+		    cardinalResolver: cardinalResolver,
+		    ordinalResolver: ordinalResolver,
+		  ),
+		  super.build(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
+		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
+		$meta.setFlatMapFunction(_flatMapFunction);
+	}
+
+	/// Metadata for the translations of <ja>.
+	@override final TranslationMetadata<AppLocale, Translations> $meta;
+
+	/// Access flat map
+	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
+
+	@override late final _StringsJa _root = this; // ignore: unused_field
+
+	// Translations
+	@override String get appTitle => 'オタク・スワイプ';
+	@override late final _StringsHomeJa home = _StringsHomeJa._(_root);
+	@override late final _StringsLevelSelectJa levelSelect = _StringsLevelSelectJa._(_root);
+	@override late final _StringsQuizJa quiz = _StringsQuizJa._(_root);
+	@override late final _StringsPremiumJa premium = _StringsPremiumJa._(_root);
+	@override late final _StringsReviewJa review = _StringsReviewJa._(_root);
+	@override late final _StringsSettingsJa settings = _StringsSettingsJa._(_root);
+}
+
+// Path: home
+class _StringsHomeJa extends _StringsHomeEn {
+	_StringsHomeJa._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '日本語のスラングを極めよう！';
+	@override String get start => '学習を始める';
+}
+
+// Path: levelSelect
+class _StringsLevelSelectJa extends _StringsLevelSelectEn {
+	_StringsLevelSelectJa._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'レベル選択';
+	@override String get subtitle => 'スラングの旅に出かけよう！';
+	@override late final _StringsLevelSelectLevelsJa levels = _StringsLevelSelectLevelsJa._(_root);
+}
+
+// Path: quiz
+class _StringsQuizJa extends _StringsQuizEn {
+	_StringsQuizJa._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get question => '問題';
+	@override String get dontKnow => 'わからない';
+	@override String get iKnowIt => '知ってる！';
+	@override String get submit => '送信';
+	@override String get tapToSeeMeaning => 'タップで意味を表示';
+	@override String get reviewMode => '復習モード';
+	@override late final _StringsQuizResultJa result = _StringsQuizResultJa._(_root);
+	@override late final _StringsQuizLockedJa locked = _StringsQuizLockedJa._(_root);
+	@override late final _StringsQuizModeJa mode = _StringsQuizModeJa._(_root);
+}
+
+// Path: premium
+class _StringsPremiumJa extends _StringsPremiumEn {
+	_StringsPremiumJa._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override late final _StringsPremiumDialogJa dialog = _StringsPremiumDialogJa._(_root);
+	@override late final _StringsPremiumUpgradeCardJa upgradeCard = _StringsPremiumUpgradeCardJa._(_root);
+	@override late final _StringsPremiumSpecialOfferJa specialOffer = _StringsPremiumSpecialOfferJa._(_root);
+}
+
+// Path: review
+class _StringsReviewJa extends _StringsReviewEn {
+	_StringsReviewJa._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override late final _StringsReviewModalJa modal = _StringsReviewModalJa._(_root);
+	@override String get button => '弱点復習';
+}
+
+// Path: settings
+class _StringsSettingsJa extends _StringsSettingsEn {
+	_StringsSettingsJa._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '設定';
+	@override String get legal => '規約・法務';
+	@override String get privacyPolicy => 'プライバシーポリシー';
+	@override String get termsOfUse => '利用規約';
+	@override String get tokusho => '特定商取引法に基づく表記';
+	@override String get services => 'サービス';
+	@override String get restore => '購入の復元';
+	@override String get restoreSubtitle => '購入済みのレベルを復元します';
+	@override String get restoreSuccess => '復元処理が完了しました。';
+	@override String restoreError({required Object error}) => '復元に失敗しました: ${error}';
+	@override String get appInfo => 'アプリ情報';
+	@override String get version => 'バージョン';
+}
+
+// Path: levelSelect.levels
+class _StringsLevelSelectLevelsJa extends _StringsLevelSelectLevelsEn {
+	_StringsLevelSelectLevelsJa._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override late final _StringsLevelSelectLevelsLevel1Ja level1 = _StringsLevelSelectLevelsLevel1Ja._(_root);
+	@override late final _StringsLevelSelectLevelsLevel2Ja level2 = _StringsLevelSelectLevelsLevel2Ja._(_root);
+	@override late final _StringsLevelSelectLevelsLevel3Ja level3 = _StringsLevelSelectLevelsLevel3Ja._(_root);
+	@override late final _StringsLevelSelectLevelsLevel4Ja level4 = _StringsLevelSelectLevelsLevel4Ja._(_root);
+	@override late final _StringsLevelSelectLevelsLevel5Ja level5 = _StringsLevelSelectLevelsLevel5Ja._(_root);
+	@override late final _StringsLevelSelectLevelsLevel6Ja level6 = _StringsLevelSelectLevelsLevel6Ja._(_root);
+}
+
+// Path: quiz.result
+class _StringsQuizResultJa extends _StringsQuizResultEn {
+	_StringsQuizResultJa._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get perfect => 'パーフェクト！';
+	@override String get awesome => 'すごい！';
+	@override String get goodJob => 'よくできました！';
+	@override String get listTitle => '結果リスト';
+	@override String get backToMenu => 'メニューへ戻る';
+	@override String get replayAll => 'すべて解き直す';
+	@override String reviewButton({required Object count}) => '${count}単語を復習する';
+}
+
+// Path: quiz.locked
+class _StringsQuizLockedJa extends _StringsQuizLockedEn {
+	_StringsQuizLockedJa._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get label => '有料コンテンツ';
+	@override String get desc => 'レベル6をアンロックして続きを見よう！';
+	@override String get button => 'アンロックする';
+	@override String get dialogTitle => 'ヤクザレベルをアンロック';
+	@override String get dialogDesc => '全50単語をアンロックしますか？';
+	@override String get cancel => 'キャンセル';
+}
+
+// Path: quiz.mode
+class _StringsQuizModeJa extends _StringsQuizModeEn {
+	_StringsQuizModeJa._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get shuffle => 'ランダム';
+	@override String get sequential => '順番通り';
+}
+
+// Path: premium.dialog
+class _StringsPremiumDialogJa extends _StringsPremiumDialogEn {
+	_StringsPremiumDialogJa._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'プレミアムアップグレード';
+	@override String get feature1 => '順番通りモード：最初の問題から順番に解くことができます。';
+	@override String get feature2 => '完全広告非表示：バナー、動画などのすべての広告を削除します。';
+	@override String get feature3 => 'カテゴリー別復習：パートごとに絞り込んで苦手な部分に集中できます。';
+	@override String get buy => '今すぐアップグレード';
+	@override String get cancel => 'あとで';
+}
+
+// Path: premium.upgradeCard
+class _StringsPremiumUpgradeCardJa extends _StringsPremiumUpgradeCardEn {
+	_StringsPremiumUpgradeCardJa._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'プレミアムプランへ';
+	@override String get subtitle => '広告を非表示にして集中！';
+	@override String get buy => '購入';
+	@override String get restore => '購入を復元する';
+}
+
+// Path: premium.specialOffer
+class _StringsPremiumSpecialOfferJa extends _StringsPremiumSpecialOfferEn {
+	_StringsPremiumSpecialOfferJa._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '期間限定特別オファー';
+	@override String get subtitle => 'プレミアム広告非表示';
+	@override String get desc => '今だけ特別価格で全機能をアンロック！';
+	@override String get priceBefore => '390円';
+	@override String get priceAfter => '190円';
+	@override String get buyNow => '今すぐ購入';
+	@override String get later => 'あとで考える';
+}
+
+// Path: review.modal
+class _StringsReviewModalJa extends _StringsReviewModalEn {
+	_StringsReviewModalJa._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'カテゴリー選択';
+	@override String get allQuestions => '全カテゴリー';
+	@override String questionCount({required Object count}) => '${count}問';
+}
+
+// Path: levelSelect.levels.level1
+class _StringsLevelSelectLevelsLevel1Ja extends _StringsLevelSelectLevelsLevel1En {
+	_StringsLevelSelectLevelsLevel1Ja._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'レベル1：サバイバル';
+	@override String get desc => '知っておくべき必須単語。';
+}
+
+// Path: levelSelect.levels.level2
+class _StringsLevelSelectLevelsLevel2Ja extends _StringsLevelSelectLevelsLevel2En {
+	_StringsLevelSelectLevelsLevel2Ja._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'レベル2：若者言葉';
+	@override String get desc => 'Z世代の間で流行っている言葉。';
+}
+
+// Path: levelSelect.levels.level3
+class _StringsLevelSelectLevelsLevel3Ja extends _StringsLevelSelectLevelsLevel3En {
+	_StringsLevelSelectLevelsLevel3Ja._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'レベル3：オタク';
+	@override String get desc => 'アニメ＆マンガ文化の用語。';
+}
+
+// Path: levelSelect.levels.level4
+class _StringsLevelSelectLevelsLevel4Ja extends _StringsLevelSelectLevelsLevel4En {
+	_StringsLevelSelectLevelsLevel4Ja._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'レベル4：インターネット';
+	@override String get desc => 'ネットスラング＆ゲームチャット。';
+}
+
+// Path: levelSelect.levels.level5
+class _StringsLevelSelectLevelsLevel5Ja extends _StringsLevelSelectLevelsLevel5En {
+	_StringsLevelSelectLevelsLevel5Ja._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'レベル5：一人称・人称';
+	@override String get desc => '俺、僕、私... 代名詞。';
+}
+
+// Path: levelSelect.levels.level6
+class _StringsLevelSelectLevelsLevel6Ja extends _StringsLevelSelectLevelsLevel6En {
+	_StringsLevelSelectLevelsLevel6Ja._(_StringsJa root) : this._root = root, super._(root);
+
+	@override final _StringsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'レベル6：ヤクザ';
+	@override String get desc => '危険な裏社会のスラング。';
+}
+
+// Path: <root>
 class _StringsPt extends Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
 	/// Constructing via the enum [AppLocale.build] is preferred.
@@ -769,6 +1351,8 @@ class _StringsPt extends Translations {
 	@override late final _StringsHomePt home = _StringsHomePt._(_root);
 	@override late final _StringsLevelSelectPt levelSelect = _StringsLevelSelectPt._(_root);
 	@override late final _StringsQuizPt quiz = _StringsQuizPt._(_root);
+	@override late final _StringsPremiumPt premium = _StringsPremiumPt._(_root);
+	@override late final _StringsReviewPt review = _StringsReviewPt._(_root);
 	@override late final _StringsSettingsPt settings = _StringsSettingsPt._(_root);
 }
 
@@ -805,10 +1389,35 @@ class _StringsQuizPt extends _StringsQuizEn {
 	@override String get question => 'Pergunta';
 	@override String get dontKnow => 'NÃO SEI';
 	@override String get iKnowIt => 'EU SEI!';
+	@override String get submit => 'Responder';
 	@override String get tapToSeeMeaning => 'Toque para ver o significado';
 	@override String get reviewMode => 'Modo Revisão';
 	@override late final _StringsQuizResultPt result = _StringsQuizResultPt._(_root);
 	@override late final _StringsQuizLockedPt locked = _StringsQuizLockedPt._(_root);
+	@override late final _StringsQuizModePt mode = _StringsQuizModePt._(_root);
+}
+
+// Path: premium
+class _StringsPremiumPt extends _StringsPremiumEn {
+	_StringsPremiumPt._(_StringsPt root) : this._root = root, super._(root);
+
+	@override final _StringsPt _root; // ignore: unused_field
+
+	// Translations
+	@override late final _StringsPremiumDialogPt dialog = _StringsPremiumDialogPt._(_root);
+	@override late final _StringsPremiumUpgradeCardPt upgradeCard = _StringsPremiumUpgradeCardPt._(_root);
+	@override late final _StringsPremiumSpecialOfferPt specialOffer = _StringsPremiumSpecialOfferPt._(_root);
+}
+
+// Path: review
+class _StringsReviewPt extends _StringsReviewEn {
+	_StringsReviewPt._(_StringsPt root) : this._root = root, super._(root);
+
+	@override final _StringsPt _root; // ignore: unused_field
+
+	// Translations
+	@override late final _StringsReviewModalPt modal = _StringsReviewModalPt._(_root);
+	@override String get button => 'Revisar Fraquezas';
 }
 
 // Path: settings
@@ -876,6 +1485,73 @@ class _StringsQuizLockedPt extends _StringsQuizLockedEn {
 	@override String get dialogTitle => 'Desbloquear Nível Yakuza';
 	@override String get dialogDesc => 'Desbloquear a lista completa de 50 palavras?';
 	@override String get cancel => 'Cancelar';
+}
+
+// Path: quiz.mode
+class _StringsQuizModePt extends _StringsQuizModeEn {
+	_StringsQuizModePt._(_StringsPt root) : this._root = root, super._(root);
+
+	@override final _StringsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get shuffle => 'Aleatório';
+	@override String get sequential => 'Em ordem';
+}
+
+// Path: premium.dialog
+class _StringsPremiumDialogPt extends _StringsPremiumDialogEn {
+	_StringsPremiumDialogPt._(_StringsPt root) : this._root = root, super._(root);
+
+	@override final _StringsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Upgrade Premium';
+	@override String get feature1 => 'Desbloquear Modo Sequencial: Resolva todas as questões em ordem a partir da primeira.';
+	@override String get feature2 => 'Totalmente Sem Anúncios: Remova todos os anúncios (banners, vídeos, etc.) do aplicativo.';
+	@override String get feature3 => 'Revisão por Categoria: Foco em seus pontos fracos filtrando por parte.';
+	@override String get buy => 'Fazer Upgrade Agora';
+	@override String get cancel => 'Depois';
+}
+
+// Path: premium.upgradeCard
+class _StringsPremiumUpgradeCardPt extends _StringsPremiumUpgradeCardEn {
+	_StringsPremiumUpgradeCardPt._(_StringsPt root) : this._root = root, super._(root);
+
+	@override final _StringsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Upgrade para Premium';
+	@override String get subtitle => 'Remova anúncios e tenha foco!';
+	@override String get buy => 'Comprar';
+	@override String get restore => 'Restaurar compra';
+}
+
+// Path: premium.specialOffer
+class _StringsPremiumSpecialOfferPt extends _StringsPremiumSpecialOfferEn {
+	_StringsPremiumSpecialOfferPt._(_StringsPt root) : this._root = root, super._(root);
+
+	@override final _StringsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Oferta por Tempo Limitado';
+	@override String get subtitle => 'Premium Sem Anúncios';
+	@override String get desc => 'Desbloqueie todos os recursos com um preço especial agora!';
+	@override String get priceBefore => '390 JPY';
+	@override String get priceAfter => '190 JPY';
+	@override String get buyNow => 'Comprar Agora';
+	@override String get later => 'Depois';
+}
+
+// Path: review.modal
+class _StringsReviewModalPt extends _StringsReviewModalEn {
+	_StringsReviewModalPt._(_StringsPt root) : this._root = root, super._(root);
+
+	@override final _StringsPt _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Selecionar Categoria';
+	@override String get allQuestions => 'Todas as Categorias';
+	@override String questionCount({required Object count}) => '${count} questões';
 }
 
 // Path: levelSelect.levels.level1
@@ -970,6 +1646,7 @@ extension on Translations {
 			case 'quiz.question': return 'Question';
 			case 'quiz.dontKnow': return 'DON\'T KNOW';
 			case 'quiz.iKnowIt': return 'I KNOW IT!';
+			case 'quiz.submit': return 'Submit';
 			case 'quiz.tapToSeeMeaning': return 'Tap to see meaning';
 			case 'quiz.reviewMode': return 'Review Mode';
 			case 'quiz.result.perfect': return 'Perfect Master!';
@@ -985,6 +1662,29 @@ extension on Translations {
 			case 'quiz.locked.dialogTitle': return 'Unlock Yakuza Level';
 			case 'quiz.locked.dialogDesc': return 'Unlock the full 50 words list?';
 			case 'quiz.locked.cancel': return 'Cancel';
+			case 'quiz.mode.shuffle': return 'Shuffle';
+			case 'quiz.mode.sequential': return 'Sequential';
+			case 'premium.dialog.title': return 'Premium Upgrade';
+			case 'premium.dialog.feature1': return 'Unlock Sequential Mode: Solve all questions in order from the first one.';
+			case 'premium.dialog.feature2': return 'Completely Ad-Free: Remove all ads (banners, videos, etc.) from the app.';
+			case 'premium.dialog.feature3': return 'Category-based Review: Focus on your weak spots by filtering by part.';
+			case 'premium.dialog.buy': return 'Upgrade Now';
+			case 'premium.dialog.cancel': return 'Later';
+			case 'premium.upgradeCard.title': return 'Upgrade to Premium';
+			case 'premium.upgradeCard.subtitle': return 'Remove ads and focus!';
+			case 'premium.upgradeCard.buy': return 'Buy';
+			case 'premium.upgradeCard.restore': return 'Restore purchase';
+			case 'premium.specialOffer.title': return 'Limited Time Offer';
+			case 'premium.specialOffer.subtitle': return 'Premium Ad-Free';
+			case 'premium.specialOffer.desc': return 'Unlock all features at a special price now!';
+			case 'premium.specialOffer.priceBefore': return '390 JPY';
+			case 'premium.specialOffer.priceAfter': return '190 JPY';
+			case 'premium.specialOffer.buyNow': return 'Buy Now';
+			case 'premium.specialOffer.later': return 'Maybe Later';
+			case 'review.modal.title': return 'Select Category';
+			case 'review.modal.allQuestions': return 'All Categories';
+			case 'review.modal.questionCount': return ({required Object count}) => '${count} questions';
+			case 'review.button': return 'Review Weakness';
 			case 'settings.title': return 'Settings';
 			case 'settings.legal': return 'LEGAL';
 			case 'settings.privacyPolicy': return 'Privacy Policy';
@@ -1025,6 +1725,7 @@ extension on _StringsEs {
 			case 'quiz.question': return 'Pregunta';
 			case 'quiz.dontKnow': return 'NO SÉ';
 			case 'quiz.iKnowIt': return '¡LO SÉ!';
+			case 'quiz.submit': return 'Responder';
 			case 'quiz.tapToSeeMeaning': return 'Toca para ver el significado';
 			case 'quiz.reviewMode': return 'Modo Repaso';
 			case 'quiz.result.perfect': return '¡Maestro Perfecto!';
@@ -1040,6 +1741,29 @@ extension on _StringsEs {
 			case 'quiz.locked.dialogTitle': return 'Desbloquear Nivel Yakuza';
 			case 'quiz.locked.dialogDesc': return '¿Desbloquear la lista completa de 50 palabras?';
 			case 'quiz.locked.cancel': return 'Cancelar';
+			case 'quiz.mode.shuffle': return 'Aleatorio';
+			case 'quiz.mode.sequential': return 'En orden';
+			case 'premium.dialog.title': return 'Mejora Premium';
+			case 'premium.dialog.feature1': return 'Desbloquear Modo Secuencial: Resuelve todas las preguntas en orden desde la primera.';
+			case 'premium.dialog.feature2': return 'Sin Anuncios: Elimina todos los anuncios (banners, videos, etc.) de la aplicación.';
+			case 'premium.dialog.feature3': return 'Repaso por Categoría: Enfócate en tus debilidades filtrando por parte.';
+			case 'premium.dialog.buy': return 'Mejorar Ahora';
+			case 'premium.dialog.cancel': return 'Más tarde';
+			case 'premium.upgradeCard.title': return 'Mejora a Premium';
+			case 'premium.upgradeCard.subtitle': return '¡Elimina anuncios y enfócate!';
+			case 'premium.upgradeCard.buy': return 'Comprar';
+			case 'premium.upgradeCard.restore': return 'Restaurar compra';
+			case 'premium.specialOffer.title': return 'Oferta por Tiempo Limitado';
+			case 'premium.specialOffer.subtitle': return 'Premium Sin Anuncios';
+			case 'premium.specialOffer.desc': return '¡Desbloquea todas las funciones a un precio especial ahora!';
+			case 'premium.specialOffer.priceBefore': return '390 JPY';
+			case 'premium.specialOffer.priceAfter': return '190 JPY';
+			case 'premium.specialOffer.buyNow': return 'Comprar Ahora';
+			case 'premium.specialOffer.later': return 'Tal vez luego';
+			case 'review.modal.title': return 'Seleccionar Categoría';
+			case 'review.modal.allQuestions': return 'Todas las Categorías';
+			case 'review.modal.questionCount': return ({required Object count}) => '${count} preguntas';
+			case 'review.button': return 'Repasar Debilidades';
 			case 'settings.title': return 'Ajustes';
 			case 'settings.legal': return 'LEGAL';
 			case 'settings.privacyPolicy': return 'Política de Privacidad';
@@ -1080,6 +1804,7 @@ extension on _StringsFr {
 			case 'quiz.question': return 'Question';
 			case 'quiz.dontKnow': return 'JE NE SAIS PAS';
 			case 'quiz.iKnowIt': return 'JE SAIS !';
+			case 'quiz.submit': return 'Valider';
 			case 'quiz.tapToSeeMeaning': return 'Appuyez pour voir le sens';
 			case 'quiz.reviewMode': return 'Mode Révision';
 			case 'quiz.result.perfect': return 'Maître Parfait !';
@@ -1095,6 +1820,29 @@ extension on _StringsFr {
 			case 'quiz.locked.dialogTitle': return 'Débloquer le niveau Yakuza';
 			case 'quiz.locked.dialogDesc': return 'Débloquer la liste complète de 50 mots ?';
 			case 'quiz.locked.cancel': return 'Annuler';
+			case 'quiz.mode.shuffle': return 'Aléatoire';
+			case 'quiz.mode.sequential': return 'Dans l\'ordre';
+			case 'premium.dialog.title': return 'Mise à niveau Premium';
+			case 'premium.dialog.feature1': return 'Débloquer le mode séquentiel : résolvez toutes les questions dans l\'ordre en commençant par la première.';
+			case 'premium.dialog.feature2': return 'Complètement sans publicité : supprimez toutes les publicités (bannières, vidéos, etc.) de l\'application.';
+			case 'premium.dialog.feature3': return 'Révision par catégorie : concentrez-vous sur vos points faibles en filtrant par partie.';
+			case 'premium.dialog.buy': return 'Passer au Premium';
+			case 'premium.dialog.cancel': return 'Plus tard';
+			case 'premium.upgradeCard.title': return 'Passer au Premium';
+			case 'premium.upgradeCard.subtitle': return 'Supprimez les pubs et concentrez-vous !';
+			case 'premium.upgradeCard.buy': return 'Acheter';
+			case 'premium.upgradeCard.restore': return 'Restaurer l\'achat';
+			case 'premium.specialOffer.title': return 'Offre à Durée Limitée';
+			case 'premium.specialOffer.subtitle': return 'Premium Sans Publicité';
+			case 'premium.specialOffer.desc': return 'Débloquez toutes les fonctionnalités à un prix spécial maintenant !';
+			case 'premium.specialOffer.priceBefore': return '390 JPY';
+			case 'premium.specialOffer.priceAfter': return '190 JPY';
+			case 'premium.specialOffer.buyNow': return 'Acheter Maintenant';
+			case 'premium.specialOffer.later': return 'Plus tard';
+			case 'review.modal.title': return 'Sélectionner la catégorie';
+			case 'review.modal.allQuestions': return 'Toutes les catégories';
+			case 'review.modal.questionCount': return ({required Object count}) => '${count} questions';
+			case 'review.button': return 'Réviser les faiblesses';
 			case 'settings.title': return 'Paramètres';
 			case 'settings.legal': return 'LÉGAL';
 			case 'settings.privacyPolicy': return 'Politique de confidentialité';
@@ -1107,6 +1855,85 @@ extension on _StringsFr {
 			case 'settings.restoreError': return ({required Object error}) => 'Échec de la restauration : ${error}';
 			case 'settings.appInfo': return 'INFO APP';
 			case 'settings.version': return 'Version';
+			default: return null;
+		}
+	}
+}
+
+extension on _StringsJa {
+	dynamic _flatMapFunction(String path) {
+		switch (path) {
+			case 'appTitle': return 'オタク・スワイプ';
+			case 'home.title': return '日本語のスラングを極めよう！';
+			case 'home.start': return '学習を始める';
+			case 'levelSelect.title': return 'レベル選択';
+			case 'levelSelect.subtitle': return 'スラングの旅に出かけよう！';
+			case 'levelSelect.levels.level1.title': return 'レベル1：サバイバル';
+			case 'levelSelect.levels.level1.desc': return '知っておくべき必須単語。';
+			case 'levelSelect.levels.level2.title': return 'レベル2：若者言葉';
+			case 'levelSelect.levels.level2.desc': return 'Z世代の間で流行っている言葉。';
+			case 'levelSelect.levels.level3.title': return 'レベル3：オタク';
+			case 'levelSelect.levels.level3.desc': return 'アニメ＆マンガ文化の用語。';
+			case 'levelSelect.levels.level4.title': return 'レベル4：インターネット';
+			case 'levelSelect.levels.level4.desc': return 'ネットスラング＆ゲームチャット。';
+			case 'levelSelect.levels.level5.title': return 'レベル5：一人称・人称';
+			case 'levelSelect.levels.level5.desc': return '俺、僕、私... 代名詞。';
+			case 'levelSelect.levels.level6.title': return 'レベル6：ヤクザ';
+			case 'levelSelect.levels.level6.desc': return '危険な裏社会のスラング。';
+			case 'quiz.question': return '問題';
+			case 'quiz.dontKnow': return 'わからない';
+			case 'quiz.iKnowIt': return '知ってる！';
+			case 'quiz.submit': return '送信';
+			case 'quiz.tapToSeeMeaning': return 'タップで意味を表示';
+			case 'quiz.reviewMode': return '復習モード';
+			case 'quiz.result.perfect': return 'パーフェクト！';
+			case 'quiz.result.awesome': return 'すごい！';
+			case 'quiz.result.goodJob': return 'よくできました！';
+			case 'quiz.result.listTitle': return '結果リスト';
+			case 'quiz.result.backToMenu': return 'メニューへ戻る';
+			case 'quiz.result.replayAll': return 'すべて解き直す';
+			case 'quiz.result.reviewButton': return ({required Object count}) => '${count}単語を復習する';
+			case 'quiz.locked.label': return '有料コンテンツ';
+			case 'quiz.locked.desc': return 'レベル6をアンロックして続きを見よう！';
+			case 'quiz.locked.button': return 'アンロックする';
+			case 'quiz.locked.dialogTitle': return 'ヤクザレベルをアンロック';
+			case 'quiz.locked.dialogDesc': return '全50単語をアンロックしますか？';
+			case 'quiz.locked.cancel': return 'キャンセル';
+			case 'quiz.mode.shuffle': return 'ランダム';
+			case 'quiz.mode.sequential': return '順番通り';
+			case 'premium.dialog.title': return 'プレミアムアップグレード';
+			case 'premium.dialog.feature1': return '順番通りモード：最初の問題から順番に解くことができます。';
+			case 'premium.dialog.feature2': return '完全広告非表示：バナー、動画などのすべての広告を削除します。';
+			case 'premium.dialog.feature3': return 'カテゴリー別復習：パートごとに絞り込んで苦手な部分に集中できます。';
+			case 'premium.dialog.buy': return '今すぐアップグレード';
+			case 'premium.dialog.cancel': return 'あとで';
+			case 'premium.upgradeCard.title': return 'プレミアムプランへ';
+			case 'premium.upgradeCard.subtitle': return '広告を非表示にして集中！';
+			case 'premium.upgradeCard.buy': return '購入';
+			case 'premium.upgradeCard.restore': return '購入を復元する';
+			case 'premium.specialOffer.title': return '期間限定特別オファー';
+			case 'premium.specialOffer.subtitle': return 'プレミアム広告非表示';
+			case 'premium.specialOffer.desc': return '今だけ特別価格で全機能をアンロック！';
+			case 'premium.specialOffer.priceBefore': return '390円';
+			case 'premium.specialOffer.priceAfter': return '190円';
+			case 'premium.specialOffer.buyNow': return '今すぐ購入';
+			case 'premium.specialOffer.later': return 'あとで考える';
+			case 'review.modal.title': return 'カテゴリー選択';
+			case 'review.modal.allQuestions': return '全カテゴリー';
+			case 'review.modal.questionCount': return ({required Object count}) => '${count}問';
+			case 'review.button': return '弱点復習';
+			case 'settings.title': return '設定';
+			case 'settings.legal': return '規約・法務';
+			case 'settings.privacyPolicy': return 'プライバシーポリシー';
+			case 'settings.termsOfUse': return '利用規約';
+			case 'settings.tokusho': return '特定商取引法に基づく表記';
+			case 'settings.services': return 'サービス';
+			case 'settings.restore': return '購入の復元';
+			case 'settings.restoreSubtitle': return '購入済みのレベルを復元します';
+			case 'settings.restoreSuccess': return '復元処理が完了しました。';
+			case 'settings.restoreError': return ({required Object error}) => '復元に失敗しました: ${error}';
+			case 'settings.appInfo': return 'アプリ情報';
+			case 'settings.version': return 'バージョン';
 			default: return null;
 		}
 	}
@@ -1135,6 +1962,7 @@ extension on _StringsPt {
 			case 'quiz.question': return 'Pergunta';
 			case 'quiz.dontKnow': return 'NÃO SEI';
 			case 'quiz.iKnowIt': return 'EU SEI!';
+			case 'quiz.submit': return 'Responder';
 			case 'quiz.tapToSeeMeaning': return 'Toque para ver o significado';
 			case 'quiz.reviewMode': return 'Modo Revisão';
 			case 'quiz.result.perfect': return 'Mestre Perfeito!';
@@ -1150,6 +1978,29 @@ extension on _StringsPt {
 			case 'quiz.locked.dialogTitle': return 'Desbloquear Nível Yakuza';
 			case 'quiz.locked.dialogDesc': return 'Desbloquear a lista completa de 50 palavras?';
 			case 'quiz.locked.cancel': return 'Cancelar';
+			case 'quiz.mode.shuffle': return 'Aleatório';
+			case 'quiz.mode.sequential': return 'Em ordem';
+			case 'premium.dialog.title': return 'Upgrade Premium';
+			case 'premium.dialog.feature1': return 'Desbloquear Modo Sequencial: Resolva todas as questões em ordem a partir da primeira.';
+			case 'premium.dialog.feature2': return 'Totalmente Sem Anúncios: Remova todos os anúncios (banners, vídeos, etc.) do aplicativo.';
+			case 'premium.dialog.feature3': return 'Revisão por Categoria: Foco em seus pontos fracos filtrando por parte.';
+			case 'premium.dialog.buy': return 'Fazer Upgrade Agora';
+			case 'premium.dialog.cancel': return 'Depois';
+			case 'premium.upgradeCard.title': return 'Upgrade para Premium';
+			case 'premium.upgradeCard.subtitle': return 'Remova anúncios e tenha foco!';
+			case 'premium.upgradeCard.buy': return 'Comprar';
+			case 'premium.upgradeCard.restore': return 'Restaurar compra';
+			case 'premium.specialOffer.title': return 'Oferta por Tempo Limitado';
+			case 'premium.specialOffer.subtitle': return 'Premium Sem Anúncios';
+			case 'premium.specialOffer.desc': return 'Desbloqueie todos os recursos com um preço especial agora!';
+			case 'premium.specialOffer.priceBefore': return '390 JPY';
+			case 'premium.specialOffer.priceAfter': return '190 JPY';
+			case 'premium.specialOffer.buyNow': return 'Comprar Agora';
+			case 'premium.specialOffer.later': return 'Depois';
+			case 'review.modal.title': return 'Selecionar Categoria';
+			case 'review.modal.allQuestions': return 'Todas as Categorias';
+			case 'review.modal.questionCount': return ({required Object count}) => '${count} questões';
+			case 'review.button': return 'Revisar Fraquezas';
 			case 'settings.title': return 'Configurações';
 			case 'settings.legal': return 'LEGAL';
 			case 'settings.privacyPolicy': return 'Política de Privacidade';

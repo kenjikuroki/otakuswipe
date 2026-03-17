@@ -1,7 +1,10 @@
-import 'dart:async';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
+import '../widgets/special_offer_dialog.dart';
+import '../services/purchase_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
 
 class PreloadedAd {
   final BannerAd ad;
@@ -20,16 +23,21 @@ class AdManager {
   AdManager._internal();
 
   final Map<String, PreloadedAd> _ads = {};
+  bool _isPremium = false;
+
+  void setPremium(bool premium) {
+    _isPremium = premium;
+    if (_isPremium) {
+      disposeAllAds();
+    }
+  }
 
   final String _adUnitId = 'ca-app-pub-3331079517737737/8905948804';
   
   // Test ID for debug (optional use)
   // final String _testAdUnitId = 'ca-app-pub-3940256099942544/6300978111';
 
-  /// Initialize Consent Flow (UMP)
-  /// Returns a Future that completes when consent gathering is finished (or failed).
   /// Initialize Consent Flow (iOS ATT)
-  /// Returns a Future that completes when consent gathering is finished (or failed).
   Future<void> initializeConsent() async {
     // iOSでのトラッキング許可ダイアログを直接呼び出し
     try {
@@ -44,14 +52,12 @@ class AdManager {
   }
 
   void preloadAd(String key) {
+    if (_isPremium) return;
     if (_ads.containsKey(key)) {
       // Already preloading or loaded
       return;
     }
 
-    // Always use the real ID as requested by user, 
-    // or switch to test ID if strictly debugging.
-    // final unitId = kDebugMode ? _testAdUnitId : _adUnitId;
     final unitId = _adUnitId;
 
     final ad = BannerAd(
@@ -77,12 +83,14 @@ class AdManager {
   }
 
   PreloadedAd? getAd(String key) {
+    if (_isPremium) return null;
     return _ads[key];
   }
   
   /// Returns the ad and removes it from manager (transfer ownership)
   /// If [keep] is true, it retains in manager (shared ownership/singleton usage like Home).
   PreloadedAd? consumeAd(String key, {bool keep = false}) {
+    if (_isPremium) return null;
     if (keep) {
       return _ads[key];
     }
@@ -96,8 +104,7 @@ class AdManager {
   final String _interstitialAdUnitId = 'ca-app-pub-3331079517737737/4723161214';
 
   void preloadInterstitial() {
-    // If already loaded or loading, skip? 
-    // Simplified: just try to load if null.
+    if (_isPremium) return;
     if (_interstitialAd != null) return;
 
     InterstitialAd.load(
@@ -118,7 +125,11 @@ class AdManager {
 
   /// Shows the interstitial ad if available.
   /// [onComplete] is called when the ad is dismissed or if it fails to show/load.
-  void showInterstitial({required VoidCallback onComplete}) {
+  void showInterstitial({required BuildContext context, required VoidCallback onComplete}) {
+    if (_isPremium) {
+      onComplete();
+      return;
+    }
     if (_interstitialAd == null) {
       debugPrint('AdManager: No interstitial ready, skipping.');
       onComplete();
@@ -131,6 +142,8 @@ class AdManager {
         ad.dispose();
         _interstitialAd = null;
         onComplete();
+        // Trigger special offer after interstitial
+        _showSpecialOfferIfEligible(context);
       },
       onAdFailedToShowFullScreenContent: (ad, err) {
         debugPrint('AdManager: Interstitial failed to show: $err');
@@ -141,15 +154,37 @@ class AdManager {
     );
 
     _interstitialAd!.show();
-    // Note: don't set null here immediately, wait for callbacks
+  }
+
+  Future<void> _showSpecialOfferIfEligible(BuildContext context) async {
+    if (_isPremium) return;
+
+    final prefs = await SharedPreferences.getInstance();
+    final hasShownOffer = prefs.getBool('has_shown_special_offer') ?? false;
+    if (hasShownOffer) return;
+
+    final limitDate = DateTime(2026, 3, 1);
+    if (DateTime.now().isAfter(limitDate)) return;
+
+    if (context.mounted) {
+      showDialog(
+        context: context,
+        builder: (context) => const SpecialOfferDialog(),
+      );
+      await prefs.setBool('has_shown_special_offer', true);
+    }
   }
   
-  void disposeAll() {
+  void disposeAllAds() {
     for (var ad in _ads.values) {
       ad.dispose();
     }
     _ads.clear();
     _interstitialAd?.dispose();
     _interstitialAd = null;
+  }
+
+  void dispose() {
+    disposeAllAds();
   }
 }

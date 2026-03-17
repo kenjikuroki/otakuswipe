@@ -1,0 +1,113 @@
+{
+    "appTitle": "オタク・スワイプ",
+    "home": {
+        "title": "日本語のスラングを極めよう！",
+        "start": "学習を始める"
+    },
+    "levelSelect": {
+        "title": "レベル選択",
+        "subtitle": "スラングの旅に出かけよう！",
+        "levels": {
+            "level1": {
+                "title": "レベル1：サバイバル",
+                "desc": "知っておくべき必須単語。"
+            },
+            "level2": {
+                "title": "レベル2：若者言葉",
+                "desc": "Z世代の間で流行っている言葉。"
+            },
+            "level3": {
+                "title": "レベル3：オタク",
+                "desc": "アニメ＆マンガ文化の用語。"
+            },
+            "level4": {
+                "title": "レベル4：インターネット",
+                "desc": "ネットスラング＆ゲームチャット。"
+            },
+            "level5": {
+                "title": "レベル5：一人称・人称",
+                "desc": "俺、僕、私... 代名詞。"
+            },
+            "level6": {
+                "title": "レベル6：ヤクザ",
+                "desc": "危険な街の裏言葉（4問目から有料）"
+            }
+        }
+    },
+    "quiz": {
+        "question": "問題",
+        "dontKnow": "わからない",
+        "iKnowIt": "知ってる！",
+        "submit": "送信",
+        "tapToSeeMeaning": "タップで意味を表示",
+        "reviewMode": "復習モード",
+        "result": {
+            "perfect": "パーフェクト！",
+            "awesome": "すごい！",
+            "goodJob": "よくできました！",
+            "listTitle": "結果リスト",
+            "backToMenu": "メニューへ戻る",
+            "replayAll": "すべて解き直す",
+            "reviewButton": "${count}単語を復習する"
+        },
+        "locked": {
+            "label": "有料コンテンツ",
+            "desc": "レベル6をアンロックして続きを見よう！",
+            "button": "アンロックする",
+            "dialogTitle": "ヤクザレベルをアンロック",
+            "dialogDesc": "全50単語をアンロックしますか？",
+            "cancel": "キャンセル"
+        },
+        "mode": {
+            "shuffle": "ランダム",
+            "sequential": "順番通り"
+        }
+    },
+    "premium": {
+        "dialog": {
+            "title": "プレミアムアップグレード",
+            "feature1": "順番通りモード：最初の問題から順番に解くことができます。",
+            "feature2": "完全広告非表示：バナー、動画などのすべての広告を削除します。",
+            "feature3": "カテゴリー別復習：パートごとに絞り込んで苦手な部分に集中できます。",
+            "buy": "今すぐアップグレード",
+            "cancel": "あとで"
+        },
+        "upgradeCard": {
+            "title": "プレミアムプランへ",
+            "subtitle": "広告を非表示にして集中！",
+            "buy": "購入",
+            "restore": "購入を復元する"
+        },
+        "specialOffer": {
+            "title": "期間限定特別オファー",
+            "subtitle": "プレミアム広告非表示",
+            "desc": "今だけ特別価格で全機能をアンロック！",
+            "priceBefore": "390円",
+            "priceAfter": "190円",
+            "buyNow": "今すぐ購入",
+            "later": "あとで考える"
+        }
+    },
+    "review": {
+        "modal": {
+            "title": "カテゴリー選択",
+            "allQuestions": "全カテゴリー",
+            "questionCount": "${count}問"
+        },
+        "button": "弱点復習"
+    },
+    "settings": {
+        "title": "設定",
+        "legal": "規約・法務",
+        "privacyPolicy": "プライバシーポリシー",
+        "termsOfUse": "利用規約",
+        "tokusho": "特定商取引法に基づく表記",
+        "services": "サービス",
+        "restore": "購入の復元",
+        "restoreSubtitle": "購入済みのレベルを復元します",
+        "restoreSuccess": "復元処理が完了しました。",
+        "restoreError": "復元に失敗しました: ${error}",
+        "appInfo": "アプリ情報",
+        "version": "バージョン"
+    }
+}

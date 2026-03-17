@@ -1,19 +1,19 @@
 // lib/pages/quiz_page.dart
 
-import 'dart:ui'; // 追加
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_card_swiper/flutter_card_swiper.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../providers/quiz_provider.dart';
-import '../widgets/quiz_card.dart';
-import '../ad_helper.dart';
-import '../widgets/ad_placeholder.dart';
 import '../models/slang_item.dart';
-import '../services/purchase_service.dart';
-import 'package:shared_preferences/shared_preferences.dart'; // 追加
-import 'package:in_app_review/in_app_review.dart'; // 追加
-import '../i18n/strings.g.dart'; // 追加
+import '../services/purchase_manager.dart';
+import '../i18n/strings.g.dart';
+import '../ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import '../widgets/quiz_card.dart';
+import '../widgets/ad_placeholder.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:in_app_review/in_app_review.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
@@ -30,6 +30,7 @@ class _QuizPageState extends State<QuizPage> {
   List<String> _currentChoices = []; // 現在の選択肢
   int? _selectedChoiceIndex; // ユーザーが選択したインデックス
   int _replayCount = 0; // リプレイ時にCardSwiperを再構築するためのキー用
+  bool _showNextButton = false; // 「次へ」ボタンを表示するか（遅延用）
 
   // 広告用の変数を追加
   BannerAd? _bannerAd;
@@ -38,8 +39,8 @@ class _QuizPageState extends State<QuizPage> {
   // ▼▼▼ 追加: 各問題の結果を保存するリスト (true: 知ってる, false: 知らない) ▼▼▼
   List<bool> _quizResults = [];
 
-  // 背景色 (フラッシュ効果用)
-  Color _backgroundColor = Colors.grey[100]!;
+  // 背景色 (フラッシュ効果用) - デフォルトは透明にしてグラデーションを表示
+  Color _backgroundColor = Colors.transparent;
 
   @override
   void initState() {
@@ -71,26 +72,37 @@ class _QuizPageState extends State<QuizPage> {
     if (_currentIndex >= provider.slangList.length) return;
 
     final correctItem = provider.slangList[_currentIndex];
-    final allItems = provider.slangList;
+    
+    // ▼▼▼ 修正: カテゴリに応じた適切な「間違い」のプールを選択 ▼▼▼
+    final isPersona = provider.isPersonaItem(correctItem);
+    final allItems = isPersona 
+        ? provider.getPersonaSlangItems() 
+        : provider.getNonPersonaSlangItems();
 
     List<String> choices = [correctItem.meaning];
     
-    // 他の単語から選択肢を3つ選ぶ
-    List<SlangItem> others = allItems.where((item) => item.word != correctItem.word).toList();
-    others.shuffle();
+    // 1. 自分自身以外の単語を「間違い候補」としてシャッフル
+    List<SlangItem> distractors = allItems.where((item) => item.word != correctItem.word).toList();
+    distractors.shuffle();
     
-    // 他の単語の意味を追加（重複しないように、かつ足りない場合は適当な文字を入れるなどの考慮が必要だが、基本4つ以上ある前提）
-    choices.addAll(others.take(3).map((e) => e.meaning));
+    // 2. 重複しない意味を持つものを3つ選ぶ
+    for (var item in distractors) {
+      if (choices.length >= 4) break;
+      if (!choices.contains(item.meaning)) {
+        choices.add(item.meaning);
+      }
+    }
     
-    // 4つに満たない場合のフォールバック（あまりないが）
+    // 3. (万が一足りない場合の保険)
     while (choices.length < 4) {
-      choices.add("---");
+      choices.add("--- ${choices.length} ---");
     }
 
     choices.shuffle();
     _currentChoices = choices;
     _selectedChoiceIndex = null;
     _showFeedback = false;
+    _showNextButton = false; // リセット
   }
 
   void _loadBannerAd() {
@@ -130,16 +142,28 @@ class _QuizPageState extends State<QuizPage> {
     // iPhone 8 is 667 logical pixels high. Use 700 as a safe threshold for "small screen".
     final isSmallScreen = screenHeight < 750; 
 
+    const brandDarkBg = Color(0xFF2D0B5A);
+    const foregroundColor = Color(0xFF2D0B5A); // Changed to deep purple for light theme
+    final levelColor = provider.currentLevelColor;
+    
+    const bgColor = Colors.white;
+
     return Scaffold(
-      backgroundColor: Colors.grey[100], // 背景を少しグレーにしてカードを目立たせる
-      appBar: AppBar(
-        title: Text(provider.currentLevelTitle, style: const TextStyle(fontWeight: FontWeight.bold)),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      body: Stack(
-        children: [
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFFF7F2FF), // Very Thin Purple
+              Color(0xFFFBF8FF), // Light Lavender White
+              Color(0xFFF2E9FF), // Soft Purple
+            ],
+            stops: [0.0, 0.5, 1.0],
+          ),
+        ),
+        child: Stack(
+          children: [
           // 背景フラッシュ用のアニメーションコンテナ
           AnimatedContainer(
             duration: const Duration(milliseconds: 300),
@@ -147,84 +171,96 @@ class _QuizPageState extends State<QuizPage> {
             child: const SizedBox.expand(),
           ),
           
-          
-          Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 600),
-              child: slangList.isEmpty
-                ? const Center(child: CircularProgressIndicator())
-                : Column(
+          SafeArea(
+            child: Column(
+              children: [
+                // --- カスタムヘッダー ---
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: Row(
                     children: [
-                  // 1. プログレスバー (残り枚数)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-                    child: Column(
-                      children: [
-                        // カウンター表示 (例: 1 / 10)
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // 1. 戻るボタン (iOSスタイル)
+                      IconButton(
+                        icon: Icon(Icons.arrow_back_ios_new, color: foregroundColor),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text(
+                              provider.currentLevelTitle,
+                              style: GoogleFonts.outfit(
+                                fontSize: 18, 
+                                fontWeight: FontWeight.bold, 
+                                color: const Color(0xFF2D0B5A),
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Container(
+                              height: 6,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF2D0B5A).withOpacity(0.08),
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(3),
+                                child: LinearProgressIndicator(
+                                  value: slangList.isEmpty ? 0 : (_currentIndex + 1) / slangList.length,
+                                  backgroundColor: Colors.transparent,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    levelColor == Colors.black ? const Color(0xFFD400FF) : levelColor
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 48), // バランス用余白 (戻るボタンの幅)
+                    ],
+                  ),
+                ),
+
+                // --- メインコンテンツ (カード) ---
+                Expanded(
+                  child: Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 600),
+                      child: slangList.isEmpty
+                        ? const Center(child: CircularProgressIndicator())
+                        : Column(
                             children: [
-                              Text(
-                                "${t.quiz.question} ${(_currentIndex + 1).clamp(1, slangList.length)}",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey[600],
-                                  fontSize: 14,
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8), // 余白を24->12に削減
+                                  child: _buildQuizContent(slangList, provider),
                                 ),
                               ),
-                              Text(
-                                "${(_currentIndex + 1).clamp(1, slangList.length)} / ${slangList.length}",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
-                                  fontSize: 16,
-                                ),
-                              ),
+
+                              // 3. 広告エリア (プレミアムなら非表示、Yakuzaレベル以外の場合のみ表示)
+                              if (!provider.isYakuzaUnlocked && provider.currentLevelId != 'level6_yakuza') ...[
+                                if (_isBannerAdReady && _bannerAd != null)
+                                  SizedBox(
+                                    width: _bannerAd!.size.width.toDouble(),
+                                    height: _bannerAd!.size.height.toDouble(),
+                                    child: AdWidget(ad: _bannerAd!),
+                                  )
+                                else
+                                  AdPlaceholder(adSize: AdSize.banner), // 読み込み中はキラキラ,
+                                const SizedBox(height: 8), // 下に少し余白
+                              ] else ...[
+                                 const SizedBox(height: 12), // 広告がない場合の余白
+                              ],
                             ],
                           ),
-                        ),
-                        // プログレスバー
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: LinearProgressIndicator(
-                            value: slangList.isEmpty ? 0 : (_currentIndex + (_showFeedback ? 1 : 0)) / slangList.length,
-                            minHeight: 8,
-                            backgroundColor: Colors.grey[300],
-                            valueColor: const AlwaysStoppedAnimation<Color>(Colors.amber),
-                          ),
-                        ),
-                      ],
                     ),
                   ),
-
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-                      child: _buildQuizContent(slangList, provider),
-                    ),
-                  ),
-
-                  // 3. 広告エリア (Yakuzaレベル以外の場合のみ表示)
-                  if (provider.currentLevelId != 'level6_yakuza') ...[
-                    if (_isBannerAdReady && _bannerAd != null)
-                      SizedBox(
-                        width: _bannerAd!.size.width.toDouble(),
-                        height: _bannerAd!.size.height.toDouble(),
-                        child: AdWidget(ad: _bannerAd!),
-                      )
-                    else
-                      const AdPlaceholder(adSize: AdSize.banner), // 読み込み中はキラキラ,
-                    const SizedBox(height: 10), // 下に少し余白
-                  ] else ...[
-                     const SizedBox(height: 20), // 広告がない場合の余白
-                  ],
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -242,152 +278,261 @@ class _QuizPageState extends State<QuizPage> {
     return Column(
       children: [
         Expanded(
-          flex: 2,
-          child: _showFeedback 
-            ? _buildFeedbackCard(item)
-            : _buildQuestionCard(item, isLockedItem),
-        ),
-        const SizedBox(height: 20),
-        if (!_showFeedback && !isLockedItem)
-          Expanded(
-            flex: 3,
-            child: _buildChoiceButtons(item),
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              // スライド or フェード or 回転（フリップ）
+              // ここではシンプルにフェード + スケール
+              return FadeTransition(
+                opacity: animation,
+                child: ScaleTransition(
+                  scale: animation.drive(Tween(begin: 0.95, end: 1.0)),
+                  child: child,
+                ),
+              );
+            },
+            child: _showFeedback 
+              ? _buildFeedbackCard(item, key: ValueKey("feedback_$_currentIndex"))
+              : _buildQuestionCard(item, isLockedItem, key: ValueKey("question_$_currentIndex")),
           ),
-        if (_showFeedback)
-          _buildNextButton(),
+        ),
         if (isLockedItem && !_showFeedback)
-           ElevatedButton(
-            onPressed: () => _showPurchaseDialogInQuiz(context),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+           Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: ElevatedButton(
+              onPressed: () => _showPurchaseDialogInQuiz(context),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              ),
+              child: Text(t.quiz.locked.button),
             ),
-            child: Text(t.quiz.locked.button),
           ),
       ],
     );
   }
 
-  // 問題カード（単語のみ）
-  Widget _buildQuestionCard(SlangItem item, bool isLocked) {
-     return Stack(
-       children: [
-         Card(
-          elevation: 8,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Spacer(),
-                Text(
-                  item.word,
-                  style: const TextStyle(fontSize: 42, fontWeight: FontWeight.w900, color: Colors.black87),
-                  textAlign: TextAlign.center,
-                ),
-                if (item.romaji != null && item.romaji!.isNotEmpty)
-                  Text(
-                    item.romaji!,
-                    style: const TextStyle(fontSize: 18, color: Colors.grey),
-                  ),
-                const Spacer(),
-              ],
-            ),
-          ),
-         ),
-         if (isLocked)
-            Positioned.fill(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                  child: Container(
-                    color: Colors.white.withOpacity(0.2),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(Icons.lock, size: 60, color: Colors.black87),
-                          const SizedBox(height: 10),
-                          Text(t.quiz.locked.label, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                        ],
+  // 問題カード（単語 + 選択肢）
+  Widget _buildQuestionCard(SlangItem item, bool isLocked, {Key? key}) {
+     return Container(
+       key: key,
+       width: double.infinity,
+       padding: const EdgeInsets.all(24),
+       decoration: BoxDecoration(
+         color: Colors.white,
+         borderRadius: BorderRadius.circular(32),
+         boxShadow: [
+           BoxShadow(
+             color: const Color(0xFF2D0B5A).withOpacity(0.08),
+             blurRadius: 30,
+             offset: const Offset(0, 10),
+           ),
+         ],
+       ),
+       child: Stack(
+         children: [
+           Center(
+             child: SingleChildScrollView(
+               physics: const BouncingScrollPhysics(),
+               child: Column(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   const SizedBox(height: 10),
+                   // 単語
+                   Text(
+                     item.word,
+                     style: GoogleFonts.outfit(
+                       fontSize: 48, 
+                       fontWeight: FontWeight.w900, 
+                       color: const Color(0xFF2D0B5A),
+                     ),
+                     textAlign: TextAlign.center,
+                   ),
+                   if (item.romaji != null && item.romaji!.isNotEmpty)
+                     Text(
+                       item.romaji!,
+                       style: GoogleFonts.outfit(
+                         fontSize: 18, 
+                         color: const Color(0xFF2D0B5A).withOpacity(0.4),
+                         letterSpacing: 2,
+                         fontWeight: FontWeight.w400,
+                       ),
+                     ),
+                   const SizedBox(height: 40),
+                       if (!isLocked) ...[
+                         _buildChoiceButtons(item),
+                         const SizedBox(height: 30),
+                         Visibility(
+                           visible: _selectedChoiceIndex != null,
+                           maintainSize: true,
+                           maintainAnimation: true,
+                           maintainState: true,
+                           child: ElevatedButton(
+                             onPressed: () => _submitAnswer(item),
+                             style: ElevatedButton.styleFrom(
+                               backgroundColor: const Color(0xFF2D0B5A),
+                               foregroundColor: Colors.white,
+                               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                               elevation: 4,
+                               shadowColor: const Color(0xFF2D0B5A).withOpacity(0.3),
+                             ),
+                             child: Text(
+                               t.quiz.submit, 
+                               style: GoogleFonts.outfit(fontSize: 18, fontWeight: FontWeight.bold)
+                             ),
+                           ),
+                         ),
+                       ],
+                       const SizedBox(height: 10),
+                     ],
+                   ),
+                 ),
+               ),
+                if (isLocked)
+                  Positioned.fill(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.8),
+                        borderRadius: BorderRadius.circular(32),
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(Icons.lock_rounded, size: 80, color: Color(0xFF2D0B5A)),
+                            const SizedBox(height: 16),
+                            Text(
+                              t.quiz.locked.label, 
+                              style: GoogleFonts.outfit(
+                                fontWeight: FontWeight.bold, 
+                                fontSize: 22,
+                                color: const Color(0xFF2D0B5A),
+                              )
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-            ),
-       ],
-     );
+            ],
+          ),
+        );
   }
 
-  // フィードバックカード（解説 + 画像）
-  Widget _buildFeedbackCard(SlangItem item) {
+  Widget _buildFeedbackCard(SlangItem item, {Key? key}) {
     final isCorrect = _selectedChoiceIndex != null && _currentChoices[_selectedChoiceIndex!] == item.meaning;
 
-    return SingleChildScrollView(
-      child: Card(
-        elevation: 8,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Padding(
-          padding: const EdgeInsets.all(20),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Container(
+        key: key,
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF7F2FF),
+          borderRadius: BorderRadius.circular(32),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFF2D0B5A).withOpacity(0.1),
+              blurRadius: 30,
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
+        child: SingleChildScrollView(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               // 正解・不正解表示
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    isCorrect ? Icons.check_circle : Icons.cancel,
-                    color: isCorrect ? Colors.green : Colors.red,
-                    size: 40,
+                    isCorrect ? Icons.check_circle_rounded : Icons.cancel_rounded,
+                    color: isCorrect ? const Color(0xFF4CAF50) : const Color(0xFFF44336),
+                    size: 44,
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: 12),
                   Text(
-                    isCorrect ? "CORRECT!" : "WRONG!",
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: isCorrect ? Colors.green : Colors.red,
+                    isCorrect ? "CORRECT" : "WRONG",
+                    style: GoogleFonts.outfit(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w900,
+                      color: isCorrect ? const Color(0xFF4CAF50) : const Color(0xFFF44336),
+                      letterSpacing: 2,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
               // 画像
               ClipRRect(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
                   item.imagePath,
-                  height: 180,
+                  height: 160,
+                  width: double.infinity,
                   fit: BoxFit.cover,
-                  errorBuilder: (c, o, s) => const Icon(Icons.image, size: 100, color: Colors.grey),
+                  errorBuilder: (c, o, s) => Container(
+                    height: 160,
+                    color: const Color(0xFF2D0B5A).withOpacity(0.05),
+                    child: const Icon(Icons.image_rounded, size: 64, color: Colors.grey),
+                  ),
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 24),
               // 意味
               Text(
                 item.meaning,
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.deepPurple),
+                style: GoogleFonts.outfit(
+                  fontSize: 26, 
+                  fontWeight: FontWeight.bold, 
+                  color: const Color(0xFF2D0B5A),
+                ),
                 textAlign: TextAlign.center,
               ),
-              const Divider(height: 30),
+              const SizedBox(height: 12),
               // 解説
               Text(
                 item.explanation,
-                style: const TextStyle(fontSize: 16, height: 1.4),
+                style: GoogleFonts.outfit(
+                  fontSize: 15, 
+                  height: 1.5,
+                  color: const Color(0xFF2D0B5A).withOpacity(0.7),
+                  fontWeight: FontWeight.w400,
+                ),
                 textAlign: TextAlign.left,
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 20),
               if (item.example != null)
-                Text(
-                  "Example: ${item.example}",
-                  style: const TextStyle(fontSize: 15, fontStyle: FontStyle.italic, color: Colors.black54),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF2D0B5A).withOpacity(0.04),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    "Example: ${item.example}",
+                    style: GoogleFonts.outfit(
+                      fontSize: 14, 
+                      fontStyle: FontStyle.italic, 
+                      color: const Color(0xFF2D0B5A).withOpacity(0.5),
+                    ),
+                  ),
                 ),
+              const SizedBox(height: 32),
+              // 次へボタン (カード内に移動、タイマーで表示)
+              Visibility(
+                visible: _showNextButton,
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                child: _buildNextButton(),
+              ),
+              const SizedBox(height: 10),
             ],
           ),
         ),
@@ -395,35 +540,108 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 
-  // 4択ボタン
   Widget _buildChoiceButtons(SlangItem item) {
-    return ListView.builder(
-      itemCount: _currentChoices.length,
-      itemBuilder: (context, index) {
+    return Column(
+      children: List.generate(_currentChoices.length, (index) {
         final choice = _currentChoices[index];
+        final isSelected = _selectedChoiceIndex == index;
+        
         return Padding(
           padding: const EdgeInsets.only(bottom: 12),
-          child: ElevatedButton(
-            onPressed: () => _onChoiceSelected(index, item),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.black87,
-              elevation: 4,
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-                side: const BorderSide(color: Colors.amber, width: 2),
+          child: SizedBox(
+            width: double.infinity,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedChoiceIndex = index;
+                });
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                decoration: BoxDecoration(
+                  color: isSelected ? const Color(0xFF2D0B5A).withOpacity(0.05) : Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: isSelected ? const Color(0xFF2D0B5A) : const Color(0xFF2D0B5A).withOpacity(0.12),
+                    width: 1.5,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: isSelected ? const Color(0xFF2D0B5A).withOpacity(0.05) : Colors.transparent,
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    )
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 22,
+                      height: 22,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: isSelected ? const Color(0xFF2D0B5A) : const Color(0xFF2D0B5A).withOpacity(0.2),
+                          width: 2,
+                        ),
+                        color: isSelected ? const Color(0xFF2D0B5A) : Colors.transparent,
+                      ),
+                      child: isSelected 
+                        ? const Center(child: Icon(Icons.check_rounded, size: 14, color: Colors.white))
+                        : null,
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Text(
+                        choice,
+                        style: GoogleFonts.outfit(
+                          fontSize: 16, 
+                          color: const Color(0xFF2D0B5A).withOpacity(isSelected ? 1.0 : 0.7),
+                          fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            child: Text(
-              choice,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
             ),
           ),
         );
-      },
+      }),
     );
+  }
+
+  void _submitAnswer(SlangItem item) {
+    if (_selectedChoiceIndex == null) return;
+    final isCorrect = (_currentChoices[_selectedChoiceIndex!] == item.meaning);
+    setState(() {
+      _showFeedback = true;
+      _quizResults[_currentIndex] = isCorrect;
+    });
+
+    // 苦手単語の永続化記録 (間違えたら追加、合ってたら削除)
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<QuizProvider>(context, listen: false);
+      provider.toggleWeakWord(item.word, !isCorrect);
+    });
+
+    // 0.8秒後に「次へ」ボタンを表示
+    Future.delayed(const Duration(milliseconds: 800), () {
+      if (mounted) {
+        setState(() {
+          _showNextButton = true;
+        });
+      }
+    });
+
+    // 背景をピカッとする
+    if (_currentChoices[_selectedChoiceIndex!] == item.meaning) {
+       _flashBackground(Colors.green.withOpacity(0.3));
+    } else {
+       _flashBackground(Colors.red.withOpacity(0.3));
+    }
   }
 
   // 次へボタン
@@ -442,18 +660,7 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   void _onChoiceSelected(int index, SlangItem item) {
-    setState(() {
-      _selectedChoiceIndex = index;
-      _showFeedback = true;
-      _quizResults[_currentIndex] = (_currentChoices[index] == item.meaning);
-    });
-
-    // 背景をピカッとする
-    if (_currentChoices[index] == item.meaning) {
-       _flashBackground(Colors.green.withOpacity(0.3));
-    } else {
-       _flashBackground(Colors.red.withOpacity(0.3));
-    }
+    // 従来の動作は削除、または _submitAnswer に統合
   }
 
   void _goToNextQuestion() {
@@ -471,10 +678,10 @@ class _QuizPageState extends State<QuizPage> {
 
   void _finishQuiz() {
     final provider = Provider.of<QuizProvider>(context, listen: false);
-    if (provider.currentLevelId == 'level6_yakuza') {
+    if (provider.isYakuzaUnlocked || provider.currentLevelId == 'level6_yakuza') {
        _showCompletionDialogWithReview();
     } else {
-      AdHelper.showInterstitialAd(onComplete: () {
+      AdHelper.showInterstitialAd(context: context, onComplete: () {
         _showCompletionDialogWithReview();
       });
     }
@@ -488,7 +695,7 @@ class _QuizPageState extends State<QuizPage> {
     Future.delayed(const Duration(milliseconds: 300), () {
       if (mounted) {
         setState(() {
-          _backgroundColor = Colors.grey[100]!;
+          _backgroundColor = Colors.transparent;
         });
       }
     });
@@ -537,14 +744,15 @@ class _QuizPageState extends State<QuizPage> {
       context: context,
       barrierDismissible: false,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFFFFF5F0),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        backgroundColor: const Color(0xFFF7F2FF),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
         // タイトル部分 (スコアのみ表示)
         title: Column(
           children: [
             const SizedBox(height: 10),
-            Text(title, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.brown), textAlign: TextAlign.center),
-            Text("$knownCount / $total", style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.brown)),
+            Text(title, style: GoogleFonts.outfit(fontWeight: FontWeight.w900, color: const Color(0xFF2D0B5A)), textAlign: TextAlign.center),
+            const SizedBox(height: 8),
+            Text("$knownCount / $total", style: GoogleFonts.outfit(fontSize: 28, fontWeight: FontWeight.bold, color: const Color(0xFF2D0B5A))),
           ],
         ),
         // コンテンツ部分 (全問リスト表示)
@@ -555,13 +763,13 @@ class _QuizPageState extends State<QuizPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 10.0),
+                padding: const EdgeInsets.only(bottom: 12.0),
                 child: Text(
                   t.quiz.result.listTitle,
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.brown[400]),
+                  style: GoogleFonts.outfit(fontWeight: FontWeight.w600, color: const Color(0xFF2D0B5A).withOpacity(0.4)),
                 ),
               ),
-              Divider(color: Colors.brown[200], height: 1),
+              Divider(color: const Color(0xFF2D0B5A).withOpacity(0.1), height: 1),
               // ▼▼▼ ここが変更点: 全問をリスト表示 ▼▼▼
               Flexible(
                 child: ListView.builder(
@@ -573,7 +781,7 @@ class _QuizPageState extends State<QuizPage> {
 
                     return Container(
                       decoration: BoxDecoration(
-                        border: Border(bottom: BorderSide(color: Colors.brown[100]!, width: 1)),
+                        border: Border(bottom: BorderSide(color: const Color(0xFF2D0B5A).withOpacity(0.05), width: 1)),
                       ),
                       child: ListTile(
                         visualDensity: VisualDensity.compact, // リストの間隔を詰める
@@ -586,9 +794,9 @@ class _QuizPageState extends State<QuizPage> {
                         // 単語
                         title: Text(
                           item.word,
-                          style: TextStyle(
+                          style: GoogleFonts.outfit(
                             fontWeight: FontWeight.bold,
-                            color: isKnown ? Colors.black87 : Colors.red[900], // 間違えた単語は少し赤く
+                            color: isKnown ? const Color(0xFF2D0B5A) : const Color(0xFFF44336), // 間違えた単語は赤
                           ),
                         ),
                         // ローマ字を表示 (あれば)
@@ -641,7 +849,7 @@ class _QuizPageState extends State<QuizPage> {
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },
-                 child: Text(t.quiz.result.backToMenu, style: const TextStyle(color: Colors.grey)),
+                 child: Text(t.quiz.result.backToMenu, style: GoogleFonts.outfit(color: const Color(0xFF2D0B5A).withOpacity(0.4))),
               ),
               TextButton(
                 onPressed: () {
@@ -653,7 +861,7 @@ class _QuizPageState extends State<QuizPage> {
                     _generateChoicesForCurrentIndex();
                   });
                 },
-                child: Text(t.quiz.result.replayAll, style: const TextStyle(color: Colors.brown, fontWeight: FontWeight.bold)),
+                child: Text(t.quiz.result.replayAll, style: GoogleFonts.outfit(color: const Color(0xFF2D0B5A), fontWeight: FontWeight.w900)),
               ),
             ],
           )
@@ -739,6 +947,7 @@ class _QuizPageState extends State<QuizPage> {
       _currentIndex = 0;
       _quizResults = List.filled(reviewList.length, false);
       _showFeedback = false;
+      _showNextButton = false; // リセット
       _replayCount++;
       _generateChoicesForCurrentIndex();
     });
@@ -761,7 +970,7 @@ class _QuizPageState extends State<QuizPage> {
                  Navigator.pop(context); // Close "Unlock" dialog
                  try {
                    // 購入処理開始
-                   await Provider.of<PurchaseService>(context, listen: false).buyYakuzaLevel();
+                   await Provider.of<PurchaseManager>(context, listen: false).buyYakuza();
                  } catch (e) {
                    debugPrint("Purchase start error: $e");
                    // エラーダイアログを表示

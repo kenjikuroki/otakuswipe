@@ -38,6 +38,7 @@
         "question": "Question",
         "dontKnow": "DON'T KNOW",
         "iKnowIt": "I KNOW IT!",
+        "submit": "Submit",
         "tapToSeeMeaning": "Tap to see meaning",
         "reviewMode": "Review Mode",
         "result": {
@@ -56,7 +57,44 @@
             "dialogTitle": "Unlock Yakuza Level",
             "dialogDesc": "Unlock the full 50 words list?",
             "cancel": "Cancel"
+        },
+        "mode": {
+            "shuffle": "Shuffle",
+            "sequential": "Sequential"
         }
+    },
+    "premium": {
+        "dialog": {
+            "title": "Premium Upgrade",
+            "feature1": "Unlock Sequential Mode: Solve all questions in order from the first one.",
+            "feature2": "Completely Ad-Free: Remove all ads (banners, videos, etc.) from the app.",
+            "feature3": "Category-based Review: Focus on your weak spots by filtering by part.",
+            "buy": "Upgrade Now",
+            "cancel": "Later"
+        },
+        "upgradeCard": {
+            "title": "Upgrade to Premium",
+            "subtitle": "Remove ads and focus!",
+            "buy": "Buy",
+            "restore": "Restore purchase"
+        },
+        "specialOffer": {
+            "title": "Limited Time Offer",
+            "subtitle": "Premium Ad-Free",
+            "desc": "Unlock all features at a special price now!",
+            "priceBefore": "390 JPY",
+            "priceAfter": "190 JPY",
+            "buyNow": "Buy Now",
+            "later": "Maybe Later"
+        }
+    },
+    "review": {
+        "modal": {
+            "title": "Select Category",
+            "allQuestions": "All Categories",
+            "questionCount": "${count} questions"
+        },
+        "button": "Review Weakness"
     },
     "settings": {
         "title": "Settings",

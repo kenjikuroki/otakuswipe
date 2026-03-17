@@ -3,41 +3,42 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 import 'pages/level_select_page.dart';
 import 'pages/quiz_page.dart';
 import 'providers/quiz_provider.dart';
-import 'services/purchase_service.dart'; // 追加
 import 'package:flutter_localizations/flutter_localizations.dart'; // localizationsDelegates用
 // ignore: unused_import
 import 'i18n/strings.g.dart'; // slang生成ファイル
+import 'widgets/premium_unlock_card.dart'; // Added
+import 'widgets/special_offer_dialog.dart';
+import 'services/purchase_manager.dart'; // Added
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await LocaleSettings.useDeviceLocale(); // デバイスの言語設定を初期化
+  await PurchaseManager.instance.initialize(); // Initialize before running
   
   // Removed MobileAds.instance.initialize() from here. Moved to LevelSelectPage.
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
+
+  // デバイスの言語設定を初期値として読み込む
+  LocaleSettings.useDeviceLocale();
   
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => PurchaseService()), // 追加
-        ChangeNotifierProxyProvider<PurchaseService, QuizProvider>(
+        ChangeNotifierProvider.value(value: PurchaseManager.instance),
+        ChangeNotifierProxyProvider<PurchaseManager, QuizProvider>(
           create: (_) => QuizProvider(),
-          update: (_, purchase, quiz) => quiz!..updatePurchaseService(purchase),
+          update: (_, purchase, quiz) => quiz!..updatePurchaseManager(purchase),
         ),
       ],
       child: const MyApp(),
     ),
   );
 }
-
-
-
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -119,22 +120,31 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Master Japanese Slang!",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              Text(
+                t.home.title,
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const QuizPage()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
-                  textStyle: const TextStyle(fontSize: 20),
+              // メニューリスト
+              Expanded(
+                child: ListView(
+                  children: [
+                    const PremiumUnlockCard(), // Added
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => const QuizPage()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                        textStyle: const TextStyle(fontSize: 20),
+                      ),
+                      child: Text(t.home.start),
+                    ),
+                  ],
                 ),
-                child: const Text("Start Learning"),
               ),
             ],
           ),

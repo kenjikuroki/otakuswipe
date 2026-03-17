@@ -38,6 +38,7 @@
         "question": "Pergunta",
         "dontKnow": "NÃO SEI",
         "iKnowIt": "EU SEI!",
+        "submit": "Responder",
         "tapToSeeMeaning": "Toque para ver o significado",
         "reviewMode": "Modo Revisão",
         "result": {
@@ -56,7 +57,44 @@
             "dialogTitle": "Desbloquear Nível Yakuza",
             "dialogDesc": "Desbloquear a lista completa de 50 palavras?",
             "cancel": "Cancelar"
+        },
+        "mode": {
+            "shuffle": "Aleatório",
+            "sequential": "Em ordem"
         }
+    },
+    "premium": {
+        "dialog": {
+            "title": "Upgrade Premium",
+            "feature1": "Desbloquear Modo Sequencial: Resolva todas as questões em ordem a partir da primeira.",
+            "feature2": "Totalmente Sem Anúncios: Remova todos os anúncios (banners, vídeos, etc.) do aplicativo.",
+            "feature3": "Revisão por Categoria: Foco em seus pontos fracos filtrando por parte.",
+            "buy": "Fazer Upgrade Agora",
+            "cancel": "Depois"
+        },
+        "upgradeCard": {
+            "title": "Upgrade para Premium",
+            "subtitle": "Remova anúncios e tenha foco!",
+            "buy": "Comprar",
+            "restore": "Restaurar compra"
+        },
+        "specialOffer": {
+            "title": "Oferta por Tempo Limitado",
+            "subtitle": "Premium Sem Anúncios",
+            "desc": "Desbloqueie todos os recursos com um preço especial agora!",
+            "priceBefore": "390 JPY",
+            "priceAfter": "190 JPY",
+            "buyNow": "Comprar Agora",
+            "later": "Depois"
+        }
+    },
+    "review": {
+        "modal": {
+            "title": "Selecionar Categoria",
+            "allQuestions": "Todas as Categorias",
+            "questionCount": "${count} questões"
+        },
+        "button": "Revisar Fraquezas"
     },
     "settings": {
         "title": "Configurações",
